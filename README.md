@@ -5,6 +5,8 @@ Author: AlabTNT@ZJU
 
 Co-author: Cy7@ZJU, Leem@ZJU, legacy@SJTU, faye@SJTU
 
+*I'm tired of sorting co-authors...Just in the order of Hugh sending email. Please donot kick my ass orz.*
+
 ### What's this?
 
 This is a project repo for DADA of Group2 in 2026 NUS SoC Summer Workshop. It contains our codes & reports when completing the project.

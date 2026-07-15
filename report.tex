@@ -1,0 +1,168 @@
+\documentclass[sigconf]{acmart}
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\usepackage{silence}
+\WarningFilter{acmart}{ACM reference format is mandatory}
+\WarningFilter{balance}{Columns might not be balanced}
+\makeatletter
+\renewcommand\@formatdoi[1]{}
+\makeatother
+\pagestyle{plain}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\lstset{
+    backgroundcolor=\color{white},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{purple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    extendedchars=false,
+    inputencoding=utf8
+}
+
+\title{Low-Level Protocol Exploitation and Physical-Layer Defenses for NFC Smart Lock Systems}
+\subtitle{NUS Computer Security Project Report}
+
+\author{Xinjie Liu}
+\affiliation{
+  \institution{Chu Kou Chen College, Zhejiang University}
+  \city{Hangzhou}
+  \country{China}}
+\email{kawaiishinsuguru@gmail.com}
+
+\author{Yulin Li}
+\affiliation{
+  \institution{College of Computer Science and Technology, Zhejiang University}
+  \city{Hangzhou}
+  \country{China}}
+\email{LeenSed@163.com}
+
+\author{Chengfeier Pei}
+\affiliation{
+  \institution{School of Integrated Circuits, Shanghai Jiao Tong University}
+  \city{Shanghai}
+  \country{China}}
+\email{faye-official@sjtu.edu.cn}
+
+\author{Canyu Liu}
+\affiliation{
+  \institution{Chu Kou Chen College, Zhejiang University}
+  \city{Hangzhou}
+  \country{China}}
+\email{liucanyu0411@gmail.com}
+
+\author{Peize Yang}
+\affiliation{
+  \institution{School of Integrated Circuits, Shanghai Jiao Tong University}
+  \city{Shanghai}
+  \country{China}}
+\email{legacy1083@sjtu.edu.cn}
+
+\begin{abstract}
+This paper presents a hardware-software integrated security evaluation and mitigation pipeline for near-field communication (NFC) smart lock systems. By utilizing commercial-off-the-shelf platforms, including the Proxmark3 RDV and HackRF One, we successfully demonstrate a non-contact, passive protocol sniffing and cloning replay attack against a MIFARE Ultralight EV1 smart card system without prior lock interaction. Furthermore, to address the vulnerability of static data leakage in the RF field, we propose and implement a two-tier defense mechanism...
+\end{abstract}
+
+\keywords{NFC Security, Protocol Sniffing, Replay Attack, Active Jamming, Hardware Defense}
+
+\begin{document}
+
+\maketitle
+\section{Introduction}
+Near-Field Communication (NFC) operating at $13.56\text{ MHz}$ has been widely adopted in modern physical access control systems, including campus dormitories and residential smart locks. While higher-layer protocols often assume a secure physical boundary, the open nature of the RF air interface poses severe security threats...
+
+Our team addresses this problem via a 21-day hardware-software co-design. Leveraging the synergy between Computer Science (CS) and Electrical Engineering (EE) skillsets, we build a high-fidelity mock door lock, exploit its low-level protocol logic, and deploy an physical-layer defense grid.
+
+\section{Experimental Sandbox Setup}
+To bypass the overhead of custom PCB design, our implementation leverages existing high-precision platforms provided for this project.
+
+\subsection{Hardware Provisioning}
+The hardware sandbox consists of:
+\begin{itemize}
+    \item \textbf{Proxmark3 RDV (Elechouse):} Equipped with a $13.56\text{ MHz}$ high-frequency antenna (\texttt{HF\_ANT}) for protocol sniffing and card emulation. \newline The legacy AT91SAM7S microcontroller firmware is stripped and optimized.
+    \item \textbf{HackRF One (SDR):} Utilized for raw I/Q signal capturing and active RF jamming transmission.
+    \item \textbf{Target Tags:} NXP MIFARE Ultralight EV1 contactless tags and backdoor-enabled Gen1a Magic Cards.
+\end{itemize}
+
+\subsection{Target Mock Lock Construction}
+We constructed a standalone target mock lock using an MCU connected to a PN532 RF frontend. The initial vulnerable firmware (\textbf{Lock V1.0}) strictly validates the 7-byte static Unique Identifier (UID) of the MIFARE Ultralight EV1 tag to trigger the unlocking GPIO state.
+
+\section{Vulnerability Exploitation (Red Team)}
+Our attack model requires zero prior interaction with the target lock frontend. The attack pipeline contains two distinct phases: sniffing and cloning.
+
+\subsection{Passive RF Sniffing}
+The Proxmark3 RDV is hidden near the target reader operating in non-contact sniffing mode. 
+\begin{lstlisting}[language=bash, caption={Proxmark3 Protocol Sniffing Execution}]
+# Activate 14443A passive sniffing
+hf 14443a sniff
+# Dump and trace captured frames
+hf list 14443a
+\end{lstlisting}
+
+When a legitimate user interacts with the lock, the $13.56\text{ MHz}$ carrier's ASK modulation and the tag's backscattered load modulation are recorded. The extracted raw frame trace reveals the 7-byte static UID: \texttt{04 AA 11 B2 3C 4D 5E}.
+
+\subsection{Tag Emulation and Cloning}
+Using the identified backdoor-enabled Magic Cards sorted during our diagnostic phase, we mutate the Gen1a card's Sector 0 block to match the intercepted identity:
+\begin{lstlisting}[language=bash]
+hf mf csetuid -u 04AA11B23C4D5E
+\end{lstlisting}
+The cloned shadow card successfully achieves complete physical bypass on Lock V1.0.
+
+\section{Physical-Layer Analysis (EE Domain)}
+The EE members analyzed the captured I/Q waveform via MATLAB. In the time-domain wave, the Frame Delay Time (FDT) between the reader's final EMD block and the tag's Response Start Time is precisely measured as:
+$$FDT = (n \times 128) + 84 \quad \text{carrier cycles}$$
+
+This boundary serves as the critical timing characteristic for detecting proxy hardware relays, as software-based network routing introduces propagation delays significantly exceeding this threshold.
+
+\section{Proposed Defensive Mechanism (Blue Team)}
+To mitigate static identity leakage, we upgrade the infrastructure to \textbf{Lock V2.0} using two defensive layers.
+
+\subsection{Protocol Hardening: Dynamic Challenge}
+We eliminate static validation by implementing a rolling cryptographic challenge-response sequence using the 32-bit password auth vector of the Ultralight EV1 tag.
+
+\subsection{Active RF Defensive Grid via HackRF}
+We deploy a reactive physical shield utilizing the HackRF One integrated with GNU Radio. As shown in Table~\ref{tab:defense_metrics}, the system dynamically tracks energy deviations in the $13.56\text{ MHz}$ spectrum.
+
+\begin{table}[h]
+\centering
+\caption{Defensive Signal Threshold Matrix}
+\label{tab:defense_metrics}
+\footnotesize
+\begin{tabular}{p{0.28\columnwidth}p{0.28\columnwidth}p{0.28\columnwidth}}
+\toprule
+Metric Parameter & Threshold Boundary & System Action \\
+\midrule
+Normal RSSI Variance & $< \pm 2.1\text{ dB}$ & Allow Transmission \\
+Sniffer Proximity Probing & $\ge +4.5\text{ dB}$ & Alert / Lock State \\
+Relay Delay Deviation & $> 12\,\mu\text{s}$ & Trigger Jamming \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Upon identifying an unauthorized proxy node or anomalous load-modulation depth (indicating a nearby sniffer like the Proxmark3), the HackRF immediately fires a targeted $13.56\text{ MHz}$ white-noise burst. This collapses the RF synchronization loop, forcing the rogue collector into a \texttt{Missing Sync} error state and rendering the attack obsolete.
+
+\section{Conclusion}
+This project successfully demonstrates the severe security risks associated with static credential exposure over the NFC interface and provides an academic proof-of-concept for dynamic physical-layer defense. 
+
+% --- 参考文献 ---
+\begin{thebibliography}{99}
+\bibitem{iceman} RfidResearchGroup. (2026). \emph{The Proxmark3 Open-Source Firmware Ecosystem}. GitHub Repository.
+\bibitem{iso14443} ISO/IEC 14443. \emph{Identification cards -- Contactless integrated circuit cards -- Proximity cards}.
+\end{thebibliography}
+
+\end{document}

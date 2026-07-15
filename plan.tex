@@ -1,0 +1,319 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\definecolor{csblue}{RGB}{41,128,185}
+\definecolor{eegreen}{RGB}{39,174,96}
+\definecolor{darkred}{RGB}{192,57,43}
+\definecolor{darkgray}{RGB}{52,73,94}
+
+\title{\textbf{NFC 智能门锁安全攻防项目——21天实施计划}}
+\author{刘昕杰（CS）\quad 李毓霖（CS/IS）\quad 刘璨宇（CS/IS）\\裴成菲儿（EE）\quad 杨佩泽（EE）}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{团队角色与分工总览}
+
+\begin{table}[h]
+\centering
+\caption{团队角色与核心职责}
+\begin{tabular}{lll}
+\toprule
+\textbf{姓名} & \textbf{专业方向} & \textbf{核心职责} \\
+\midrule
+刘昕杰 & CS & 固件编译、Proxmark3 操作、攻击脚本、报告撰写 \\
+李毓霖 & CS/IS & Python 门锁程序设计、ACR122T 驱动、协议解析 \\
+刘璨宇 & CS/IS & 固件优化、魔术卡分拣、BibTeX/文献整理 \\
+裴成菲儿 & EE & HackRF SDR 操作、GNU Radio 开发、波形分析 \\
+杨佩泽 & EE & 信号捕获解调、MATLAB 分析、防御阈值建模 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vskip 12pt
+\noindent\textbf{并行化设计原则：} CS 组和 EE 组的工作流在硬件上完全解耦。CS 组使用 Proxmark3 + ACR122T 进行协议层攻防，EE 组使用 HackRF One 进行物理层分析。除联调演示外，双方互不阻塞。
+
+\section{项目总体时间线}
+
+\begin{table}[h]
+\centering
+\caption{四阶段时间规划}
+\begin{tabular}{cll}
+\toprule
+\textbf{阶段} & \textbf{天数} & \textbf{主题} \\
+\midrule
+Phase 1 & Day 1--3  & 诊断分拣与硬件部署 \\
+Phase 2 & Day 4--14 & 漏洞利用（红队攻击） \\
+Phase 3 & Day 15--19& 防御系统构建（蓝队） \\
+Phase 4 & Day 20--21& 联合演示与报告定稿 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Phase 1：诊断分拣与硬件部署（Day 1--3）}
+
+\textbf{目标：} 清点全部硬件资产，搭建可运行的模拟门锁靶机，验证 HackRF 接收通路。
+
+\subsection*{Day 1 上午——全员：开箱与资产清点}
+\begin{itemize}[nosep]
+    \item 拆封三个包裹，对照清单核对所有硬件
+    \item 为每张卡片贴标签编号，建立 Excel 资产表
+    \item EE 同学确认 HackRF One 配件完整（天线、microUSB、扩展坞）
+\end{itemize}
+
+\subsection*{Day 1 下午——CS 组（刘昕杰 + 李毓霖）：固件编译}
+\begin{itemize}[nosep]
+    \item 克隆 Iceman 固件仓库 \texttt{RfidResearchGroup/proxmark3}
+    \item 配置 \texttt{Makefile.platform}：\texttt{PLATFORM=PM3RDV2}，\texttt{PLATFORM\_SIZE=256}
+    \item 剥离低频（LF）组件，仅保留 13.56MHz 高频功能
+    \item 编译并刷入 Proxmark3，验证 \texttt{hw version} 正常输出
+\end{itemize}
+
+\subsection*{Day 1 下午——EE 组（裴成菲儿 + 杨佩泽）：SDR 环境搭建}
+\begin{itemize}[nosep]
+    \item 安装 HackRF 驱动（Windows: Zadig；macOS: \texttt{brew install hackrf}）
+    \item 安装 SDR 软件：SDR\#（Windows）或 GQRX（macOS/Ubuntu）
+    \item 将 HackRF 频率调至本地 FM 广播（如 93.3MHz）验证接收通路正常
+    \item 安装 GNU Radio，搭建最小化的 13.56MHz 频谱监测流图
+\end{itemize}
+
+\subsection*{Day 2 上午——CS 组：卡片分拣}
+\begin{itemize}[nosep]
+    \item 插上 HF\_ANT 高频天线，执行 \texttt{hf search} 扫描所有卡片
+    \item 分类为三箱：
+    \begin{enumerate}[nosep,label=(\arabic*)]
+        \item \textbf{魔术卡箱：} 执行 \texttt{hf mf cdetect} 检出 Gen1a Magic Card（可改 UID）
+        \item \textbf{正版钥匙箱：} MIFARE Classic 1K / Ultralight / NTAG21X 原厂卡
+        \item \textbf{低频垃圾箱：} 插入 LF\_ANT 执行 \texttt{lf search} 检出的 125kHz ID 卡（丢弃不用）
+    \end{enumerate}
+    \item 记录每张卡的 UID 和芯片型号到 Excel
+\end{itemize}
+
+\subsection*{Day 2 下午——CS 组（李毓霖 + 刘璨宇）：门锁 V1.0 搭建}
+\begin{itemize}[nosep]
+    \item 将 ACR122T 插入电脑 A，安装 \texttt{pyscard}（\texttt{pip install pyscard}）
+    \item 编写 Python 脚本，循环检测读卡器上的卡片
+    \item 读取卡片 7 字节 UID，匹配预设白名单，打印 \texttt{ACCESS GRANTED}
+    \item 测试：用分拣出的正版钥匙卡刷卡，确认脚本能正确识别
+\end{itemize}
+
+\subsection*{Day 2 下午——EE 组：HackRF 13.56MHz 频谱标定}
+\begin{itemize}[nosep]
+    \item 将 HackRF 接收频率对准 13.56MHz，采样率设定为 2--4 Msps
+    \item 在门锁刷卡时，观察瀑布图（Waterfall）上的能量谱线
+    \item 记录正常刷卡时的 RSSI 基线值（dB）
+    \item 导出第一组频谱截图，用于报告
+\end{itemize}
+
+\subsection*{Day 3——全员交叉验证}
+\begin{itemize}[nosep]
+    \item CS 组向 EE 组演示门锁 V1.0 刷卡流程
+    \item EE 组同步用 HackRF 捕获完整的卡片--读卡器交互波形
+    \item 双方确认硬件链路贯通，环境就绪
+    \item 当天产出：资产清单 Excel + 门锁 V1.0 源码 + HackRF 频谱截图
+\end{itemize}
+
+\section{Phase 2：漏洞利用——红队攻击（Day 4--14）}
+
+\textbf{目标：} 实现对门锁 V1.0 的非接触远程监听与克隆攻击，完成完整的攻击链证明。
+
+\subsection*{Day 4--5——CS 组：被动嗅探攻击}
+\begin{itemize}[nosep]
+    \item 将 Proxmark3 部署在 ACR122T 模拟门锁旁（距离 5--10cm）
+    \item 执行 \texttt{hf 14443a sniff} 进入被动嗅探模式
+    \item 用正版 NTAG21X 钥匙卡刷卡开门，PM3 自动捕获空中帧
+    \item 执行 \texttt{hf list 14443a} 导出捕获的协议帧
+    \item 在十六进制日志中定位 7-byte UID（以 \texttt{04} 开头）
+    \item 记录完整的防冲突（ANTICOLL）和选择（SELECT）阶段数据
+\end{itemize}
+
+\subsection*{Day 4--5——EE 组：I/Q 信号录制与解调分析}
+\begin{itemize}[nosep]
+    \item 用 HackRF 录制刷卡过程的原始 I/Q 采样数据
+    \item 导入 MATLAB：绘制 ASK 100\% 调制波形图
+    \item 标记读卡器命令、卡片负载调制响应的时间轴
+    \item 测量并记录 Frame Delay Time（FDT）：
+    \[
+    \text{FDT} = (n \times 128) + 84 \quad \text{（载波周期）}
+    \]
+    \item 产出：MATLAB 时域波形图（报告用）
+\end{itemize}
+
+\subsection*{Day 6--7——CS 组（刘昕杰 + 李毓霖）：UID 克隆与验证}
+\begin{itemize}[nosep]
+    \item 从 Phase 1 分拣出的魔术卡箱中取一张 Gen1a Magic Card
+    \item 执行 \texttt{hf mf csetuid -u 04AA11B23C4D5E} 写入嗅探到的 UID
+    \item 用克隆卡刷 ACR122T 模拟门锁，验证能否通过
+    \item 预期结果：\texttt{ACCESS GRANTED}——红队攻击成功
+    \item 撰写攻击过程记录，包含完整命令和截图
+\end{itemize}
+
+\subsection*{Day 6--9——EE 组：中继攻击模拟与延时建模}
+\begin{itemize}[nosep]
+    \item 部署两个读卡器（ACR122T + Microsoft USB Reader）构建中继链路
+    \item 测量本地交互 vs 中继场景的 FDT 差异
+    \item 建立数学模型：正常 FDT 阈值 vs 中继额外延迟
+    \item 确定触发防御的 FDT 阈值门限
+    \item 产出：FDT 对比表格 + 延时分布图
+\end{itemize}
+
+\subsection*{Day 8--10——CS 组（李毓霖 + 刘璨宇）：协议深度解析}
+\begin{itemize}[nosep]
+    \item 撰写 Proxmark3 \texttt{hf list 14443a} 输出格式的详细解析文档
+    \item 标注每一帧的类型（REQA、ANTICOLL、SELECT、RATS、READ 等）
+    \item 解析 NTAG21X 的存储结构与 PWD\_AUTH 指令格式
+    \item 产出：协议帧解析手册（供 EE 同学参考）
+\end{itemize}
+
+\subsection*{Day 11--14——全员：攻击闭环验证与文档化}
+\begin{itemize}[nosep]
+    \item CS 组完整复现三次攻击链路（嗅探 → 提取 → 克隆 → 绕过）
+    \item EE 组录制完整的攻击过程 HackRF 频谱对比图（正常 vs 被嗅探）
+    \item 整理所有攻击数据、截图、波形，归档至项目文件夹
+    \item 开始撰写报告第 2--3 节（实验设置 + 漏洞利用）
+\end{itemize}
+
+\section{Phase 3：防御系统构建——蓝队（Day 15--19）}
+
+\textbf{目标：} 设计并实现两层防御机制，使门锁系统能够抵御 Phase 2 中演示的攻击。
+
+\subsection*{Day 15--16——CS 组：门锁 V2.0 协议层防御}
+\begin{itemize}[nosep]
+    \item 在 Python 门锁程序中实现动态挑战--应答（Challenge-Response）逻辑：
+    \begin{enumerate}[nosep,label=步骤\arabic*:]
+        \item 门锁检测到卡片后，生成 4 字节随机数 $R$
+        \item 向卡片发送 \texttt{PWD\_AUTH} 指令，附带预设密码
+        \item 认证通过后，读取卡片受保护的数据页（Page 8--9）
+        \item 验证隐藏令牌（哈希值），匹配才开门
+    \end{enumerate}
+    \item 用 ACR122T 初始化 NTAG21X 卡片：写入密码 + 锁定数据页
+    \item 测试：用 Phase 2 克隆的魔术卡刷卡，预期被拒绝
+\end{itemize}
+
+\subsection*{Day 15--16——EE 组：HackRF 主动干扰防御}
+\begin{itemize}[nosep]
+    \item 在 GNU Radio 中编写实时频谱能量监测脚本
+    \item 设定防御阈值矩阵（参考 Table~\ref{tab:defense_metrics}）
+    \item 实现触发逻辑：RSSI 异常 $\to$ HackRF 发射 13.56MHz 白噪声
+    \item 测试：在门锁旁放置 Proxmark3 嗅探，验证 HackRF 能否触发干扰
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{防御信号阈值矩阵}
+\label{tab:defense_metrics}
+\begin{tabular}{lcl}
+\toprule
+\textbf{指标参数} & \textbf{阈值边界} & \textbf{系统动作} \\
+\midrule
+正常 RSSI 方差 & $< \pm 2.1\text{ dB}$ & 允许通信 \\
+嗅探器接近探测 & $\ge +4.5\text{ dB}$ & 告警/锁定 \\
+中继延迟偏差 & $> 12\,\mu\text{s}$ & 触发干扰 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Day 17——全员联调：双层防御集成测试}
+\begin{itemize}[nosep]
+    \item CS 组将 V2.0 门锁程序部署到 ACR122T
+    \item EE 组将 HackRF 防御模块部署到门锁旁边
+    \item 联合测试场景：
+    \begin{enumerate}[nosep,label=场景\arabic*:]
+        \item 正版钥匙卡 $\to$ 开锁成功（不触发防御）
+        \item 克隆魔术卡 $\to$ PWD\_AUTH 失败，拒绝访问
+        \item Proxmark3 嗅探 $\to$ HackRF 检测到异常，触发干扰，PM3 报 Missing Sync
+    \end{enumerate}
+    \item 录制三段测试视频，截取关键帧
+\end{itemize}
+
+\subsection*{Day 18--19——全员：防御报告撰写}
+\begin{itemize}[nosep]
+    \item CS 组撰写报告第 5 节（Defensive Mechanism）：协议层防御设计
+    \item EE 组撰写报告第 4 节（Physical-Layer Analysis）：物理层分析
+    \item 整理 HackRF 干扰前后的对比频谱图
+    \item 整理防御前后的攻击成功率对比表
+\end{itemize}
+
+\section{Phase 4：联合演示与报告定稿（Day 20--21）}
+
+\subsection*{Day 20——全员：彩排与优化}
+\begin{itemize}[nosep]
+    \item 完整走一遍 Demo 流程（攻击 → 防御 → 被阻断）
+    \item 调整设备摆放、演示节奏、讲解台词
+    \item 确认所有演示步骤可靠可复现（至少连续成功 3 次）
+    \item 收集最终的演示截图与数据
+\end{itemize}
+
+\subsection*{Day 21——全员：报告最终定稿}
+\begin{itemize}[nosep]
+    \item 整合所有章节，补全 Abstract、Introduction、Conclusion
+    \item 检查交叉引用、图表编号、参考文献格式
+    \item 最终编译 \texttt{xelatex report.tex} 确保零错误
+    \item 提交 PDF  + 演示视频 + 源码仓库链接
+\end{itemize}
+
+\section{并行性分析}
+
+\begin{table}[h]
+\centering
+\caption{各阶段并行度与依赖关系}
+\begin{tabular}{p{0.25\textwidth}p{0.35\textwidth}p{0.35\textwidth}}
+\toprule
+\textbf{阶段} & \textbf{CS 组（独立）} & \textbf{EE 组（独立）} \\
+\midrule
+Phase 1 & PM3 固件 + 卡片分拣 + 门锁 V1.0 & HackRF 驱动 + 频谱标定 \\
+Phase 2 & 嗅探 + 克隆 + 协议解析 & I/Q 录制 + 解调 + FDT 建模 \\
+Phase 3 & PWD 密码防御 + V2.0 编写 & GNU Radio 干扰脚本 + 阈值矩阵 \\
+Phase 4 & 报告 CS 部分 & 报告 EE 部分 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vskip 12pt
+\noindent\textbf{唯一的阻塞点：}
+\begin{itemize}[nosep]
+    \item Day 3 交叉验证需要 CS 组门锁 V1.0 就绪 + EE 组 HackRF 环境就绪
+    \item Day 17 联调需要双方 V2.0 防御方案均已完成
+    \item 其余所有天数的 CS 和 EE 工作完全并行，互不依赖
+\end{itemize}
+
+\section{关键里程碑检查清单}
+
+\begin{enumerate}[label=\textbf{M\arabic*:},leftmargin=*]
+    \item \textbf{Day 3 结束前：} 资产清点完成，门锁 V1.0 可刷卡响应，HackRF 可捕获 13.56MHz 信号
+    \item \textbf{Day 7 结束前：} 非接触嗅探克隆攻击成功，克隆卡能打开 V1.0 门锁
+    \item \textbf{Day 14 结束前：} 完整攻击链路可复现，所有波形数据和协议帧已归档
+    \item \textbf{Day 17 结束前：} V2.0 防御系统集成测试通过（三场景验证）
+    \item \textbf{Day 21 结束前：} 最终报告零错误编译，演示视频录制完成
+\end{enumerate}
+
+\section{附录：设备使用速查表}
+
+\begin{table}[h]
+\centering
+\caption{关键设备与用途}
+\begin{tabular}{lll}
+\toprule
+\textbf{设备} & \textbf{负责人} & \textbf{核心命令/用途} \\
+\midrule
+Proxmark3 RDV & 刘昕杰（CS） & \texttt{hf 14443a sniff} 嗅探、\texttt{hf mf csetuid} 克隆 \\
+ACR122T & 李毓霖（CS） & Python \texttt{pyscard} 模拟门锁 \\
+Microsoft USB Reader& 刘璨宇（CS） & 中继攻击第二读卡器 \\
+HackRF One & 裴成菲儿（EE）& GNU Radio 频谱监测 + 白噪声干扰 \\
+MATLAB & 杨佩泽（EE） & I/Q 波形解调 + FDT 延时建模 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

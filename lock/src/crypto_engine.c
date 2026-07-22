@@ -9,7 +9,32 @@ static LONG apdu_send(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                       const BYTE *cmd, DWORD cmdLen,
                       BYTE *resp, DWORD *respLen)
 {
-    return SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
+    LONG rc = SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
+
+    /* ACS ACR122T driver requires transaction for pseudo-APDU commands */
+    if (rc == 0x00000016) {          /* SCARD_E_NOT_TRANSACTED */
+        rc = SCardBeginTransaction(hCard);
+        if (rc != SCARD_S_SUCCESS) return rc;
+        rc = SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
+        SCardEndTransaction(hCard, SCARD_LEAVE_CARD);
+    }
+
+    /* ACR122T / some ACS readers reject pseudo-APDU on T=1; retry with T=0 */
+    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
+        *respLen = APDU_RESP_MAX_LEN;
+        rc = SCardTransmit(hCard, SCARD_PCI_T0, cmd, cmdLen,
+                           NULL, resp, respLen);
+
+        if (rc == 0x00000016) {
+            rc = SCardBeginTransaction(hCard);
+            if (rc != SCARD_S_SUCCESS) return rc;
+            rc = SCardTransmit(hCard, SCARD_PCI_T0, cmd, cmdLen,
+                               NULL, resp, respLen);
+            SCardEndTransaction(hCard, SCARD_LEAVE_CARD);
+        }
+    }
+
+    return rc;
 }
 
 static int apdu_ok(const BYTE *resp, DWORD respLen)
@@ -154,15 +179,8 @@ int mifare_load_key(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
 
-    /* ACR122T / some ACS readers reject pseudo-APDU on T=1; retry with T=0 */
-    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
-        respLen = sizeof(resp);
-        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
-    }
-
     if (rc != SCARD_S_SUCCESS) {
-        fprintf(stderr, "  [*] SCardTransmit error: 0x%08lX\n"
-                        "      (driver may not support pseudo-APDU on this protocol)\n",
+        fprintf(stderr, "  [*] SCardTransmit error: 0x%08lX\n",
                 (unsigned long)rc);
         return AUTH_FAIL_KEY;
     }

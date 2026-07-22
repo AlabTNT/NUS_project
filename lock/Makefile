@@ -1,9 +1,10 @@
 CC       = gcc
 CFLAGS   = -Wall -Werror -g -O0 -std=c99 -Iinclude
 LDFLAGS  =
-TARGET   = lock
-SRCS     = src/main.c src/readin.c src/crypto_engine.c src/hardware_ctrl.c
-OBJS     = $(SRCS:.c=.o)
+TARGETS  = lock lock_admin
+
+COMMON_SRCS = src/readin.c src/crypto_engine.c src/hardware_ctrl.c
+COMMON_OBJS = $(COMMON_SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s 2>/dev/null || echo Windows)
 
@@ -18,13 +19,16 @@ endif
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: $(TARGETS)
 
-$(TARGET): $(OBJS)
+lock: src/main.o $(COMMON_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+lock_admin: src/admin.o $(COMMON_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f src/*.o $(TARGETS)

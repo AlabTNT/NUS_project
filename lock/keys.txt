@@ -1,0 +1,6 @@
+# Door Lock Authorized Keys
+# Each line: 16 hex chars = 8-byte credential key from lock_admin output
+# Lines starting with # are ignored
+# Example (replace with actual keys):
+# A1B2C3D4E5F6A7B8
+# 1122334455667788

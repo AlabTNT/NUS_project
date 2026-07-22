@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "crypto_engine.h"
 
 /* ---- internal helpers ---- */
@@ -32,6 +33,7 @@ static const char *auth_strerror(auth_result_t rc)
     case AUTH_FAIL_EXPIRED:     return "credential expired";
     case AUTH_FAIL_MAGIC:       return "not a door-lock card (bad magic)";
     case AUTH_FAIL_FORMAT:      return "invalid credential format";
+    case AUTH_FAIL_NOT_IN_LIST: return "credential key not in whitelist";
     default:                    return "unknown error";
     }
 }
@@ -42,6 +44,100 @@ static void hexdump(const char *label, const BYTE *data, int len)
     for (int i = 0; i < len; i++)
         fprintf(stdout, "%02X ", data[i]);
     fprintf(stdout, "\n");
+}
+
+/* ---- hex parsing for whitelist ---- */
+
+static int hex_nibble(char c)
+{
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+    return -1;
+}
+
+static int parse_hex_key(const char *line, BYTE key[CRED_KEY_LEN])
+{
+    int i = 0;
+    while (*line == ' ' || *line == '\t') line++;
+    for (int b = 0; b < CRED_KEY_LEN; b++) {
+        int hi = hex_nibble(line[i]);
+        int lo = hex_nibble(line[i + 1]);
+        if (hi < 0 || lo < 0) return -1;
+        key[b] = (BYTE)((hi << 4) | lo);
+        i += 2;
+    }
+    return 0;
+}
+
+static int load_whitelist(const char *path,
+                          BYTE keys[MAX_WHITELIST_KEYS][CRED_KEY_LEN],
+                          int *count)
+{
+    FILE *f = fopen(path, "r");
+    if (!f) {
+        fprintf(stderr, "[!] Cannot open whitelist: %s\n", path);
+        return -1;
+    }
+
+    *count = 0;
+    char line[256];
+    while (*count < MAX_WHITELIST_KEYS && fgets(line, sizeof(line), f)) {
+        if (line[0] == '#' || line[0] == '\n' || line[0] == '\r')
+            continue;
+        if (parse_hex_key(line, keys[*count]) == 0)
+            (*count)++;
+    }
+    fclose(f);
+
+    fprintf(stdout, "[*] Loaded %d authorized key(s) from %s\n", *count, path);
+    return 0;
+}
+
+static int is_in_whitelist(const BYTE key[CRED_KEY_LEN],
+                           const BYTE whitelist[MAX_WHITELIST_KEYS][CRED_KEY_LEN],
+                           int count)
+{
+    for (int i = 0; i < count; i++)
+        if (memcmp(key, whitelist[i], CRED_KEY_LEN) == 0)
+            return 1;
+    return 0;
+}
+
+/* ---- date helpers ---- */
+
+static int date4_to_int(const BYTE d[4])
+{
+    return d[0] * 1000000 + d[1] * 10000 + d[2] * 100 + d[3];
+}
+
+static int today_int(void)
+{
+    time_t t = time(NULL);
+    struct tm *tm = localtime(&t);
+    return (tm->tm_year + 1900) * 10000
+         + (tm->tm_mon  + 1)    * 100
+         + tm->tm_mday;
+}
+
+static int check_expiry(const BYTE expiryDate[4])
+{
+    int expiry = date4_to_int(expiryDate);
+    int today  = today_int();
+
+    fprintf(stdout, "  expiry  : %08d  (today %08d)\n", expiry, today);
+
+    if (expiry == 0 || expiry >= 99990000)
+        return 1;   /* no expiry set */
+
+    if (expiry < today) {
+        fprintf(stdout, "  [*] Credential expired %d day(s) ago\n",
+                today - expiry);
+        return 0;
+    }
+
+    fprintf(stdout, "  [*] Valid for %d more day(s)\n", expiry - today);
+    return 1;
 }
 
 /* ---- key loading ---- */
@@ -232,7 +328,6 @@ int mifare_dec_value(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 int mifare_restore_value(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                          BYTE srcBlock, BYTE dstBlock)
 {
-    /* Read value from src, write to dst as binary */
     mf1k_value_block_t val;
     int rc = mifare_read_value(hCard, pio, srcBlock, &val);
     if (rc != AUTH_SUCCESS) return rc;
@@ -273,49 +368,63 @@ int mifare_read_sector(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 }
 
 /* ================================================================
- *  Door-Lock Credential Verification
+ *  Door-Lock Credential Verification  (enhanced)
  * ================================================================
  *
- *  Expects Sector 1 to contain:
- *    Block 4  → cred_header_t   (magic "LOCK", card serial, access level)
- *    Block 5  → cred_key_t      (8-byte credential key)
- *    Block 6  → cred_meta_t     (issue date, expiry date)
- *    Block 7  → sector trailer  (Key A + access bits + Key B)
+ *  @param keyA          6-byte custom Key A; NULL = use default all-FF
+ *  @param whitelistPath path to authorized keys file; NULL = skip
  *
- * 1) Load default Key A, authenticate sector 1
- * 2) Read credential header → verify magic "LOCK"
- * 3) Read credential key    → verify non-zero
- * 4) Read metadata          → check expiry
- * 5) Print card info, return AUTH_SUCCESS / AUTH_FAIL_*
+ *  1) Load Key A (custom or default), authenticate Sector 1
+ *  2) Read Block 4 → verify magic "LOCK"
+ *  3) Read Block 5 → verify credKey against whitelist (or non-blank)
+ *  4) Read Block 6 → verify expiry date
+ *  5) Return AUTH_SUCCESS / AUTH_FAIL_*
  */
 
-int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
+int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
+                     const BYTE *keyA, const char *whitelistPath)
 {
     BYTE defaultKey[MIFARE_KEY_LEN] = MF1K_DEFAULT_KEY_A;
     BYTE block[MF1K_BLOCK_SIZE];
     int  rc;
 
-    /* ---- 1. load default Key A ---- */
-    fprintf(stdout, "[*] Loading default Key A ...\n");
-    rc = mifare_load_key(hCard, pio, defaultKey, APDU_LOAD_KEY_SLOT_A);
+    const BYTE *useKey = keyA ? keyA : defaultKey;
+
+    /* ---- load whitelist (if requested) ---- */
+    BYTE whitelist[MAX_WHITELIST_KEYS][CRED_KEY_LEN];
+    int  wlCount = 0;
+    int  useWhitelist = 0;
+
+    if (whitelistPath) {
+        if (load_whitelist(whitelistPath, whitelist, &wlCount) == 0
+            && wlCount > 0)
+            useWhitelist = 1;
+    }
+
+    /* ---- 1. load Key A ---- */
+    fprintf(stdout, "[*] Loading Key A (%02X%02X%02X%02X%02X%02X) ...\n",
+            useKey[0], useKey[1], useKey[2],
+            useKey[3], useKey[4], useKey[5]);
+    rc = mifare_load_key(hCard, pio, useKey, APDU_LOAD_KEY_SLOT_A);
     if (rc != AUTH_SUCCESS) {
         fprintf(stderr, "[!] %s\n", auth_strerror(rc));
         return rc;
     }
 
-    /* ---- 2. authenticate sector CRED_SECTOR ---- */
+    /* ---- 2. authenticate Sector 1 ---- */
     BYTE authBlock = (BYTE)(CRED_SECTOR * MF1K_BLOCKS_PER_SECTOR);
-    fprintf(stdout, "[*] Authenticating sector %u (block %u) with Key A ...\n",
+    fprintf(stdout, "[*] Authenticating sector %u (block %u) ...\n",
             CRED_SECTOR, authBlock);
     rc = mifare_authenticate(hCard, pio, authBlock, MIFARE_KEY_A,
                              APDU_AUTH_KEY_NO);
     if (rc != AUTH_SUCCESS) {
-        fprintf(stderr, "[!] %s\n", auth_strerror(rc));
+        fprintf(stderr, "[!] %s — wrong Key A or not a MIFARE Classic card\n",
+                auth_strerror(rc));
         return rc;
     }
-    fprintf(stdout, "[+] Crypto-1 session established (three-pass auth OK)\n");
+    fprintf(stdout, "[+] Crypto-1 session established\n");
 
-    /* ---- 3. read credential header (block CRED_BLOCK_HDR in sector) ---- */
+    /* ---- 3. read & verify credential header ---- */
     BYTE hdrBlock = (BYTE)(CRED_SECTOR * MF1K_BLOCKS_PER_SECTOR + CRED_BLOCK_HDR);
     fprintf(stdout, "[*] Reading credential header (block %u) ...\n", hdrBlock);
     rc = mifare_read_block(hCard, pio, hdrBlock, block);
@@ -326,21 +435,18 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
     hexdump("raw header", block, MF1K_BLOCK_SIZE);
 
     cred_header_t *hdr = (cred_header_t *)block;
-
     if (memcmp(hdr->magic, CRED_MAGIC, CRED_MAGIC_LEN) != 0) {
         fprintf(stderr, "[!] bad magic: expected '%.4s', got '%.4s'\n",
                 CRED_MAGIC, hdr->magic);
         return AUTH_FAIL_MAGIC;
     }
     fprintf(stdout, "[+] Magic '%.4s' verified\n", CRED_MAGIC);
-
     fprintf(stdout, "[+] Card serial : %02X %02X %02X %02X\n",
             hdr->cardSerial[0], hdr->cardSerial[1],
             hdr->cardSerial[2], hdr->cardSerial[3]);
-    fprintf(stdout, "[+] Access level: %02X %02X\n",
-            hdr->accessLevel[0], hdr->accessLevel[1]);
+    fprintf(stdout, "[+] Access level: %u\n", hdr->accessLevel[0]);
 
-    /* ---- 4. read credential key ---- */
+    /* ---- 4. read & verify credential key ---- */
     BYTE keyBlock = (BYTE)(CRED_SECTOR * MF1K_BLOCKS_PER_SECTOR + CRED_BLOCK_KEY);
     fprintf(stdout, "[*] Reading credential key (block %u) ...\n", keyBlock);
     rc = mifare_read_block(hCard, pio, keyBlock, block);
@@ -350,16 +456,25 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
     }
     hexdump("cred key", block, MF1K_BLOCK_SIZE);
 
-    cred_key_t *key = (cred_key_t *)block;
-    int allFF = 1;
-    for (int i = 0; i < 8; i++)
-        if (key->credKey[i] != 0xFF) { allFF = 0; break; }
-    if (allFF) {
-        fprintf(stderr, "[!] credential key is blank (all FF)\n");
-        return AUTH_FAIL_FORMAT;
+    if (useWhitelist) {
+        if (!is_in_whitelist(block, whitelist, wlCount)) {
+            fprintf(stderr, "[!] credential key NOT in whitelist\n");
+            return AUTH_FAIL_NOT_IN_LIST;
+        }
+        fprintf(stdout, "[+] Credential key found in whitelist (%d keys)\n",
+                wlCount);
+    } else {
+        int allFF = 1;
+        for (int i = 0; i < CRED_KEY_LEN; i++)
+            if (block[i] != 0xFF) { allFF = 0; break; }
+        if (allFF) {
+            fprintf(stderr, "[!] credential key is blank (all FF)\n");
+            return AUTH_FAIL_FORMAT;
+        }
+        fprintf(stdout, "[+] Credential key non-blank (whitelist mode off)\n");
     }
 
-    /* ---- 5. read metadata / expiry ---- */
+    /* ---- 5. read metadata & check expiry ---- */
     BYTE metaBlock = (BYTE)(CRED_SECTOR * MF1K_BLOCKS_PER_SECTOR + CRED_BLOCK_META);
     fprintf(stdout, "[*] Reading metadata (block %u) ...\n", metaBlock);
     rc = mifare_read_block(hCard, pio, metaBlock, block);
@@ -368,6 +483,11 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
         return rc;
     }
     hexdump("metadata", block, MF1K_BLOCK_SIZE);
+
+    if (!check_expiry(block + 4)) {
+        fprintf(stderr, "[!] %s\n", auth_strerror(AUTH_FAIL_EXPIRED));
+        return AUTH_FAIL_EXPIRED;
+    }
 
     /* ---- 6. verdict ---- */
     fprintf(stdout, "\n[+] Card credential verification PASSED\n\n");

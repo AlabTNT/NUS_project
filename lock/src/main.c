@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "pcsc_common.h"
 #include "readin.h"
 #include "crypto_engine.h"
@@ -72,11 +73,55 @@ static void show_card_uid(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
             buf[0], buf[1], buf[2], buf[3], buf[4]);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     char        readerList[2048] = {0};
     DWORD       readerLen        = sizeof(readerList);
     const char *targetReader     = NULL;
+    const char *keyfile          = NULL;
+    BYTE        customKeyA[MIFARE_KEY_LEN];
+    BYTE       *pKeyA            = NULL;
+    int         haveCustomKey    = 0;
+
+    /* ---- parse arguments ---- */
+    for (int i = 1; i < argc; i++) {
+        if (!strcmp(argv[i], "--keyfile") && i + 1 < argc) {
+            keyfile = argv[++i];
+        } else if (!strcmp(argv[i], "--keya") && i + 1 < argc) {
+            const char *hex = argv[++i];
+            if (strlen(hex) != MIFARE_KEY_LEN * 2) {
+                fprintf(stderr, "[!] --keya requires exactly %d hex chars\n",
+                        MIFARE_KEY_LEN * 2);
+                return 1;
+            }
+            for (int j = 0; j < MIFARE_KEY_LEN; j++) {
+                char hi = (char)toupper(hex[j * 2]);
+                char lo = (char)toupper(hex[j * 2 + 1]);
+                if (!isxdigit(hi) || !isxdigit(lo)) {
+                    fprintf(stderr, "[!] invalid hex in --keya\n");
+                    return 1;
+                }
+                customKeyA[j] = (BYTE)(
+                    ((hi >= 'A' ? hi - 'A' + 10 : hi - '0') << 4) |
+                     (lo >= 'A' ? lo - 'A' + 10 : lo - '0'));
+            }
+            haveCustomKey = 1;
+            pKeyA = customKeyA;
+        } else if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) {
+            fprintf(stdout,
+                "Usage: %s [--keyfile PATH] [--keya HEX]\n\n"
+                "  --keyfile PATH   whitelist of authorised credential keys\n"
+                "  --keya HEX       custom 6-byte Key A (12 hex chars)\n\n"
+                "Examples:\n"
+                "  %s --keyfile keys.txt\n"
+                "  %s --keya AABBCCDDEEFF\n\n",
+                argv[0], argv[0], argv[0]);
+            return 0;
+        } else {
+            fprintf(stderr, "[!] Unknown option: %s  (use --help)\n", argv[i]);
+            return 1;
+        }
+    }
 
     install_signal_handler();
 
@@ -85,6 +130,16 @@ int main(void)
             "  Smart Card Door Lock System v2.0\n"
             "  Crypto-1 Encrypted Authentication\n"
             "========================================\n\n");
+
+    if (keyfile)
+        fprintf(stdout, "  Whitelist   : %s\n", keyfile);
+    if (haveCustomKey)
+        fprintf(stdout, "  Key A       : %02X%02X%02X%02X%02X%02X (custom)\n",
+                customKeyA[0], customKeyA[1], customKeyA[2],
+                customKeyA[3], customKeyA[4], customKeyA[5]);
+    else
+        fprintf(stdout, "  Key A       : FFFFFFFFFFFF (default)\n");
+    fprintf(stdout, "\n");
 
     hw_init();
 
@@ -135,7 +190,8 @@ int main(void)
                 "\n---- Crypto-1 Authenticated Session ----\n");
 
         /* Crypto-1 encrypted credential verification */
-        int authResult = auth_verify_card(g_hCard, g_pioSendPci);
+        int authResult = auth_verify_card(g_hCard, g_pioSendPci,
+                                          pKeyA, keyfile);
 
         fprintf(stdout,
                 "------------------------------------------\n");

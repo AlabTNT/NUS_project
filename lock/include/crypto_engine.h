@@ -63,7 +63,12 @@ int mifare_read_sector(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                        BYTE sector, const BYTE keyA[MIFARE_KEY_LEN],
                        BYTE blocks[MF1K_BLOCKS_PER_SECTOR][MF1K_BLOCK_SIZE]);
 
-/* ---- door-lock credential verification ---- */
-int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pioSendPci);
+/* ---- door-lock credential verification ----
+ *
+ *  keyA         : custom Key A (6 bytes); NULL = use default all-FF
+ *  whitelistPath: path to authorized keys file; NULL = skip whitelist
+ */
+int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pioSendPci,
+                     const BYTE *keyA, const char *whitelistPath);
 
 #endif /* CRYPTO_ENGINE_H */

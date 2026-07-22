@@ -116,6 +116,10 @@ typedef struct {
 #define ACR122U_VENDOR_NAME     "ACS ACR122U"
 #define ACR122U_MAX_READERS     8
 
+#define DEFAULT_KEYFILE         "keys.txt"
+#define MAX_WHITELIST_KEYS      64
+#define CRED_KEY_LEN            8
+
 /* ---------- default key ---------- */
 #define MF1K_DEFAULT_KEY_A      {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}
 #define MF1K_DEFAULT_KEY_B      {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}
@@ -144,7 +148,8 @@ typedef enum {
     AUTH_FAIL_ACCESS      = -7,
     AUTH_FAIL_EXPIRED     = -8,
     AUTH_FAIL_MAGIC       = -9,
-    AUTH_FAIL_FORMAT      = -10
+    AUTH_FAIL_FORMAT      = -10,
+    AUTH_FAIL_NOT_IN_LIST = -11
 } auth_result_t;
 
 #endif /* PCSC_COMMON_H */

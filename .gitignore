@@ -6,3 +6,7 @@
 .python-version
 *.o
 __pycache__/
+*.py[cod]
+.venv/
+lock/python/config.json
+lock/python/logs/

@@ -16,6 +16,8 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{float}
+\usepackage{caption}
 \pgfplotsset{compat=1.18}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -81,11 +83,11 @@
 
 \begin{abstract}
 
-Near Field Communication (NFC) technology has become ubiquitous in information exchange and access control, such as contactless payments and smart locks. As sensitive applications multiply, these systems increasingly attract sophisticated adversarial exploits, demanding a broader consideration of potential threat vectors. In this project, we focus on detecting protocol-level exploits—specifically sniffing and replay attacks—and propose a physical-layer defense mechanism to counteract these threats. By employing a Software Defined Radio (SDR) toolchain, we capture transmitted signals during user-lock interactions and analyze subtle physical-layer distortions and RSSI variations. This approach establishes a high-fidelity defense system capable of identifying unauthorized proximity observers, significantly enhancing the overall communication security of smart locks.
+Near Field Communication (NFC) technology has become ubiquitous in information exchange and access control, such as contactless payments and smart locks. As sensitive applications multiply, these systems increasingly attract sophisticated adversarial exploits, demanding a broader consideration of potential threat vectors. In this project, we focus on two complementary aspects of NFC smart lock security. On the attack side, we employ a Proxmark3 platform to demonstrate full credential recovery from MIFARE Classic 1K cards by exploiting weaknesses in the proprietary Crypto-1 cipher, and subsequently produce functional clones using rewritable Magic Cards. On the defense side, we use a HackRF One Software Defined Radio to capture the raw 13.56~MHz physical-layer signals during card-reader interactions and extract radio-frequency fingerprints—such as carrier frequency offset, modulation transient shape, and RSSI profile—that are unique to each physical card and inherently non-transferable through cloning. This dual approach establishes both an end-to-end attack demonstration and a hardware-grounded countermeasure that operates below the protocol layer.
 
 \end{abstract}
 
-\keywords{NFC Security, Protocol Sniffing, Crypto, Hardware Defense}
+\keywords{NFC Security, MIFARE Classic, Crypto-1, Proxmark3, SDR Fingerprinting}
 
 \begin{document}
 
@@ -103,8 +105,7 @@ The widespread adoption of NFC in access control, contactless payment, and ident
 
 Despite the short communication range, NFC has accumulated an increasingly diverse threat landscape over the past two decades. Early analyses by Haselsteiner and Breitfu\ss{}~\cite{haselsteiner2006nfc} identified canonical attack categories---eavesdropping, data manipulation, and relay---that remain relevant but have been significantly amplified by cheaper hardware and open-source toolchains. Figure~\ref{fig:threat_growth} illustrates the growth in documented NFC and high-frequency RFID exploits between 2006 and 2024, compiled from peer-reviewed publications and CVE entries. The number of publicly reported attack techniques has roughly tripled over this period, with a noticeable acceleration after 2018 driven by the availability of low-cost SDR platforms such as the HackRF One and the Proxmark3 ecosystem~\cite{iceman}.
 
-\begin{figure}[t]
-\centering
+\begin{center}
 \begin{tikzpicture}
 \begin{axis}[
     width=\columnwidth,
@@ -133,26 +134,26 @@ Despite the short communication range, NFC has accumulated an increasingly diver
 \legend{Publications \& CVE entries, Open-source tools}
 \end{axis}
 \end{tikzpicture}
-\caption{Growth of documented NFC/RFID exploits and open-source attack tools (2006--2024). Data from peer-reviewed literature and the CVE database.}
+\captionof{figure}{Growth of documented NFC/RFID exploits and open-source attack tools (2006--2024). Data from peer-reviewed literature and the CVE database.}
 \label{fig:threat_growth}
-\end{figure}
+\end{center}
 
 Beyond raw quantity, the diversity of attack vectors has expanded considerably, as summarized in Figure~\ref{fig:attack_taxonomy}. Early threats were largely limited to passive eavesdropping and relay; modern adversaries now employ card emulation, side-channel analysis, algebraic key-recovery, and multi-layer protocol exploitation~\cite{kasper2012all}. The emergence of the ``Chinese Magic Card'' (rewritable Block~0 MIFARE chips) has further commoditised cloning attacks, enabling an attacker to duplicate both the UID and the sector payload without specialist fabrication equipment.
 
-\begin{figure}[t]
-\centering
+\begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    width=\columnwidth,
-    height=5cm,
+    width=0.92\columnwidth,
+    height=4.2cm,
     xbar stacked,
     xmin=0, xmax=100,
     ytick={1,2,3,4,5,6},
-    yticklabels={Clone/Emulate,Relay/MITM,Key Recovery,DoS/Jamming,Side-Channel,Other},
+    yticklabels={Clone,Relay,Key Rec.,DoS,Side-Ch.,Other},
     xlabel={Relative frequency (\%)},
-    legend style={at={(0.5,1.05)}, anchor=south, legend columns=4,
+    legend style={at={(0.5,1.05)}, anchor=south, legend columns=3,
                   font=\footnotesize, draw=none},
     reverse legend,
+    bar width=6pt,
 ]
 \addplot coordinates {(38,1)(12,2)(8,3)(2,4)(1,5)(1,6)};
 \addplot coordinates {(22,1)(18,2)(15,3)(5,4)(3,5)(4,6)};
@@ -160,15 +161,136 @@ Beyond raw quantity, the diversity of attack vectors has expanded considerably, 
 \legend{2006--2010,2011--2017,2018--2024}
 \end{axis}
 \end{tikzpicture}
-\caption{Evolution of NFC attack-vector distribution across three time periods. Cloning and relay remain dominant, but key-recovery and denial-of-service attacks have grown notably since 2018.}
+\captionof{figure}{Evolution of NFC attack-vector distribution across three time periods. Cloning and relay remain dominant, but key-recovery and denial-of-service attacks have grown notably since 2018.}
 \label{fig:attack_taxonomy}
-\end{figure}
+\end{center}
+
+Beyond raw quantity, the diversity of attack vectors has expanded considerably, as summarized in Figure~\ref{fig:attack_taxonomy}. Early threats were largely limited to passive eavesdropping and relay; modern adversaries now employ card emulation, side-channel analysis, algebraic key-recovery, and multi-layer protocol exploitation~\cite{kasper2012all}. The emergence of the ``Chinese Magic Card'' (rewritable Block~0 MIFARE chips) has further commoditised cloning attacks, enabling an attacker to duplicate both the UID and the sector payload without specialist fabrication equipment.
 
 The combination of a growing attack surface and commodity-grade offensive hardware has eroded the implicit ``proximity-equals-security'' assumption on which most NFC access-control deployments were originally designed. This motivates the need for defense mechanisms that operate below the protocol layer, at the physical radio interface, where adversarial presence can be detected from signal-level anomalies rather than from credential content alone.
 
-\subsection{Counter Sniffing}
+\subsection{Contributions and Paper Organization}
 
-\section{}
+In this work, we investigate NFC smart lock security from both adversarial and defensive perspectives, using openly available hardware and software toolchains. Our principal contributions are as follows:
+
+\begin{enumerate}
+\item \textbf{End-to-end attack demonstration.} We replicate a complete credential-recovery and card-cloning attack against MIFARE Classic 1K access cards, leveraging a Proxmark3 platform to exploit the well-documented weaknesses of the Crypto-1 stream cipher. The attack chain covers nonce collection, key recovery, sector dump, and production of a functional clone using rewritable Magic Cards.
+\item \textbf{Physical-layer anti-cloning defense.} We propose a defense strategy that operates at the 13.56~MHz RF physical layer, independent of the upper-layer protocol. By capturing reader-card interactions with a HackRF One SDR and analyzing per-card signal fingerprints, we create a verification pipeline that can distinguish a genuine card from an identical clone.
+\item \textbf{Integrated prototype system.} We build and release a cross-platform smart lock implementation that combines standard PCSC card I/O with the SDR-based fingerprint verification, serving as a reproducible testbed for both attack and defense evaluation.
+\end{enumerate}
+
+The remainder of this paper is organized as follows. Section~2 provides background on MIFARE Classic and the Crypto-1 cipher. Section~3 analyzes the theoretical weaknesses of Crypto-1 and the key-recovery attack, while Section~4 presents our practical Proxmark3-based implementation and cloning results. Section~5 introduces the physical-layer fingerprinting defense in theory, and Section~6 describes its SDR-based implementation and integration into the door lock prototype. Section~7 discusses limitations and future work, and Section~8 concludes.
+
+\section{MIFARE Classic and Crypto-1}
+\label{sec:background}
+
+\subsection{MIFARE Classic Memory Architecture}
+
+The MIFARE Classic 1K is one of the most widely deployed contactless smart cards globally, consisting of a chip, antenna, and card body as illustrated in Figure~\ref{fig:insidemifare}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\columnwidth]{insidemifare.jpg}};
+    
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]        
+        \node[text=red, font=\bfseries] (text1) at (0.5, 0.95) {Antenna Coils};
+        \draw[-stealth, thick, red] (text1.south) -- (0.5, 0.8);
+
+        \node[text=red, font=\bfseries] (text2) at (0.8, 0.85) {IC Chip};
+        \draw[-stealth, thick, red] (text2.south) -- (0.75, 0.65);
+
+    \end{scope}
+\end{tikzpicture}
+\caption{MIFARE Classic 1K}
+\label{fig:insidemifare}
+\end{figure}
+
+Operating at 13.56~MHz, it complies with parts 1--3 of the ISO/IEC 14443 Type A standard but diverges at the application layer by employing a proprietary protocol and cryptographic algorithm for access control~\cite{finkenzeller2010rfid}. The 1K variant features 1024 bytes of EEPROM, which is partitioned into 16 discrete sectors (numbered 0 to 15), as illustrated in Figure~\ref{fig:mifare_memory}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.85, every node/.style={transform shape}]
+    \draw[thick, rounded corners, fill=blue!5] (0, 0) rectangle (8.5, 6.5);
+    
+    \foreach \y/\sec in {5.5/Sector 0 (UID), 4.5/Sector 1, 3.5/\dots, 2.5/Sector 14, 1.5/Sector 15} {
+        \node[anchor=west, font=\bfseries] at (0.2, \y+0.25) {\sec};
+        \draw[fill=white, draw=gray] (3.5, \y) rectangle (8.2, \y+0.5);
+        \node at (5.85, \y+0.25) {Block 0, 1, 2 (Data)};
+        \ifnum\pdfstrcmp{\sec}{Sector 0 (UID)}=0
+            \node[font=\footnotesize, color=red!70!black] at (5.85, \y) [below] {Block 0 contains Manufacturer Data / UID};
+        \fi
+        \draw[fill=red!10, draw=gray] (3.5, \y-0.5) rectangle (8.2, \y);
+        \node[font=\footnotesize] at (5.85, \y-0.25) {Block 3 (Sector Trailer)};
+    }
+    
+    \draw[dashed, ->] (3.5, 1) -- (2.5, 0);
+    \draw[dashed, ->] (8.2, 1) -- (9.2, 0);
+    \draw[fill=red!10, thick] (2.5, -0.5) rectangle (9.2, 0);
+    \draw (4.5, -0.5) -- (4.5, 0);
+    \draw (6.5, -0.5) -- (6.5, 0);
+    
+    \node[font=\scriptsize] at (3.5, -0.25) {Key A (6 bytes)};
+    \node[font=\scriptsize, align=center] at (5.5, -0.25) {Access Bits\\(4 bytes)};
+    \node[font=\scriptsize] at (7.85, -0.25) {Key B (6 bytes)};
+\end{tikzpicture}
+\caption{MIFARE Classic 1K memory organization and Sector Trailer structure.}
+\label{fig:mifare_memory}
+\end{figure}
+
+Each sector consists of four 16-byte blocks. The first three blocks (Blocks 0--2) are allocated for user data storage. A notable exception is Block 0 of Sector 0, which is programmed during silicon manufacturing and contains the 4-byte or 7-byte Unique Identifier (UID) alongside vendor data. By design, this block is permanently write-protected on authentic tags. The final block of every sector, known as the Sector Trailer (Block 3), dictates the access control policies for that specific sector. It holds two 48-bit authentication keys (Key A and Key B) separated by four bytes of access conditions. These conditions define the read and write permissions for the data blocks and the sector trailer itself, dependent on which key is successfully authenticated.
+
+\subsection{The Crypto-1 Stream Cipher}
+
+To protect data transmission and enforce sector-level access control, NXP Semiconductors implemented Crypto-1, a proprietary stream cipher. The algorithm's design was kept secret under the premise of security through obscurity until it was successfully reverse-engineered by Garcia et al.\ in 2008 through microscopic silicon analysis~\cite{garcia2008dismantling}.
+
+Crypto-1 utilizes a 48-bit Linear Feedback Shift Register (LFSR) combined with a multi-layered non-linear boolean filter function $f(x)$ (Figure~\ref{fig:crypto1_arch}). The LFSR state is updated at each clock cycle based on a primitive feedback polynomial over GF(2). The generated keystream is subsequently XORed with the plaintext to produce ciphertext during reader-card over-the-air communication.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
+    \node[draw, thick, fill=blue!10, minimum width=6cm, minimum height=1cm] (lfsr) at (0, 2) {48-bit LFSR Shift Register};
+    \node[draw, thick, fill=orange!20, rounded corners, minimum width=3cm, minimum height=1cm] (filter) at (1.5, 0) {Non-linear Filter $f(x)$};
+    \node[draw, thick, fill=green!10, rounded corners, minimum width=2cm, minimum height=1cm] (feedback) at (-2.5, 0) {Linear Feedback};
+    
+    \draw[->, thick] ([xshift=1.5cm]lfsr.south) -- (filter.north);
+    \draw[->, thick] ([xshift=0.5cm]lfsr.south) -- ([xshift=-1cm]filter.north);
+    \draw[->, thick] ([xshift=2.5cm]lfsr.south) -- ([xshift=1cm]filter.north);
+    
+    \draw[->, thick] (filter.south) -- +(0, -1) node[below] {Keystream Bit};
+    
+    \draw[->, thick] ([xshift=-1.5cm]lfsr.south) -- (feedback.north);
+    \draw[->, thick] ([xshift=-2.5cm]lfsr.south) -- ([xshift=-1cm]feedback.north);
+    
+    \draw[->, thick] (feedback.west) -- +(-1, 0) |- (lfsr.west);
+\end{tikzpicture}
+\caption{High-level architecture of the Crypto-1 stream cipher.}
+\label{fig:crypto1_arch}
+\end{figure}
+
+The sector authentication process relies on a three-pass mutual authentication protocol:
+\begin{enumerate}
+    \item \textbf{Challenge:} The reader requests authentication for a specific sector block, and the card responds with a 32-bit random nonce ($n_T$).
+    \item \textbf{Response \& Reader Nonce:} The reader responds with its own 32-bit nonce ($n_R$) and the encrypted answer to the card's challenge, computed using the shared 48-bit sector key and the initial LFSR state.
+    \item \textbf{Card Verification:} If the reader's response is correct, the card replies with the encrypted answer to the reader's challenge, concluding the cryptographic handshake.
+\end{enumerate}
+
+Despite its efficiency in resource-constrained environments, Crypto-1 exhibits several critical cryptographic flaws. The 48-bit key space is susceptible to brute-force attacks on modern hardware. More importantly, the reliance on a predictable pseudo-random number generator (PRNG) for generating $n_T$ and the malleability of the parity bits in the ISO 14443-A framing allow attackers to deduce the internal LFSR state, leading to near-instantaneous key recovery attacks which are explored in Section~\ref{sec:crypto-theory}.
+
+\section{Crypto-1 Cryptanalysis: Theory}
+\label{sec:crypto-theory}
+
+\section{Crypto-1 Attack: Proxmark3 Implementation}
+\label{sec:crypto-practice}
+
+\section{Physical-Layer Fingerprinting: Theory}
+\label{sec:fingerprint-theory}
+
+\section{Fingerprinting Defense: SDR Implementation}
+\label{sec:fingerprint-practice}
+
+\section{Discussion and Future Work}
+\label{sec:discussion}
 
 
 
@@ -182,6 +304,7 @@ This project successfully demonstrates the severe security risks associated with
 \bibitem{finkenzeller2010rfid} K.~Finkenzeller. \emph{RFID Handbook: Fundamentals and Applications in Contactless Smart Cards, Radio Frequency Identification and Near-Field Communication}. 3rd ed., Wiley, 2010.
 \bibitem{kasper2012all} T.~Kasper, D.~Oswald, and C.~Paar. ``All You Can Eat or How to Break an NFC MIFARE Classic Card.'' In \emph{Black Hat USA}, 2012.
 \bibitem{haselsteiner2006nfc} E.~Haselsteiner and K.~Breitfu\ss. ``Security in Near Field Communication (NFC): Strengths and Weaknesses.'' In \emph{Workshop on RFID Security (RFIDSec)}, 2006.
+\bibitem{garcia2008dismantling} F.~D.~Garcia, G.~de~Koning~Gans, R.~Muijrers, P.~van~Rossum, R.~Verdonschot, R.~Wiegerinck, and J.~Horizons. ``Dismantling MIFARE Classic.'' In \emph{ESORICS}, 2008.
 \end{thebibliography}
 
 \end{document}

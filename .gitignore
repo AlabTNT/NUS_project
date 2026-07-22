@@ -10,3 +10,8 @@ __pycache__/
 .venv/
 lock/python/config.json
 lock/python/logs/
+rrg_other/client/fingerprint_data/
+rrg_other/client/fingerprint_development/
+rrg_other/client/fingerprint_blind_test/
+rrg_other/models/
+rrg_other/reports/

@@ -14,15 +14,16 @@ static const BYTE DEFAULT_KEY_A[MIFARE_KEY_LEN] = MF1K_DEFAULT_KEY_A;
 static const BYTE SAFE_ACCESS[ACCESS_BITS_LEN]  = {0xFF, 0x07, 0x80, 0x69};
 
 static BYTE g_defaultKeyB[MIFARE_KEY_LEN] = MF1K_DEFAULT_KEY_B;
-
 static const char *select_reader(const char *readerList)
 {
     const char *p = readerList;
     while (*p) {
-        if (strstr(p, "ACR122")) return p;
+        if (strstr(p, "ACR122") || strstr(p, "ACR12"))
+            return p;
         p += strlen(p) + 1;
     }
-    return readerList;
+    /* fallback: first available reader */
+    return (*readerList) ? readerList : NULL;
 }
 
 static void random_bytes(BYTE *buf, int len)
@@ -322,5 +323,9 @@ int main(int argc, char **argv)
 done:
     pcsc_disconnect_card(hCard);
     pcsc_cleanup(hContext);
+#ifdef _WIN32
+    fprintf(stdout, "\nPress any key to exit...");
+    getchar();
+#endif
     return (rc == AUTH_SUCCESS) ? 0 : 1;
 }

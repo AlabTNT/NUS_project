@@ -54,11 +54,11 @@ static const char *select_reader(const char *readerList)
 {
     const char *p = readerList;
     while (*p) {
-        if (strstr(p, "ACR122"))
+        if (strstr(p, "ACR122") || strstr(p, "ACR12"))
             return p;
         p += strlen(p) + 1;
     }
-    return readerList;
+    return (*readerList) ? readerList : NULL;
 }
 
 static void show_card_uid(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
@@ -216,5 +216,9 @@ int main(int argc, char **argv)
 fatal:
     fprintf(stderr, "[!] Fatal error - system halted.\n");
     do_cleanup();
+#ifdef _WIN32
+    fprintf(stdout, "\nPress any key to exit...");
+    getchar();
+#endif
     return 1;
 }

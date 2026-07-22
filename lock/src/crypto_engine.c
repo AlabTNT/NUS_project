@@ -153,8 +153,25 @@ int mifare_load_key(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     DWORD respLen = sizeof(resp);
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
-    if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_KEY;
-    if (!apdu_ok(resp, respLen))  return AUTH_FAIL_KEY;
+
+    /* ACR122T / some ACS readers reject pseudo-APDU on T=1; retry with T=0 */
+    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
+        respLen = sizeof(resp);
+        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
+    }
+
+    if (rc != SCARD_S_SUCCESS) {
+        fprintf(stderr, "  [*] SCardTransmit error: 0x%08lX\n"
+                        "      (driver may not support pseudo-APDU on this protocol)\n",
+                (unsigned long)rc);
+        return AUTH_FAIL_KEY;
+    }
+    if (!apdu_ok(resp, respLen)) {
+        fprintf(stderr, "  [*] Key load rejected: SW=%02X%02X\n",
+                respLen >= 2 ? resp[respLen-2] : 0,
+                respLen >= 2 ? resp[respLen-1] : 0);
+        return AUTH_FAIL_KEY;
+    }
     return AUTH_SUCCESS;
 }
 
@@ -175,6 +192,13 @@ int mifare_authenticate(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     DWORD respLen = sizeof(resp);
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
+
+    /* ACR122T fallback to T=0 */
+    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
+        respLen = sizeof(resp);
+        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
+    }
+
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_KEY;
 
     if (!apdu_ok(resp, respLen)) {
@@ -201,6 +225,12 @@ int mifare_read_block(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     DWORD respLen = sizeof(resp);
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
+
+    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
+        respLen = sizeof(resp);
+        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
+    }
+
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_READ;
     if (!apdu_ok(resp, respLen)) return AUTH_FAIL_READ;
 
@@ -230,6 +260,12 @@ int mifare_write_block(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     DWORD respLen = sizeof(resp);
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
+
+    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
+        respLen = sizeof(resp);
+        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
+    }
+
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_WRITE;
     if (!apdu_ok(resp, respLen)) return AUTH_FAIL_WRITE;
     return AUTH_SUCCESS;

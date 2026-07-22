@@ -1,0 +1,2 @@
+script run .\luascripts\hf_mf_fingerprint_raw.lua -h
+script run .\luascripts\hf_mf_fingerprint_trace.lua -h

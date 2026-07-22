@@ -1,0 +1,33 @@
+[+] loaded `C:/Users/李/Desktop/WorkDocument/Grade3-b/Singapore/rrg_other/client/.proxmark3/preferences.json`
+[+] execute command from commandline: script run .\luascripts\hf_mf_fingerprint_raw.lua -h
+
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+[=] No previous history could be loaded
+[usb|script] pm3 --> script run .\luascripts\hf_mf_fingerprint_raw.lua -h
+[+] executing lua .\luascripts\hf_mf_fingerprint_raw.lua
+[+] args '-h'
+[-] error - .\luascripts\hf_mf_fingerprint_raw.lua:1: module 'getopt' not found:
+[-] 	no field package.preload['getopt']
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\lua\getopt.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\lua\getopt\init.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\getopt.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\getopt\init.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\..\share\lua\5.4\getopt.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\..\share\lua\5.4\getopt\init.lua'
+[-] 	no file '.\getopt.lua'
+[-] 	no file '.\getopt\init.lua'
+[-] 	no file 'C:\Users\鏉嶾Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\luascripts/getopt.lua'
+[-] 	no file 'C:\Users\鏉嶾Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\lualibs/getopt.lua'
+[-] 	no file 'C:/Users/李/Desktop/WorkDocument/Grade3-b/Singapore/rrg_other/client/.proxmark3/luascripts/getopt.lua'
+[-] 	no file 'C:/Users/李/Desktop/WorkDocument/Grade3-b/Singapore/rrg_other/client/.proxmark3/lualibs/getopt.lua'
+[-] 	no file 'C:\Users\鏉嶾Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\../share/proxmark3/luascripts/getopt.lua'
+[-] 	no file 'C:\Users\鏉嶾Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\../share/proxmark3/lualibs/getopt.lua'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\getopt.dll'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\..\lib\lua\5.4\getopt.dll'
+[-] 	no file 'C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\loadall.dll'
+[-] 	no file '.\getopt.dll'
+
+
+[+] finished .\luascripts\hf_mf_fingerprint_raw.lua
+

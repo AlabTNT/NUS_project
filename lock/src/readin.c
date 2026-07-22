@@ -73,8 +73,8 @@ void pcsc_cleanup(SCARDCONTEXT hContext)
     }
 }
 
-int pcsc_wait_for_card(SCARDCONTEXT hContext, const char *readerName,
-                       DWORD timeoutMs)
+static int wait_for_presence(SCARDCONTEXT hContext, const char *readerName,
+                             DWORD timeoutMs, int wantPresent)
 {
     SCARD_READERSTATE rgReaderStates[1];
 
@@ -82,10 +82,32 @@ int pcsc_wait_for_card(SCARDCONTEXT hContext, const char *readerName,
     rgReaderStates[0].szReader       = readerName;
     rgReaderStates[0].dwCurrentState = SCARD_STATE_UNAWARE;
 
-    LONG rc = SCardGetStatusChange(hContext, timeoutMs, rgReaderStates, 1);
-    if (rc != SCARD_S_SUCCESS && rc != SCARD_E_TIMEOUT)
-        return -1;
-    if (rgReaderStates[0].dwEventState & SCARD_STATE_PRESENT)
-        return 1;
-    return 0;
+    for (;;) {
+        LONG rc = SCardGetStatusChange(hContext, timeoutMs, rgReaderStates, 1);
+        if (rc == SCARD_E_TIMEOUT)
+            return 0;
+        if (rc != SCARD_S_SUCCESS)
+            return -1;
+
+        DWORD eventState = rgReaderStates[0].dwEventState;
+        int isPresent = (eventState & SCARD_STATE_PRESENT) != 0;
+        if (isPresent == wantPresent)
+            return 1;
+
+        /* Acknowledge this state, then wait for the opposite transition. */
+        rgReaderStates[0].dwCurrentState =
+            eventState & ~(DWORD)SCARD_STATE_CHANGED;
+    }
+}
+
+int pcsc_wait_for_card(SCARDCONTEXT hContext, const char *readerName,
+                       DWORD timeoutMs)
+{
+    return wait_for_presence(hContext, readerName, timeoutMs, 1);
+}
+
+int pcsc_wait_for_card_removal(SCARDCONTEXT hContext, const char *readerName,
+                               DWORD timeoutMs)
+{
+    return wait_for_presence(hContext, readerName, timeoutMs, 0);
 }

@@ -16,11 +16,12 @@
 #else
   #include <stdio.h>
   #include <stdlib.h>
-  #include <unistd.h>
   #include <signal.h>
+  #include <poll.h>
   #include <PCSC/winscard.h>
   #include <PCSC/wintypes.h>
-  #define SLEEP_MS(ms)  usleep((useconds_t)(ms) * 1000)
+  /* poll() provides a millisecond sleep without relying on obsolete usleep(). */
+  #define SLEEP_MS(ms)  ((void)poll(NULL, 0, (int)(ms)))
 #endif
 
 /* ================================================================
@@ -50,6 +51,7 @@
 #define APDU_CLA                  0xFF
 #define APDU_INS_LOAD_KEY         0x82
 #define APDU_INS_AUTH             0x86
+#define APDU_INS_GET_DATA         0xCA
 #define APDU_INS_READ_BIN         0xB0
 #define APDU_INS_UPDATE_BIN       0xD6
 #define APDU_INS_VALUE_OP         0xD7
@@ -149,7 +151,9 @@ typedef enum {
     AUTH_FAIL_EXPIRED     = -8,
     AUTH_FAIL_MAGIC       = -9,
     AUTH_FAIL_FORMAT      = -10,
-    AUTH_FAIL_NOT_IN_LIST = -11
+    AUTH_FAIL_NOT_IN_LIST = -11,
+    AUTH_FAIL_CONFIG      = -12,
+    AUTH_FAIL_UID         = -13
 } auth_result_t;
 
 #endif /* PCSC_COMMON_H */

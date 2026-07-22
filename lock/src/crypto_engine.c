@@ -9,32 +9,11 @@ static LONG apdu_send(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                       const BYTE *cmd, DWORD cmdLen,
                       BYTE *resp, DWORD *respLen)
 {
-    LONG rc = SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
+    if (!pio || !cmd || !resp || !respLen)
+        return SCARD_E_INVALID_PARAMETER;
 
-    /* ACS ACR122T driver requires transaction for pseudo-APDU commands */
-    if (rc == 0x00000016) {          /* SCARD_E_NOT_TRANSACTED */
-        rc = SCardBeginTransaction(hCard);
-        if (rc != SCARD_S_SUCCESS) return rc;
-        rc = SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
-        SCardEndTransaction(hCard, SCARD_LEAVE_CARD);
-    }
-
-    /* ACR122T / some ACS readers reject pseudo-APDU on T=1; retry with T=0 */
-    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
-        *respLen = APDU_RESP_MAX_LEN;
-        rc = SCardTransmit(hCard, SCARD_PCI_T0, cmd, cmdLen,
-                           NULL, resp, respLen);
-
-        if (rc == 0x00000016) {
-            rc = SCardBeginTransaction(hCard);
-            if (rc != SCARD_S_SUCCESS) return rc;
-            rc = SCardTransmit(hCard, SCARD_PCI_T0, cmd, cmdLen,
-                               NULL, resp, respLen);
-            SCardEndTransaction(hCard, SCARD_LEAVE_CARD);
-        }
-    }
-
-    return rc;
+    /* The PCI must match the protocol negotiated by SCardConnect. */
+    return SCardTransmit(hCard, pio, cmd, cmdLen, NULL, resp, respLen);
 }
 
 static int apdu_ok(const BYTE *resp, DWORD respLen)
@@ -59,6 +38,8 @@ static const char *auth_strerror(auth_result_t rc)
     case AUTH_FAIL_MAGIC:       return "not a door-lock card (bad magic)";
     case AUTH_FAIL_FORMAT:      return "invalid credential format";
     case AUTH_FAIL_NOT_IN_LIST: return "credential key not in whitelist";
+    case AUTH_FAIL_CONFIG:      return "invalid or empty whitelist";
+    case AUTH_FAIL_UID:         return "card UID does not match credential";
     default:                    return "unknown error";
     }
 }
@@ -83,15 +64,21 @@ static int hex_nibble(char c)
 
 static int parse_hex_key(const char *line, BYTE key[CRED_KEY_LEN])
 {
-    int i = 0;
     while (*line == ' ' || *line == '\t') line++;
+
     for (int b = 0; b < CRED_KEY_LEN; b++) {
-        int hi = hex_nibble(line[i]);
-        int lo = hex_nibble(line[i + 1]);
+        int hi = hex_nibble(line[b * 2]);
+        int lo = hex_nibble(line[b * 2 + 1]);
         if (hi < 0 || lo < 0) return -1;
         key[b] = (BYTE)((hi << 4) | lo);
-        i += 2;
     }
+
+    line += CRED_KEY_LEN * 2;
+    while (*line == ' ' || *line == '\t' || *line == '\r' || *line == '\n')
+        line++;
+    if (*line != '\0' && *line != '#')
+        return -1;
+
     return 0;
 }
 
@@ -107,13 +94,29 @@ static int load_whitelist(const char *path,
 
     *count = 0;
     char line[256];
+    int lineNumber = 0;
     while (*count < MAX_WHITELIST_KEYS && fgets(line, sizeof(line), f)) {
-        if (line[0] == '#' || line[0] == '\n' || line[0] == '\r')
+        lineNumber++;
+        const char *content = line;
+        while (*content == ' ' || *content == '\t') content++;
+        if (*content == '#' || *content == '\n' || *content == '\r'
+            || *content == '\0')
             continue;
-        if (parse_hex_key(line, keys[*count]) == 0)
-            (*count)++;
+
+        if (parse_hex_key(content, keys[*count]) != 0) {
+            fprintf(stderr, "[!] Invalid whitelist entry at %s:%d\n",
+                    path, lineNumber);
+            fclose(f);
+            return -1;
+        }
+        (*count)++;
     }
     fclose(f);
+
+    if (*count == 0) {
+        fprintf(stderr, "[!] Whitelist contains no valid keys: %s\n", path);
+        return -1;
+    }
 
     fprintf(stdout, "[*] Loaded %d authorized key(s) from %s\n", *count, path);
     return 0;
@@ -130,6 +133,29 @@ static int is_in_whitelist(const BYTE key[CRED_KEY_LEN],
 }
 
 /* ---- date helpers ---- */
+
+static int is_leap_year(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+
+static int is_valid_date_int(int date)
+{
+    static const int daysPerMonth[] = {
+        0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    };
+    int year = date / 10000;
+    int month = (date / 100) % 100;
+    int day = date % 100;
+
+    if (year < 1970 || year > 9999 || month < 1 || month > 12 || day < 1)
+        return 0;
+
+    int maxDay = daysPerMonth[month];
+    if (month == 2 && is_leap_year(year))
+        maxDay++;
+    return day <= maxDay;
+}
 
 static int date4_to_int(const BYTE d[4])
 {
@@ -148,20 +174,23 @@ static int today_int(void)
 static int check_expiry(const BYTE expiryDate[4])
 {
     int expiry = date4_to_int(expiryDate);
-    int today  = today_int();
+    if (expiry == 0) {
+        fprintf(stdout, "  expiry     : none\n");
+        return 1;
+    }
+    if (!is_valid_date_int(expiry)) {
+        fprintf(stderr, "[!] Invalid expiry date in credential: %08d\n", expiry);
+        return -1;
+    }
 
-    fprintf(stdout, "  expiry  : %08d  (today %08d)\n", expiry, today);
-
-    if (expiry == 0 || expiry >= 99990000)
-        return 1;   /* no expiry set */
-
+    int today = today_int();
+    fprintf(stdout, "  expiry     : %08d  (today %08d)\n", expiry, today);
     if (expiry < today) {
-        fprintf(stdout, "  [*] Credential expired %d day(s) ago\n",
-                today - expiry);
+        fprintf(stdout, "  [*] Credential expired on %08d\n", expiry);
         return 0;
     }
 
-    fprintf(stdout, "  [*] Valid for %d more day(s)\n", expiry - today);
+    fprintf(stdout, "  [*] Credential valid until %08d\n", expiry);
     return 1;
 }
 
@@ -211,12 +240,6 @@ int mifare_authenticate(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
 
-    /* ACR122T fallback to T=0 */
-    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
-        respLen = sizeof(resp);
-        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
-    }
-
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_KEY;
 
     if (!apdu_ok(resp, respLen)) {
@@ -227,6 +250,31 @@ int mifare_authenticate(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
         }
         return AUTH_FAIL_KEY;
     }
+    return AUTH_SUCCESS;
+}
+
+/* ---- PICC UID ---- */
+
+int mifare_get_uid(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
+                   BYTE *uid, DWORD *uidLen)
+{
+    BYTE cmd[] = { APDU_CLA, APDU_INS_GET_DATA, 0x00, 0x00, 0x00 };
+    BYTE resp[12]; /* Maximum 10-byte UID plus SW1/SW2. */
+    DWORD respLen = sizeof(resp);
+
+    if (!uid || !uidLen || *uidLen < 4)
+        return AUTH_FAIL_CARD;
+
+    LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
+    if (rc != SCARD_S_SUCCESS || !apdu_ok(resp, respLen))
+        return AUTH_FAIL_CARD;
+
+    DWORD dataLen = respLen - 2;
+    if ((dataLen != 4 && dataLen != 7 && dataLen != 10) || dataLen > *uidLen)
+        return AUTH_FAIL_FORMAT;
+
+    memcpy(uid, resp, dataLen);
+    *uidLen = dataLen;
     return AUTH_SUCCESS;
 }
 
@@ -244,17 +292,11 @@ int mifare_read_block(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
 
-    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
-        respLen = sizeof(resp);
-        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
-    }
-
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_READ;
     if (!apdu_ok(resp, respLen)) return AUTH_FAIL_READ;
+    if (respLen != MF1K_BLOCK_SIZE + 2) return AUTH_FAIL_FORMAT;
 
-    DWORD dataLen = respLen - 2;
-    if (dataLen > MF1K_BLOCK_SIZE) dataLen = MF1K_BLOCK_SIZE;
-    memcpy(out, resp, dataLen);
+    memcpy(out, resp, MF1K_BLOCK_SIZE);
     return AUTH_SUCCESS;
 }
 
@@ -278,11 +320,6 @@ int mifare_write_block(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     DWORD respLen = sizeof(resp);
 
     LONG rc = apdu_send(hCard, pio, cmd, sizeof(cmd), resp, &respLen);
-
-    if (rc != SCARD_S_SUCCESS && pio != SCARD_PCI_T0) {
-        respLen = sizeof(resp);
-        rc = apdu_send(hCard, SCARD_PCI_T0, cmd, sizeof(cmd), resp, &respLen);
-    }
 
     if (rc != SCARD_S_SUCCESS) return AUTH_FAIL_WRITE;
     if (!apdu_ok(resp, respLen)) return AUTH_FAIL_WRITE;
@@ -444,15 +481,14 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 
     const BYTE *useKey = keyA ? keyA : defaultKey;
 
-    /* ---- load whitelist (if requested) ---- */
+    /* ---- load mandatory whitelist (fail closed) ---- */
     BYTE whitelist[MAX_WHITELIST_KEYS][CRED_KEY_LEN];
     int  wlCount = 0;
-    int  useWhitelist = 0;
 
-    if (whitelistPath) {
-        if (load_whitelist(whitelistPath, whitelist, &wlCount) == 0
-            && wlCount > 0)
-            useWhitelist = 1;
+    if (!whitelistPath
+        || load_whitelist(whitelistPath, whitelist, &wlCount) != 0) {
+        fprintf(stderr, "[!] %s\n", auth_strerror(AUTH_FAIL_CONFIG));
+        return AUTH_FAIL_CONFIG;
     }
 
     /* ---- 1. load Key A ---- */
@@ -495,7 +531,20 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
         return AUTH_FAIL_MAGIC;
     }
     fprintf(stdout, "[+] Magic '%.4s' verified\n", CRED_MAGIC);
-    fprintf(stdout, "[+] Card serial : %02X %02X %02X %02X\n",
+
+    BYTE uid[10];
+    DWORD uidLen = sizeof(uid);
+    rc = mifare_get_uid(hCard, pio, uid, &uidLen);
+    if (rc != AUTH_SUCCESS || uidLen < sizeof(hdr->cardSerial)) {
+        fprintf(stderr, "[!] Unable to read PICC UID\n");
+        return AUTH_FAIL_UID;
+    }
+    if (memcmp(hdr->cardSerial, uid, sizeof(hdr->cardSerial)) != 0) {
+        fprintf(stderr, "[!] Stored card serial does not match PICC UID\n");
+        return AUTH_FAIL_UID;
+    }
+
+    fprintf(stdout, "[+] Card serial : %02X %02X %02X %02X (UID matched)\n",
             hdr->cardSerial[0], hdr->cardSerial[1],
             hdr->cardSerial[2], hdr->cardSerial[3]);
     fprintf(stdout, "[+] Access level: %u\n", hdr->accessLevel[0]);
@@ -510,23 +559,12 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     }
     hexdump("cred key", block, MF1K_BLOCK_SIZE);
 
-    if (useWhitelist) {
-        if (!is_in_whitelist(block, whitelist, wlCount)) {
-            fprintf(stderr, "[!] credential key NOT in whitelist\n");
-            return AUTH_FAIL_NOT_IN_LIST;
-        }
-        fprintf(stdout, "[+] Credential key found in whitelist (%d keys)\n",
-                wlCount);
-    } else {
-        int allFF = 1;
-        for (int i = 0; i < CRED_KEY_LEN; i++)
-            if (block[i] != 0xFF) { allFF = 0; break; }
-        if (allFF) {
-            fprintf(stderr, "[!] credential key is blank (all FF)\n");
-            return AUTH_FAIL_FORMAT;
-        }
-        fprintf(stdout, "[+] Credential key non-blank (whitelist mode off)\n");
+    if (!is_in_whitelist(block, whitelist, wlCount)) {
+        fprintf(stderr, "[!] credential key NOT in whitelist\n");
+        return AUTH_FAIL_NOT_IN_LIST;
     }
+    fprintf(stdout, "[+] Credential key found in whitelist (%d keys)\n",
+            wlCount);
 
     /* ---- 5. read metadata & check expiry ---- */
     BYTE metaBlock = (BYTE)(CRED_SECTOR * MF1K_BLOCKS_PER_SECTOR + CRED_BLOCK_META);
@@ -538,7 +576,19 @@ int auth_verify_card(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
     }
     hexdump("metadata", block, MF1K_BLOCK_SIZE);
 
-    if (!check_expiry(block + 4)) {
+    cred_meta_t *meta = (cred_meta_t *)block;
+    int issueDate = date4_to_int(meta->issueDate);
+    if (!is_valid_date_int(issueDate)) {
+        fprintf(stderr, "[!] Invalid issue date in credential: %08d\n",
+                issueDate);
+        return AUTH_FAIL_FORMAT;
+    }
+    fprintf(stdout, "  issued     : %08d\n", issueDate);
+
+    int expiryStatus = check_expiry(meta->expiryDate);
+    if (expiryStatus < 0)
+        return AUTH_FAIL_FORMAT;
+    if (expiryStatus == 0) {
         fprintf(stderr, "[!] %s\n", auth_strerror(AUTH_FAIL_EXPIRED));
         return AUTH_FAIL_EXPIRED;
     }

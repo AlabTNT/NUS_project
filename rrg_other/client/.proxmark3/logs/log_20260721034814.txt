@@ -1,0 +1,31 @@
+[+] loaded `C:\Users\Àî\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[=] No previous history could be loaded
+[usb|script] pm3 --> hf mf eload -f my_keys.dic.json
+[=] Upload 64 blocks 1024 bytes
+[+] loaded `my_keys.dic.json`
+[=] Uploading to emulator memory
+[=] ....
+[?] Hint: You are ready to simulate. See `hf mf sim -h`
+[=] Done!
+[usb|script] pm3 --> hf mf sim --1k
+[=] MIFARE 1K | 0 bytes UID  n/a
+[=] Options [ numreads: 0, flags: 64 (0x0040) ]
+[=] Press pm3 button or send another cmd to abort simulation
+
+[#] Enforcing Mifare 1K ATQA/SAK
+[#] 4B UID: 1aa624a0
+[#] ATQA  : 00 04
+[#] SAK   : 08

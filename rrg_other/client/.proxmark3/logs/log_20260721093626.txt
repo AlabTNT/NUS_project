@@ -1,0 +1,35 @@
+[+] loaded `C:/Users/Àî/Desktop/WorkDocument/Grade3-b/Singapore/rrg_other/client/.proxmark3/preferences.json`
+[+] execute command from commandline: script run .\luascripts\hf_mf_fingerprint_raw.lua -h
+
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+[usb|script] pm3 --> script run .\luascripts\hf_mf_fingerprint_raw.lua -h
+[+] executing lua .\luascripts\hf_mf_fingerprint_raw.lua
+[+] args '-h'
+Passive raw-envelope capture for MIFARE Classic hardware-fingerprint datasets.
+An external reader must generate the actual ISO14443-A / Crypto1 transaction.
+	
+script run hf_mf_fingerprint_raw -c <card_id> [options]
+
+Required:
+  -c <card_id>     Stable ID of the physical card. Do not reuse across cards.
+
+Options:
+  -h               Show this help.
+  -u <uid>         Card UID for metadata only (default: unknown).
+  -l <label>       Dataset label (default: genuine).
+  -n <count>       Number of captures (default: 200).
+  -r <ratio>       PM3 sratio: 0, 2, 4, or 8 (default: 4).
+                   Effective decimation is 1 when 0, otherwise 2 * ratio.
+  -o <dir>         Output root (default: fingerprint_data).
+  -s <session>     Session ID (default: UTC timestamp).
+  -e <reader_id>   External reader ID (default: acr122t_custom).
+  -f <fixture_id>  Geometry/fixture ID (default: fixture_01).
+  -j <min,max>     Random inter-capture delay in ms (default: 800,3000).
+
+Example:
+  script run hf_mf_fingerprint_raw -c card_001 -u DE0E504F -n 200 -r 4
+	
+
+[+] finished .\luascripts\hf_mf_fingerprint_raw.lua
+

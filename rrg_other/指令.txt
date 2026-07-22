@@ -1,0 +1,27 @@
+加载数据
+hf mf eload -f my_keys.dic.json
+
+模拟信号
+hf mf sim --1k
+
+破解
+hf mf hardnested --blk 24 -a -k [扇区6 KeyA] --tblk 4 --ta -w
+
+检查密码，存入临时文件
+hf mf chk --dump -k FFFFFFFFFFFF -k 000000000000 -k A0A1A2A3A4A5 -k B0B1B2B3B4B5
+
+把卡数据和密码写入文件
+hf mf dump -f ../keys/ID_xxx -k hf-mf-FA9B36C5-key.bin --1k
+
+写魔术卡（Gen 1a）
+hf mf cload -f ../keys/xxx.bin
+写魔术卡（Gen 2）
+hf mf restore --1k -f ../keys/xxx.bin
+
+尝试用密钥读块
+hf mf rdbl --blk 3 -k A0A1A2A3A4A5
+
+tag :78 77 88 FF
+
+清空魔术卡
+hf mf wipe

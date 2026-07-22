@@ -17,4 +17,8 @@ void pcsc_cleanup(SCARDCONTEXT hContext);
 int pcsc_wait_for_card(SCARDCONTEXT hContext, const char *readerName,
                        DWORD timeoutMs);
 
+/* Wait until the current card has actually left the reader field. */
+int pcsc_wait_for_card_removal(SCARDCONTEXT hContext, const char *readerName,
+                               DWORD timeoutMs);
+
 #endif /* READIN_H */

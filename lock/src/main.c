@@ -11,9 +11,6 @@ static SCARDCONTEXT            g_hContext   = 0;
 static SCARDHANDLE             g_hCard      = 0;
 static const SCARD_IO_REQUEST *g_pioSendPci = NULL;
 
-static SCARD_IO_REQUEST g_ioT0 = { SCARD_PROTOCOL_T0, 0 };
-static SCARD_IO_REQUEST g_ioT1 = { SCARD_PROTOCOL_T1, 0 };
-
 static void do_cleanup(void)
 {
     fprintf(stdout, "\n[*] Shutting down...\n");
@@ -63,14 +60,18 @@ static const char *select_reader(const char *readerList)
 
 static void show_card_uid(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio)
 {
-    BYTE  buf[MF1K_BLOCK_SIZE];
-    int   rc = mifare_read_block(hCard, pio, MF1K_BLOCK_MFR, buf);
+    BYTE uid[10];
+    DWORD uidLen = sizeof(uid);
+    int rc = mifare_get_uid(hCard, pio, uid, &uidLen);
     if (rc != AUTH_SUCCESS) {
-        fprintf(stdout, "[*] UID: (could not read manufacturer block)\n");
+        fprintf(stdout, "[*] UID: (could not read PICC UID)\n");
         return;
     }
-    fprintf(stdout, "[*] UID : %02X %02X %02X %02X  (BCC %02X)\n",
-            buf[0], buf[1], buf[2], buf[3], buf[4]);
+
+    fprintf(stdout, "[*] UID :");
+    for (DWORD i = 0; i < uidLen; i++)
+        fprintf(stdout, " %02X", uid[i]);
+    fprintf(stdout, "\n");
 }
 
 int main(int argc, char **argv)
@@ -78,7 +79,7 @@ int main(int argc, char **argv)
     char        readerList[2048] = {0};
     DWORD       readerLen        = sizeof(readerList);
     const char *targetReader     = NULL;
-    const char *keyfile          = NULL;
+    const char *keyfile          = DEFAULT_KEYFILE;
     BYTE        customKeyA[MIFARE_KEY_LEN];
     BYTE       *pKeyA            = NULL;
     int         haveCustomKey    = 0;
@@ -110,7 +111,7 @@ int main(int argc, char **argv)
         } else if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) {
             fprintf(stdout,
                 "Usage: %s [--keyfile PATH] [--keya HEX]\n\n"
-                "  --keyfile PATH   whitelist of authorised credential keys\n"
+                "  --keyfile PATH   whitelist (default: " DEFAULT_KEYFILE ")\n"
                 "  --keya HEX       custom 6-byte Key A (12 hex chars)\n\n"
                 "Examples:\n"
                 "  %s --keyfile keys.txt\n"
@@ -131,8 +132,7 @@ int main(int argc, char **argv)
             "  Crypto-1 Encrypted Authentication\n"
             "========================================\n\n");
 
-    if (keyfile)
-        fprintf(stdout, "  Whitelist   : %s\n", keyfile);
+    fprintf(stdout, "  Whitelist   : %s (required)\n", keyfile);
     if (haveCustomKey)
         fprintf(stdout, "  Key A       : %02X%02X%02X%02X%02X%02X (custom)\n",
                 customKeyA[0], customKeyA[1], customKeyA[2],

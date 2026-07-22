@@ -26,6 +26,10 @@ int mifare_load_key(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
 int mifare_authenticate(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                         BYTE blockAddr, BYTE keyType, BYTE keySlot);
 
+/* Read the PICC UID through the PC/SC Get Data command (4, 7, or 10 bytes). */
+int mifare_get_uid(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
+                   BYTE *uid, DWORD *uidLen);
+
 /* ---- block I/O ---- */
 int mifare_read_block(SCARDHANDLE hCard, const SCARD_IO_REQUEST *pio,
                       BYTE blockAddr, BYTE out[MF1K_BLOCK_SIZE]);

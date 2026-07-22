@@ -1,0 +1,28 @@
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+[=] Creating initial preferences file
+[+] Saved to json file C:\Users\Àî\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[=] No previous history could be loaded
+[usb|script] pm3 --> hf mf chk --4k -a -k A0A1A2A3A4A5
+[+] loaded 1 user keys
+[+] loaded 63 hardcoded keys
+[=] Start check for keys...
+[=] ..............[#] Error in frame reception: -8 PM3_EIO
+[#] Error in frame reception: -8 PM3_EIO
+...[#] BCC0 incorrect, got 0x0e, expected 0x4e
+.[#] Aborting
+.[#] BCC0 incorrect, got 0x0e, expected 0x4e
+.[#] Aborting
+.[#] BCC0 incorrect, got 0x0e, expected 0x4e
+.

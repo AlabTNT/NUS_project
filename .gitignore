@@ -4,3 +4,5 @@
 .vscode/
 .DS_Store
 .python-version
+*.o
+__pycache__/

@@ -179,7 +179,7 @@ In this work, we investigate NFC smart lock security from both adversarial and d
 \item \textbf{Integrated prototype system.} We build and release a cross-platform smart lock implementation that combines standard PCSC card I/O with the SDR-based fingerprint verification, serving as a reproducible testbed for both attack and defense evaluation.
 \end{enumerate}
 
-The remainder of this paper is organized as follows. Section~2 provides background on MIFARE Classic and the Crypto-1 cipher. Section~3 analyzes the theoretical weaknesses of Crypto-1 and the key-recovery attack, while Section~4 presents our practical Proxmark3-based implementation and cloning results. Section~5 introduces the physical-layer fingerprinting defense in theory, and Section~6 describes its SDR-based implementation and integration into the door lock prototype. Section~7 discusses limitations and future work, and Section~8 concludes.
+The remainder of this paper is organized as follows. Section~2 provides background on MIFARE Classic and the Crypto-1 cipher. Section~3 describes the smart-lock credential model and a methodology for evaluating it. Section~4 presents the Proxmark3 command workflow, repository evidence, and a theoretical end-to-end validation method. Section~5 presents the physical-layer fingerprinting defense. Section~6 discusses limitations and future work, and Section~7 concludes.
 
 \section{MIFARE Classic and Crypto-1}
 \label{sec:background}
@@ -275,13 +275,146 @@ The sector authentication process relies on a three-pass mutual authentication p
     \item \textbf{Card Verification:} If the reader's response is correct, the card replies with the encrypted answer to the reader's challenge, concluding the cryptographic handshake.
 \end{enumerate}
 
-Despite its efficiency in resource-constrained environments, Crypto-1 exhibits several critical cryptographic flaws. The 48-bit key space is susceptible to brute-force attacks on modern hardware. More importantly, the reliance on a predictable pseudo-random number generator (PRNG) for generating $n_T$ and the malleability of the parity bits in the ISO 14443-A framing allow attackers to deduce the internal LFSR state, leading to near-instantaneous key recovery attacks which are explored in Section~\ref{sec:crypto-theory}.
+Despite its efficiency in resource-constrained environments, Crypto-1 exhibits several critical cryptographic flaws. The 48-bit key space is susceptible to brute-force attacks on modern hardware. More importantly, the reliance on a predictable pseudo-random number generator (PRNG) for generating $n_T$ and the malleability of the parity bits in the ISO 14443-A framing allow attackers to deduce the internal LFSR state. Section~\ref{sec:attack} examines how these weaknesses can be exercised with commodity research hardware.
 
-\section{Smart Lock System}
-\label{sec:White part}
+\section{Smart-Lock Credential Model and Evaluation Method}
+\label{sec:testbed}
 
-\section{Crypto-1 Attack}
-\label{sec:Red part}
+\subsection{Implemented Reader and Host Components}
+
+The README in the \texttt{lock/} directory specifies an ACR122U or compatible 13.56~MHz PC/SC reader, MIFARE Classic 1K cards, and a host computer. Running \texttt{make} in that directory builds \texttt{lock}, which continuously waits for a card and makes the access decision, and \texttt{lock\_admin}, which writes the project credential format to a card.
+
+The main loop in \texttt{lock/src/main.c} selects a PC/SC reader, waits for card insertion, connects using the active T=0 or T=1 transport, displays the UID, and calls \texttt{auth\_verify\_card}. A successful return invokes the access-granted hardware response; every failure invokes the access-denied response. The card is then disconnected before the next polling cycle.
+
+\subsection{Credential Provisioning and Memory Layout}
+
+The constants and structures in \texttt{pcsc\_common.h} place the credential in Sector~1. Table~\ref{tab:credential-layout} maps each block to the bytes written by \texttt{lock\_admin} and the checks performed by \texttt{lock}.
+
+\begin{table}[H]
+\centering
+\caption{Sector~1 credential layout implemented in \texttt{lock/}.}
+\label{tab:credential-layout}
+\small
+\begin{tabular}{p{0.10\columnwidth}p{0.39\columnwidth}p{0.31\columnwidth}}
+\toprule
+\textbf{Block} & \textbf{Stored fields} & \textbf{Runtime use} \\
+\midrule
+4 & \texttt{LOCK} (4 B), card serial (4 B), access level (2 B), reserved (6 B) & Marker and UID comparison; access level is printed. \\
+5 & Random credential key (8 B), reserved (8 B) & First eight bytes are compared with the host whitelist. \\
+6 & Issue date (4 B), expiry date (4 B), reserved (8 B) & Date-format and expiry checks. \\
+7 & Key A (6 B), access bits (4 B), Key B (6 B) & Sector trailer; rewritten only when explicitly requested. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The administration program reads the current four-byte UID, writes it with the \texttt{LOCK} marker and access level to Block~4, generates eight random bytes for Block~5, and writes the issue and expiry dates to Block~6. The trailer is intentionally skipped unless \texttt{--format-trailer} is supplied, because an incorrect key or access-bit configuration can make the sector inaccessible. The immediate verification function in the administration program reads Block~4 and checks the marker.
+
+\subsection{Runtime Authentication Sequence}
+
+The runtime decision is fail-closed and proceeds in a fixed order:
+
+\begin{enumerate}
+\item The whitelist file is parsed as eight-byte hexadecimal values. Missing, malformed, or empty whitelist data causes a configuration failure.
+\item Key~A is loaded into the PC/SC reader and used to authenticate Block~4, thereby authenticating Sector~1.
+\item Block~4 is read. The program checks the \texttt{LOCK} marker, obtains the PICC UID, and compares its first four bytes with the stored card serial.
+\item Block~5 is read. Its first eight bytes must match one of the whitelist entries.
+\item Block~6 is read. The issue date must have a valid format and the expiry date must not be in the past.
+\item Only after the preceding checks does the function return \texttt{AUTH\_SUCCESS}.
+\end{enumerate}
+
+The access-level field is displayed but is not used as an authorization condition in the current decision function. Consequently, the enforced conditions are possession of the Sector~1 Key~A, a matching marker and UID, a whitelisted credential key, and valid dates.
+
+\subsection{Theoretical Evaluation Method}
+
+A controlled evaluation of this credential model can use four inputs: a correctly provisioned card, an emulator loaded with the same logical image, a rewritable card containing the image, and an unrelated control card. For each presentation, the evaluator can record the return value at each decision boundary: sector authentication, marker verification, UID comparison, whitelist membership, date validation, and final grant or denial.
+
+Logical equivalence can be measured independently of the door decision. A MIFARE Classic 1K image contains 64 blocks and 1024 bytes. A source image and a reproduced image can therefore be compared block by block, with sector trailers examined separately because access conditions may affect their readable representation. Repeating the acquisition can distinguish a stable mismatch from a transient communication failure. These procedures define an evaluation method; they do not by themselves constitute an experimental result.
+
+From the code path, a logical reproduction would need to preserve the UID observed by the reader, the Key~A required for Sector~1 authentication, and the contents of Blocks~4--6. This is a code-derived condition rather than a claim that a particular reproduced card has passed the lock.
+
+\section{Proxmark3 Credential Recovery and Card Reproduction}
+\label{sec:attack}
+
+\subsection{Cryptanalytic Basis}
+
+Crypto-1 uses a 48-bit internal state. MIFARE Classic applies it in a proprietary mutual authentication protocol. Published analyses show that weaknesses in the cipher, initialization, and nonce generation can permit key recovery and decryption without treating Crypto-1 as an ideal exhaustive-search problem~\cite{garcia2008dismantling,kasper2012all}. MIFARE Classic protects sectors with independent Key~A and Key~B values. Once one valid key is available, nested-family techniques can use authenticated exchanges as a starting point for recovering a target sector key. The hardnested variant implemented by Proxmark3 is intended for cards for which the simpler nested assumptions are hardened.
+
+The command recorded in the repository selects Block~24 with Key~A as the known source and Block~4 Key~A as the target. Since MIFARE Classic 1K sectors contain four blocks, Block~24 is the first block of Sector~6 and Block~4 is the first block of Sector~1. The command-line mapping therefore expresses a cross-sector recovery attempt from a known Sector~6 credential to the Sector~1 credential used by the smart-lock format.
+
+\subsection{Repository Command Workflow}
+
+The Chinese-language instruction file under \texttt{rrg\_other/} records the command families in Table~\ref{tab:attack-workflow}. Actual key values and card identifiers are omitted here.
+
+\begin{table}[H]
+\centering
+\caption{MIFARE Classic command workflow recorded in the repository.}
+\label{tab:attack-workflow}
+\small
+\begin{tabular}{p{0.28\columnwidth}p{0.53\columnwidth}}
+\toprule
+\textbf{Command} & \textbf{Function} \\
+\midrule
+\texttt{hf mf chk --dump} & Test the four explicitly listed candidate keys and save discovered keys. \\
+\texttt{hf mf hardnested} & Use the recorded source block/key type to recover the target Block~4 Key~A. \\
+\texttt{hf mf dump} & Read a MIFARE Classic 1K image using a key file and save it under the selected name. \\
+\texttt{hf mf rdbl} & Attempt an authenticated read of one selected block. \\
+\texttt{hf mf eload} & Upload a BIN, EML, or JSON dump to Proxmark3 emulator memory. \\
+\texttt{hf mf sim --1k} & Present emulator memory as a MIFARE Classic 1K card. \\
+\texttt{hf mf cload} & Copy a binary image to a Gen1a Magic Card. \\
+\texttt{hf mf restore} & Restore a MIFARE Classic 1K image with the \texttt{--1k} option, using the authenticated-write path identified in the instruction file for Gen2 cards. \\
+\texttt{hf mf wipe} & Invoke the Magic-Card wipe operation. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Candidate-Key Testing}
+
+\texttt{hf mf chk --dump} tests the four candidate keys written explicitly in the instruction file. The \texttt{--dump} option stores discovered keys for later commands. This stage should be distinguished from cryptanalytic recovery: a successful check means that a supplied value was already a valid key. Nevertheless, one valid sector key can serve as the known source required by the hardnested command.
+
+The repository file named \texttt{my\_keys.dic.json} is not a plain-text dictionary despite the \texttt{dic} component in its name. Its \texttt{FileType} field identifies it as an \texttt{mfc v2} card image, and it contains card metadata, sector keys, and block data.
+
+\subsubsection{Hardnested Recovery}
+
+The hardnested command separates the known source parameters from the unknown target parameters. In the recorded command, \texttt{--blk 24}, \texttt{-a}, and \texttt{-k} select the source block, Key~A, and its known value. The options \texttt{--tblk 4} and \texttt{--ta} select target Block~4 and target Key~A. This distinction is essential because the block number determines the sector and the key-type flag determines which half of the trailer credential is being recovered.
+
+The Proxmark3 logs contain multiple hardnested invocations with different source and target blocks. They also contain \texttt{hf mf autopwn}, which combines candidate-key checks, available recovery strategies, key-file generation, emulator transfer, and dump generation. Because \texttt{autopwn} is present in the logs rather than the instruction file, it is treated as additional recorded evidence rather than a step written in that file.
+
+\subsubsection{Memory Acquisition}
+
+\texttt{hf mf dump} uses recovered keys to authenticate and read the card blocks. The retained logs show dump operations producing a 1024-byte binary file and a structured JSON file. Three tracked image pairs are present: \texttt{my\_keys.dic}, \texttt{ID\_lyl}, and \texttt{ID\_ypz}. Each JSON image declares \texttt{mfc v2}, contains 64 block entries and 16 sector-key entries, and has a corresponding 1024-byte binary image.
+
+The binary file is the byte-oriented image used by restoration commands, whereas JSON preserves structured metadata and is directly accepted by the emulator-loading command. These artifacts contain decoded card memory rather than time-domain RF samples; their role is protocol-level reproduction, not physical-layer model training.
+
+\subsubsection{Emulation and Persistent Writing}
+
+\texttt{hf mf eload} transfers a saved image into Proxmark3 emulator memory. The simulation command then presents that memory through the high-frequency interface as a MIFARE Classic 1K card. This path is volatile: it uses the Proxmark3 as the card-side device and does not alter a separate physical card.
+
+For persistent copying, the instruction file assigns \texttt{hf mf cload} to Gen1a cards and \texttt{hf mf restore --1k} to Gen2 cards. The distinction matters because Gen1a cards expose a special write path, while the restore command follows authenticated block writing and requires suitable current keys and access conditions.
+
+\subsection{Recorded Proxmark3 Results}
+
+The retained client logs provide the following directly observable results:
+
+\begin{itemize}
+\item \texttt{log\_20260721034814.txt} records \texttt{hf mf eload}, an upload of 64 blocks and 1024 bytes, \texttt{Done!}, and a subsequent \texttt{hf mf sim --1k} command.
+\item \texttt{log\_20260722031003.txt} records a dump that saved a 1024-byte binary image and a JSON image.
+\item The same log records \texttt{hf mf cload} loading a 1024-byte image, copying it to a Gen1a MIFARE Classic 1K card, loading 64 blocks, and returning \texttt{Done!}.
+\item A recorded \texttt{hf mf autopwn} run generated binary and JSON dumps and reported an execution time of seven seconds.
+\end{itemize}
+
+These observations establish command completion and artifact generation. A \texttt{Done!} response from a card-writing command indicates that the Proxmark3 client completed that operation; it is not, by itself, a measurement of an access-control decision.
+
+\subsection{Theoretical End-to-End Validation}
+
+An end-to-end validation can separate three questions. First, \emph{key completeness} can be assessed by checking whether the required Key~A/Key~B positions are populated and whether protected blocks can be read. Second, \emph{logical reproduction} can be assessed by acquiring a fresh image from the emulator or destination card and comparing its UID, data blocks, and sector trailers with the source. Third, \emph{application behavior} can be assessed by presenting the genuine card, emulator, persistent reproduction, and an unrelated control to the same reader configuration and recording each smart-lock decision stage.
+
+For the implemented smart-lock format, the most relevant comparison covers the presented UID, Sector~1 Key~A, and Blocks~4--6. A UID-only reproduction cannot demonstrate equivalence because the lock also performs sector authentication and reads the whitelisted credential and dates. Conversely, a successful Proxmark3 write cannot demonstrate application acceptance without observing the reader-side decision. Separating these layers prevents key recovery, memory copying, and lock acceptance from being reported as if they were the same result.
+
+\subsection{Theoretical Limitations}
+
+The workflow is specific to MIFARE Classic and Crypto-1. It should not be transferred directly to other product families that use different authentication protocols and cryptographic designs. Recovery behavior may also differ between MIFARE Classic revisions because nonce behavior influences which recovery strategy is applicable.
+
+Protocol-level equality does not imply physical-layer equality. A Proxmark3 emulator and a rewritable card can reproduce logical identifiers and memory while using different analog front ends, clock sources, load-modulation circuits, and antennas. Such differences provide the theoretical basis for examining physical-layer fingerprints in the following section.
 
 \section{Fingerprinting Defense}
 \label{sec:Blue part}

@@ -277,17 +277,14 @@ The sector authentication process relies on a three-pass mutual authentication p
 
 Despite its efficiency in resource-constrained environments, Crypto-1 exhibits several critical cryptographic flaws. The 48-bit key space is susceptible to brute-force attacks on modern hardware. More importantly, the reliance on a predictable pseudo-random number generator (PRNG) for generating $n_T$ and the malleability of the parity bits in the ISO 14443-A framing allow attackers to deduce the internal LFSR state, leading to near-instantaneous key recovery attacks which are explored in Section~\ref{sec:crypto-theory}.
 
-\section{Crypto-1 Cryptanalysis: Theory}
-\label{sec:crypto-theory}
+\section{Smart Lock System}
+\label{sec:White part}
 
-\section{Crypto-1 Attack: Proxmark3 Implementation}
-\label{sec:crypto-practice}
+\section{Crypto-1 Attack}
+\label{sec:Red part}
 
-\section{Physical-Layer Fingerprinting: Theory}
-\label{sec:fingerprint-theory}
-
-\section{Fingerprinting Defense: SDR Implementation}
-\label{sec:fingerprint-practice}
+\section{Fingerprinting Defense}
+\label{sec:Blue part}
 
 \section{Discussion and Future Work}
 \label{sec:discussion}

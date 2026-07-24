@@ -10,6 +10,8 @@ __pycache__/
 .venv/
 lock/python/config.json
 lock/python/logs/
+lock.disabled/python/logs/
+rrg_other/client/.proxmark3/logs/
 rrg_other/client/fingerprint_data/
 rrg_other/client/fingerprint_development/
 rrg_other/client/fingerprint_blind_test/

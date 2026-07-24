@@ -1,0 +1,29 @@
+{
+  "reader": {
+    "name_contains": "ACR122",
+    "poll_interval_ms": 300
+  },
+  "sectors": [
+    {
+      "sector": 0,
+      "required": true,
+      "auth": "A",
+      "key_a": "FFFFFFFFFFFF",
+      "key_b": null
+    },
+    {
+      "sector": 1,
+      "required": true,
+      "auth": "both",
+      "key_a": "FFFFFFFFFFFF",
+      "key_b": "FFFFFFFFFFFF"
+    },
+    {
+      "sector": 2,
+      "required": false,
+      "auth": "B",
+      "key_a": null,
+      "key_b": "FFFFFFFFFFFF"
+    }
+  ]
+}

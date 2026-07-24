@@ -1,5 +1,0 @@
-[+] Using UART port COM5
-
-[!] ERROR: invalid serial port COM5
-
-[?] Hint: Try the shell script ``./pm3 --list` to get a list of possible serial ports

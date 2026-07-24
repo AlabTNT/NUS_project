@@ -1,4 +1,0 @@
-[+] loaded `C:\Users\Àî\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
-[+] Using UART port COM5
-[+] Communicating with PM3 over USB-CDC
-[usb|script] pm3 --> quit

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "groups": {
+    "lxj": {
+      "magic_generation": "Gen 1a"
+    },
+    "lyl": {
+      "magic_generation": "Gen 1a"
+    },
+    "pcfe": {
+      "magic_generation": "Gen 2/CUID"
+    },
+    "szc": {
+      "magic_generation": "Gen 1a"
+    },
+    "ypz": {
+      "magic_generation": "Gen 1a"
+    },
+    "zxh": {
+      "magic_generation": "Gen 2/CUID"
+    }
+  }
+}

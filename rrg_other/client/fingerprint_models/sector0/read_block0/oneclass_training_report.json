@@ -1,0 +1,297 @@
+{
+  "mode": "oneclass",
+  "important_note": "Magic samples were used only for evaluation, never for fitting or threshold calibration.",
+  "all_available_data_evaluation": {
+    "sample_count": 241,
+    "threshold": 8.860452721538461,
+    "accuracy": 0.8215767634854771,
+    "formal_accept_rate": 0.95,
+    "magic_reject_rate": 0.4426229508196721,
+    "auc": 0.8959016393442623,
+    "formal_scores": {
+      "minimum": 0.25136098985543637,
+      "median": 0.8664323245435145,
+      "mean": 2.4278707024749266,
+      "maximum": 15.070145324179483
+    },
+    "magic_scores": {
+      "minimum": 2.207976677241318,
+      "median": 7.100080245168275,
+      "mean": 9.43791739030539,
+      "maximum": 18.63058365032067
+    }
+  },
+  "leave_one_formal_card_out": {
+    "status": "ok",
+    "folds": [
+      {
+        "held_out_card": "lxj",
+        "capture_count": 33,
+        "accept_rate": 0.8787878787878788,
+        "threshold": 10.12668225906692,
+        "scores": {
+          "minimum": 0.3037993630005015,
+          "median": 1.158765842463563,
+          "mean": 3.908256066975464,
+          "maximum": 12.530464677397447
+        }
+      },
+      {
+        "held_out_card": "lyl",
+        "capture_count": 32,
+        "accept_rate": 0.96875,
+        "threshold": 10.506486231106082,
+        "scores": {
+          "minimum": 0.4363679295746259,
+          "median": 2.0842659333677793,
+          "mean": 3.4718663355019417,
+          "maximum": 11.309809762179333
+        }
+      },
+      {
+        "held_out_card": "pcfe",
+        "capture_count": 30,
+        "accept_rate": 1.0,
+        "threshold": 7.809335278506283,
+        "scores": {
+          "minimum": 0.25238197828588876,
+          "median": 0.8532313504818387,
+          "mean": 1.4338286039336097,
+          "maximum": 6.983389709075431
+        }
+      },
+      {
+        "held_out_card": "szc",
+        "capture_count": 31,
+        "accept_rate": 0.967741935483871,
+        "threshold": 8.59926779411563,
+        "scores": {
+          "minimum": 0.367461291679749,
+          "median": 0.5665077088167177,
+          "mean": 1.5324630563762824,
+          "maximum": 9.342593757823902
+        }
+      },
+      {
+        "held_out_card": "ypz",
+        "capture_count": 30,
+        "accept_rate": 1.0,
+        "threshold": 8.757895372745299,
+        "scores": {
+          "minimum": 0.31078954206014936,
+          "median": 0.8000251121615057,
+          "mean": 1.876054682839552,
+          "maximum": 8.383488557481611
+        }
+      },
+      {
+        "held_out_card": "zxh",
+        "capture_count": 24,
+        "accept_rate": 0.875,
+        "threshold": 8.719040228573755,
+        "scores": {
+          "minimum": 0.303878558417612,
+          "median": 0.97639544995141,
+          "mean": 3.4256869527320326,
+          "maximum": 15.331251437179517
+        }
+      }
+    ],
+    "aggregate_unseen_formal_accept_rate": 0.95,
+    "unseen_formal_scores": {
+      "minimum": 0.25238197828588876,
+      "median": 0.9149263910800159,
+      "mean": 2.6060639620148933,
+      "maximum": 15.331251437179517
+    }
+  },
+  "leave_one_batch_out": {
+    "status": "ok",
+    "score_definition": "fold anomaly score divided by that fold threshold",
+    "folds": [
+      {
+        "held_out_batch": "lxj",
+        "raw_threshold": 10.12668225906692,
+        "sample_count": 47,
+        "threshold": 1.0,
+        "accuracy": 0.7446808510638298,
+        "formal_accept_rate": 0.8787878787878788,
+        "magic_reject_rate": 0.42857142857142855,
+        "auc": 0.8506493506493507,
+        "formal_scores": {
+          "minimum": 0.029999890904890875,
+          "median": 0.1144269971960523,
+          "mean": 0.3859364762310191,
+          "maximum": 1.2373711702249077
+        },
+        "magic_scores": {
+          "minimum": 0.35495411494736756,
+          "median": 0.7558086590690749,
+          "mean": 1.0744283399417873,
+          "maximum": 1.9918481002011788
+        }
+      },
+      {
+        "held_out_batch": "lyl",
+        "raw_threshold": 10.506486231106082,
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.7608695652173914,
+        "formal_accept_rate": 0.96875,
+        "magic_reject_rate": 0.2857142857142857,
+        "auc": 0.8370535714285714,
+        "formal_scores": {
+          "minimum": 0.041533193874341255,
+          "median": 0.19837897157253076,
+          "mean": 0.3304498058754356,
+          "maximum": 1.0764597709836508
+        },
+        "magic_scores": {
+          "minimum": 0.2765785055389623,
+          "median": 0.6312021574749318,
+          "mean": 0.8923649620902764,
+          "maximum": 1.8799707752211532
+        }
+      },
+      {
+        "held_out_batch": "pcfe",
+        "raw_threshold": 7.809335278506283,
+        "sample_count": 39,
+        "threshold": 1.0,
+        "accuracy": 0.8717948717948718,
+        "formal_accept_rate": 1.0,
+        "magic_reject_rate": 0.4444444444444444,
+        "auc": 0.9629629629629629,
+        "formal_scores": {
+          "minimum": 0.03231798473047026,
+          "median": 0.10925787151567132,
+          "mean": 0.18360443658757378,
+          "maximum": 0.8942361238216894
+        },
+        "magic_scores": {
+          "minimum": 0.5692994274348867,
+          "median": 0.9189032250309609,
+          "mean": 1.221489779287768,
+          "maximum": 2.00077595561055
+        }
+      },
+      {
+        "held_out_batch": "szc",
+        "raw_threshold": 8.59926779411563,
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.8260869565217391,
+        "formal_accept_rate": 0.967741935483871,
+        "magic_reject_rate": 0.5333333333333333,
+        "auc": 0.9505376344086022,
+        "formal_scores": {
+          "minimum": 0.04273169535796968,
+          "median": 0.0658785983155882,
+          "mean": 0.17820855136351577,
+          "maximum": 1.08644061116656
+        },
+        "magic_scores": {
+          "minimum": 0.2440220749744113,
+          "median": 1.0752778087375907,
+          "mean": 1.0352793185836762,
+          "maximum": 1.6544708118500762
+        }
+      },
+      {
+        "held_out_batch": "ypz",
+        "raw_threshold": 8.757895372745299,
+        "sample_count": 30,
+        "threshold": 1.0,
+        "accuracy": 1.0,
+        "formal_accept_rate": 1.0,
+        "magic_reject_rate": null,
+        "auc": null,
+        "formal_scores": {
+          "minimum": 0.0354867840768378,
+          "median": 0.09134901458759097,
+          "mean": 0.21421295904925539,
+          "maximum": 0.9572492249189403
+        },
+        "magic_scores": null
+      },
+      {
+        "held_out_batch": "zxh",
+        "raw_threshold": 8.719040228573755,
+        "sample_count": 33,
+        "threshold": 1.0,
+        "accuracy": 0.7575757575757576,
+        "formal_accept_rate": 0.875,
+        "magic_reject_rate": 0.4444444444444444,
+        "auc": 0.8287037037037037,
+        "formal_scores": {
+          "minimum": 0.03485229457042199,
+          "median": 0.11198428087894338,
+          "mean": 0.39289725278540216,
+          "maximum": 1.7583645717032523
+        },
+        "magic_scores": {
+          "minimum": 0.39746053274058735,
+          "median": 0.9648914427965639,
+          "mean": 1.0925780804780905,
+          "maximum": 2.0142517240056046
+        }
+      }
+    ],
+    "aggregate": {
+      "sample_count": 241,
+      "threshold": 1.0,
+      "accuracy": 0.8174273858921162,
+      "formal_accept_rate": 0.95,
+      "magic_reject_rate": 0.4262295081967213,
+      "auc": 0.8941712204007286,
+      "formal_scores": {
+        "minimum": 0.029999890904890875,
+        "median": 0.10554467016858951,
+        "mean": 0.278882325177006,
+        "maximum": 1.7583645717032523
+      },
+      "magic_scores": {
+        "minimum": 0.2440220749744113,
+        "median": 0.8529312658958337,
+        "mean": 1.0473919138540453,
+        "maximum": 2.0142517240056046
+      }
+    }
+  },
+  "mean_family_scores_by_label": {
+    "formal": {
+      "amplitude": 1.7107396936585746,
+      "occupancy": 2.4755758994082795,
+      "transition": 1.2455075004829106,
+      "correlation": 1.2672924417491023,
+      "temporal": 3.9573409351502327,
+      "spectrum": 3.910767744400459
+    },
+    "magic": {
+      "amplitude": 17.099544211112597,
+      "occupancy": 13.307594185604433,
+      "transition": 3.8276601827023056,
+      "correlation": 2.5030295181915094,
+      "temporal": 11.352487923380403,
+      "spectrum": 8.537188320841103
+    }
+  },
+  "model_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\fingerprint_models\\sector0\\read_block0\\oneclass_model.json",
+  "feature_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\fingerprint_models\\sector0\\read_block0\\features.csv",
+  "capture_count": 241,
+  "formal_card_groups": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "ypz",
+    "zxh"
+  ],
+  "magic_card_groups": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "zxh"
+  ]
+}

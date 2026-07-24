@@ -1,0 +1,162 @@
+[+] loaded `C:\Users\Àî\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: 9A AF 3E C5 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Block 0.......... 9AAF3EC5CE880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 2 / CUID
+
+[=] --- PRNG Information
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: 6A 53 4D C5 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Sector 1 key A... FFFFFFFFFFFF
+[+] Sector 1 key B... FFFFFFFFFFFF
+[+] Block 0.......... 6A534DC5B1880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 2 / CUID
+
+[=] --- PRNG Information
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: FA 9B 36 C5 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Sector 1 key A... 000000000000
+[+] Block 0.......... FA9B36C592880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 1a
+
+[=] --- PRNG Information
+[+] Prng....... weak
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: 6A 56 9C C1 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Sector 1 key A... 000000000000
+[+] Block 0.......... 6A569CC161880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 1a
+
+[=] --- PRNG Information
+[+] Prng....... weak
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: 64 C8 5A C8 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Sector 1 key B... FFFFFFFFFFFF
+[+] Block 0.......... 64C85AC83E880400C805002000000021 | ... ...!
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 1a
+
+[=] --- PRNG Information
+[+] Prng....... weak
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: AA D4 35 C5 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... A0A1A2A3A4A5
+[+] Sector 0 key B... B0B1B2B3B4B5
+[+] Sector 1 key B... FFFFFFFFFFFF
+[+] Block 0.......... AAD435C58E880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 1a
+
+[=] --- PRNG Information
+[+] Prng....... weak
+

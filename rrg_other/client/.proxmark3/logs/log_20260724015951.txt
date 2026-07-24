@@ -1,0 +1,676 @@
+[+] loaded `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015953504805Z-06113ba0-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015953504805Z-06113ba0-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015953504805Z-06113ba0-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015953504805Z-06113ba0-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015953504805Z-06113ba0-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015953504805Z-06113ba0-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015958770962Z-2dea676b-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015958770962Z-2dea676b-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015958770962Z-2dea676b-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015958770962Z-2dea676b-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T015958770962Z-2dea676b-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T015958770962Z-2dea676b-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020005582819Z-1aaa6802-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020005582819Z-1aaa6802-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020005582819Z-1aaa6802-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020005582819Z-1aaa6802-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020005582819Z-1aaa6802-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020005582819Z-1aaa6802-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020012058534Z-9fcaf83f-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020012058534Z-9fcaf83f-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020012058534Z-9fcaf83f-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020012058534Z-9fcaf83f-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020012058534Z-9fcaf83f-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020012058534Z-9fcaf83f-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020019228158Z-06ee6098-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020019228158Z-06ee6098-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020019228158Z-06ee6098-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020019228158Z-06ee6098-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020019228158Z-06ee6098-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020019228158Z-06ee6098-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020022109258Z-14dd7d6f-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020022109258Z-14dd7d6f-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020022109258Z-14dd7d6f-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020022109258Z-14dd7d6f-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020022109258Z-14dd7d6f-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020022109258Z-14dd7d6f-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020026473081Z-ce908232-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020026473081Z-ce908232-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020026473081Z-ce908232-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020026473081Z-ce908232-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020026473081Z-ce908232-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020026473081Z-ce908232-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020029316886Z-c2af8492-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020029316886Z-c2af8492-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020029316886Z-c2af8492-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020029316886Z-c2af8492-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020029316886Z-c2af8492-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020029316886Z-c2af8492-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020033630937Z-83cfdab9-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020033630937Z-83cfdab9-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020033630937Z-83cfdab9-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020033630937Z-83cfdab9-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020033630937Z-83cfdab9-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020033630937Z-83cfdab9-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020039598653Z-2242585a-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020039598653Z-2242585a-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020039598653Z-2242585a-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020039598653Z-2242585a-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020039598653Z-2242585a-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020039598653Z-2242585a-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020043826319Z-7e2c8ab5-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020043826319Z-7e2c8ab5-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020043826319Z-7e2c8ab5-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020043826319Z-7e2c8ab5-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020043826319Z-7e2c8ab5-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020043826319Z-7e2c8ab5-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020046659083Z-8fc81ffe-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020046659083Z-8fc81ffe-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020046659083Z-8fc81ffe-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020046659083Z-8fc81ffe-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020046659083Z-8fc81ffe-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020046659083Z-8fc81ffe-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020050181816Z-8b987944-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020050181816Z-8b987944-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020050181816Z-8b987944-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020050181816Z-8b987944-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020050181816Z-8b987944-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020050181816Z-8b987944-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020053599369Z-74bd5e31-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020053599369Z-74bd5e31-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020053599369Z-74bd5e31-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020053599369Z-74bd5e31-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020053599369Z-74bd5e31-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020053599369Z-74bd5e31-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020058274098Z-a896f855-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020058274098Z-a896f855-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020058274098Z-a896f855-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020058274098Z-a896f855-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020058274098Z-a896f855-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020058274098Z-a896f855-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020116042235Z-1572b8b0-auth_a
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020116042235Z-1572b8b0-auth_a.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020116042235Z-1572b8b0-auth_b
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020116042235Z-1572b8b0-auth_b.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Buffer cleared (36244 bytes)
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f .pm3_staging/20260724T020116042235Z-1572b8b0-read_block0
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.pm3_staging/20260724T020116042235Z-1572b8b0-read_block0.pm3`
+[usb|script] pm3 --> data clear
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> quit

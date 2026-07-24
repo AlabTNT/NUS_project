@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-07-23T16:58:04.271+00:00",
+  "model_type": "three_stage_oneclass",
+  "required_stages": [
+    "auth_a",
+    "auth_b",
+    "read_block0"
+  ],
+  "combination": "all_stages_must_pass",
+  "sample_rate_hz": 1695000.0,
+  "complete_training_capture_count": 2,
+  "physical_card_ids": [
+    "integrated_hardware_lyl",
+    "integrated_hardware_lyl_persistent"
+  ],
+  "models": {
+    "auth_a": "auth_a/oneclass_model.json",
+    "auth_b": "auth_b/oneclass_model.json",
+    "read_block0": "read_block0/oneclass_model.json"
+  }
+}

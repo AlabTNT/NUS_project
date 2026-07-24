@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-07-24T03:07:22.918+00:00",
+  "model_type": "three_stage_oneclass",
+  "required_stages": [
+    "auth_a",
+    "auth_b",
+    "read_block0"
+  ],
+  "combination": "all_stages_must_pass",
+  "sample_rate_hz": 1695000.0,
+  "complete_training_capture_count": 180,
+  "complete_magic_evaluation_capture_count": 61,
+  "physical_card_ids": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "ypz",
+    "zxh"
+  ],
+  "models": {
+    "auth_a": "auth_a/oneclass_model.json",
+    "auth_b": "auth_b/oneclass_model.json",
+    "read_block0": "read_block0/oneclass_model.json"
+  }
+}

@@ -1,0 +1,703 @@
+[+] loaded `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[usb|script] pm3 --> hf 14a info
+
+[=] ---------- ISO14443-A Information ----------
+[+]  UID: FA 9B 36 C5   ( ONUID, re-used )
+[+] ATQA: 00 04
+[+]  SAK: 08 [2]
+[+] Possible types:
+[+]    MIFARE Classic 1K
+[=] 
+[=] Proprietary non iso14443-4 card found
+[=] RATS not supported
+[+] Prng detection..... hard
+[=]  IC signature public key name: NXP MIFARE Classic MFC1C14_x
+[=] IC signature public key value: 044F6D3F294DEA5737F0F46FFEE88A35
+[=]                              : 6EED95695DD7E0C27A591E6F6F65962B
+[=]                              : AF
+[=]     Elliptic curve parameters: secp128r1
+[=]              TAG IC Signature: EADCAEA9C6293E22EA6C25ECE151502E
+[=]                              : 6BA9D0EF985E2B2557D2CA95DB0A442D
+[+]        Signature verification: successful
+
+[?] Hint: Try `hf mf info`
+
+[usb|script] pm3 --> hf 14a snoop
+
+
+[usb|script] pm3 --> hf mf snoop
+
+
+[usb|script] pm3 --> hf snoop
+
+
+[usb|script] pm3 --> hhf
+
+
+[usb|script] pm3 --> hf
+
+
+[usb|script] pm3 --> hf sniff
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 7327
+[usb|script] pm3 --> data plot
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[usb|script] pm3 --> data norm
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 1100
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 2621
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data save -f formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal.pm3`
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 2573
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data save -f magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic.pm3`
+[usb|script] pm3 --> hf autopwn
+
+
+[usb|script] pm3 --> hf 14a
+
+
+[usb|script] pm3 --> hw
+
+
+[usb|script] pm3 --> hf 14a info
+[usb|script] pm3 --> hf 14a info
+
+[=] ---------- ISO14443-A Information ----------
+[+]  UID: 80 0D B5 DE   ( ONUID, re-used )
+[+] ATQA: 00 04
+[+]  SAK: 08 [2]
+[+] Possible types:
+[+]    MIFARE Classic 1K
+[=] 
+[=] Proprietary non iso14443-4 card found
+[=] RATS not supported
+[+] Prng detection..... weak
+
+[?] Hint: Try `hf mf info`
+
+[usb|script] pm3 --> hf mf autopwn
+
+[=] Static Encrypted Nonce Key Recovery
+[=] ---------+---------+---------------------------------------------------------+---------------------------+---------------
+[=]          |         |                                                         | Expected to verify        | Estimated     
+[=]  Time    | #nonces | Activity                                                | #keys/candidates          | time for task 
+[=] ---------+---------+---------------------------------------------------------+---------------------------+---------------
+[=]        0 |       0 | Start FM11RF08S static encrypted nonce recovery         |                           |               
+[=]        0 |       0 | Collect nonce/data evidence with key A396EFA4E24F       |                           |               
+[=]        1 |      34 | Loaded card UID 800DB5DE using backdoor key A396EFA4E24 |                           |               
+[-] Error - can't find `mfc_default_keys.dic`
+[=]        1 |      34 | Skip default-key dictionary check already done by autop |                           |               
+[=]        1 |      34 | Generate first-pass candidates from nT/{nT}/parity      |                           |               
+[=]        1 |      34 | Prepared sec 000 candidates (A 15467 / B 13418)         |                     28885 |               
+[=]        2 |      34 | Prepared sec 001 candidates (A 17883 / B 22859)         |                     40742 |               
+[=]        2 |      34 | Prepared sec 002 candidates (A 22586 / B 22586)         |                     45172 |               
+[=]        3 |      34 | Prepared sec 003 candidates (A 22255 / B 20647)         |                     42902 |               
+[=]        3 |      34 | Prepared sec 004 candidates (A 16641 / B 21946)         |                     38587 |               
+[=]        3 |      34 | Prepared sec 005 candidates (A 6705 / B 6613)           |                     13318 |               
+[=]        4 |      34 | Prepared sec 006 candidates (A 28200 / B 27705)         |                     55905 |               
+[=]        4 |      34 | Prepared sec 007 candidates (A 10042 / B 10440)         |                     20482 |               
+[=]        5 |      34 | Prepared sec 008 candidates (A 25525 / B 28634)         |                     54159 |               
+[=]        6 |      34 | Prepared sec 009 candidates (A 23741 / B 21751)         |                     45492 |               
+[=]        6 |      34 | Prepared sec 010 candidates (A 9781 / B 8744)           |                     18525 |               
+[=]        6 |      34 | Prepared sec 011 candidates (A 11318 / B 10653)         |                     21971 |               
+[=]        7 |      34 | Prepared sec 012 candidates (A 14785 / B 17368)         |                     32153 |               
+[=]        7 |      34 | Prepared sec 013 candidates (A 10402 / B 16264)         |                     26666 |               
+[=]        8 |      34 | Prepared sec 014 candidates (A 22390 / B 28876)         |                     51266 |               
+[=]        9 |      34 | Prepared sec 015 candidates (A 29625 / B 25128)         |                     54753 |               
+[=]        9 |      34 | Prepared sec 032 candidates (A 13168 / B 13827)         |                     26995 |               
+[=]        9 |      34 | Prioritized candidates (0 duplicate-priority)           |                    617973 |         35min 
+[=]        9 |      34 | Indexed 617973 candidate refs for key-reuse cascades    |                    617973 |               
+[=]        9 |      34 | Batch-check top 29/29 cross-sector reuse keys with fchk |                        29 |            2s 
+[=]       10 |      34 | Reuse-priority fchk recovered 31 normal-sector keys     |                        31 |               
+[=]       10 |      34 | Reduced paired candidate sets by 17882 keys             |                     17882 |               
+[=]       10 |      34 | Refreshed 600091 candidate refs for key-reuse cascades  |                    600091 |               
+[=]       10 |      34 | Measurement: score unresolved candidate paths           |                     26996 |               
+[=]       10 |      34 | Measurement: best sec 001 A cost 1 list 1               |                         1 |               
+[=]       10 |      34 | Verify remaining sector-specific candidates             |                     26996 |          1min 
+[=]       10 |      34 | sec 001 key A - checking 1 candidates                   |                         1 |            1s 
+[+]       11 |      34 | Key sec 001 key A = 2A2C13CC242A                        |                32/34 keys |               
+[=]       11 |      34 | sec 032 key B - checking 13827 candidates               |                     13827 |           48s 
+[+]       11 |      34 | Key sec 032 key B = 000056CC214E                        |                33/34 keys |               
+[=]       12 |      34 | Reduced paired candidate sets by 13165 keys             |                     13165 |               
+[=]       12 |      34 | sec 032 key A - checking 3 candidates                   |                         3 |            1s 
+[+]       12 |      34 | Key sec 032 key A = 302D26D68C05                        |                34/34 keys |               
+[=] ---------+---------+---------------------------------------------------------+---------------------------+---------------
+
+[+] -----+-----+--------------+---+--------------+----
+[+]  Sec | Blk | key A        |res| key B        |res
+[+] -----+-----+--------------+---+--------------+----
+[+]  000 | 003 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  001 | 007 | 2A2C13CC242A | 1 | FFFFFFFFFFFF | 1 
+[+]  002 | 011 | FFFFFFFFFFFF | 1 | FFFFFFFFFFFF | 1 
+[+]  003 | 015 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  004 | 019 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  005 | 023 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  006 | 027 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  007 | 031 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  008 | 035 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  009 | 039 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  010 | 043 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  011 | 047 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  012 | 051 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  013 | 055 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  014 | 059 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  015 | 063 | E25195EB7DAA | 1 | FFFFFFFFFFFF | 1 
+[+]  032 | 131 | 302D26D68C05 | 1 | 000056CC214E | 1 ( * )
+[+] -----+-----+--------------+---+--------------+----
+
+[+] Saved 204 bytes to binary file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-800DB5DE-key.bin`
+[+] Saved 1024 bytes to binary file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-800DB5DE-dump.bin`
+[+] time in sen 13 seconds
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 1906
+[usb|script] pm3 --> data save -f formal
+[!] Graphbuffer is empty, nothing to save
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf 14a sniff
+[=] Press pm3 button to abort sniffing
+
+[#] trace len = 2549
+[usb|script] pm3 --> data plot
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[?] Hint: No repeating pattern found, try increasing window size
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> save plot
+
+
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-001.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data plot
+[usb|script] pm3 --> data save
+
+Save signal trace from graph window , i.e. the GraphBuffer
+This is a text file with number -127 to 127.  With the option `w` you can save it as wave file
+Filename should be without file extension
+
+usage:
+    data saveoptions:
+
+examples/notes:
+    data save -f myfilename              -> save graph buffer to file
+    data save --wave -f myfilename       -> save graph buffer to wave file
+
+[usb|script] pm3 --> data save -f magic.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-001.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-002.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-003.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-002.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-003.pm3`
+[usb|script] pm3 --> trace list
+[+] Recorded activity ( 0 bytes )
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-004.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-005.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-006.pm3`
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f formal.pm3
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/formal-007.pm3`
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-004.pm3`
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-005.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-006.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/magic-007.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-001.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-002.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-003.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-004.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-005.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/formal
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/formal-006.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-001.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-002.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-003.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-004.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-005.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)
+[usb|script] pm3 --> hf sniff --sp 0 --st 0 --smode drop --sratio 4
+[=] Skip mode. Function: drop, each: 8 sample
+[#] Skipping first 0 sample pairs, Skipping 0 triggers
+[=] HF sniff (36244 samples)
+[?] Hint: Use `data hpf` to remove offset
+[?] Hint: Use `data plot` to view
+[?] Hint: Use `data save` to save
+[=] Done!
+[usb|script] pm3 --> data save -f ./capture/ypz/magic
+[+] Saved 36243 bytes to PM3 file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/./capture/ypz/magic-006.pm3`
+[usb|script] pm3 --> data clear
+
+[#] Buffer cleared (36244 bytes)

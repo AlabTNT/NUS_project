@@ -1,0 +1,321 @@
+[+] loaded `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[usb|script] pm3 --> hf mf autopwn
+
+[+] loaded 8 user keys
+[+] loaded 63 hardcoded keys
+[=] Running strategy 1
+
+[+] -----+-----+--------------+---+--------------+----
+[+]  Sec | Blk | key A        |res| key B        |res
+[+] -----+-----+--------------+---+--------------+----
+[+]  000 | 003 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  001 | 007 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  002 | 011 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  003 | 015 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  004 | 019 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  005 | 023 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  006 | 027 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  007 | 031 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  008 | 035 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  009 | 039 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  010 | 043 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  011 | 047 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  012 | 051 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  013 | 055 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  014 | 059 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  015 | 063 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+] -----+-----+--------------+---+--------------+----
+[=] ( D:Dictionary / S:darkSide / U:User / R:Reused / N:Nested / H:Hardnested / C:statiCnested / A:keyA  )
+
+
+[+] Generating binary key file
+[+] Found keys have been dumped to `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-key-001.bin`
+[=] --[ FFFFFFFFFFFF ]-- has been inserted for unknown keys where res is 0
+[=] Transferring keys to simulator memory ( ok )
+[=] Dumping card content to emulator memory (Cmd Error: 04 can occur)
+[=] downloading card content from emulator memory
+[+] Saved 1024 bytes to binary file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-dump-001.bin`
+[+] Saved to json file C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-dump-001.json
+[=] Autopwn execution time: 2 seconds
+[usb|script] pm3 --> hf mf wipe --gen2
+[=] Loaded keys matching MIFARE Classic 1K
+[=] Forcing overwrite of sector 0 / block 0 
+
+[=]  blk | 
+[=] -----+------------------------------------------------------------
+[=]    0 | 11 22 33 44 44 08 04 00 62 63 64 65 66 67 68 69 - key B ( ok )
+[=]    1 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    3 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]    4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    7 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   10 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   11 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   12 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   13 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   14 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   15 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   16 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   17 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   18 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   19 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   20 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   21 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   22 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   23 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   24 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   25 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   26 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   27 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   28 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   29 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   30 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   31 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   32 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   33 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   34 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   35 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   36 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   37 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   38 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   39 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   40 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   41 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   42 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   43 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   44 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   45 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   46 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   47 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   48 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   49 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   50 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   51 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   52 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   53 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   54 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   55 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   56 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   57 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   58 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   59 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=]   60 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   61 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   62 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - key B ( ok )
+[=]   63 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF - key B ( ok )
+[=] -----+------------------------------------------------------------
+
+[=] Done!
+[usb|script] pm3 --> hf mf autopwn
+
+[+] loaded 8 user keys
+[+] loaded 63 hardcoded keys
+[=] Running strategy 1
+
+[+] -----+-----+--------------+---+--------------+----
+[+]  Sec | Blk | key A        |res| key B        |res
+[+] -----+-----+--------------+---+--------------+----
+[+]  000 | 003 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  001 | 007 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  002 | 011 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  003 | 015 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  004 | 019 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  005 | 023 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  006 | 027 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  007 | 031 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  008 | 035 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  009 | 039 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  010 | 043 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  011 | 047 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  012 | 051 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  013 | 055 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  014 | 059 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  015 | 063 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+] -----+-----+--------------+---+--------------+----
+[=] ( D:Dictionary / S:darkSide / U:User / R:Reused / N:Nested / H:Hardnested / C:statiCnested / A:keyA  )
+
+
+[+] Generating binary key file
+[+] Found keys have been dumped to `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-11223344-key.bin`
+[=] --[ FFFFFFFFFFFF ]-- has been inserted for unknown keys where res is 0
+[=] Transferring keys to simulator memory ( ok )
+[=] Dumping card content to emulator memory (Cmd Error: 04 can occur)
+[=] downloading card content from emulator memory
+[+] Saved 1024 bytes to binary file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-11223344-dump.bin`
+[+] Saved to json file C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-11223344-dump.json
+[=] Autopwn execution time: 2 seconds
+[usb|script] pm3 --> hf mf restore --1k -f ../keys/ID_zxh.json
+[+] Loaded binary key file `hf-mf-11223344-key.bin`
+[+] loaded `../keys/ID_zxh.json`
+
+[=]  blk | data                                            | status
+[=] -----+-------------------------------------------------+----------------
+[=]    0 | 6A 53 4D C5 B1 88 04 00 C8 38 00 20 00 00 00 22 | ( ok )
+[=]    1 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    3 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]    4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[!] Invalid Access Conditions on sector 1, replacing with default values
+[=]    7 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | ( ok )
+[=]    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   10 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[!] Invalid Access Conditions on sector 2, replacing with default values
+[=]   11 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | ( ok )
+[=]   12 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   13 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   14 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   15 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   16 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   17 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   18 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   19 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   20 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   21 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   22 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   23 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   24 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   25 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   26 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   27 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   28 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   29 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   30 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   31 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   32 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   33 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   34 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   35 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   36 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   37 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   38 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   39 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   40 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   41 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   42 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   43 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   44 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   45 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   46 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   47 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   48 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   49 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   50 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   51 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   52 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   53 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   54 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   55 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   56 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   57 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   58 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   59 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=]   60 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   61 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   62 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   63 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | ( ok )
+[=] -----+-------------------------------------------------+----------------
+
+[?] Hint: Try `hf mf dump --ns` to verify
+[=] Done!
+[usb|script] pm3 --> hf mf dump --ns
+[+] Loaded binary key file `hf-mf-6A534DC5-key.bin`
+[=] Reading sector access bits...
+[=] .................
+[+] Finished reading sector access bits
+[=] Dumping all blocks from card...
+
+[+] Succeeded in dumping all blocks
+
+[+] time: 10 seconds
+
+
+[=] -----+-----+-------------------------------------------------+-----------------
+[=]  sec | blk | data                                            | ascii
+[=] -----+-----+-------------------------------------------------+-----------------
+[=]    0 |   0 | 6A 53 4D C5 B1 88 04 00 C8 38 00 20 00 00 00 22 | jSM......8. ..."
+[=]      |   1 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   3 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    1 |   4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   7 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | .........i......
+[=]    2 |   8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |   9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  10 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  11 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | .........i......
+[=]    3 |  12 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  13 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  14 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  15 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    4 |  16 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  17 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  18 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  19 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    5 |  20 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  21 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  22 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  23 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    6 |  24 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  25 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  26 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  27 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    7 |  28 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  29 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  30 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  31 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    8 |  32 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  33 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  34 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  35 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]    9 |  36 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  37 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  38 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  39 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   10 |  40 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  41 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  42 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  43 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   11 |  44 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  45 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  46 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  47 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   12 |  48 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  49 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  50 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  51 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   13 |  52 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  53 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  54 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  55 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   14 |  56 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  57 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  58 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  59 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=]   15 |  60 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  61 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  62 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ................
+[=]      |  63 | FF FF FF FF FF FF 7F 07 88 69 FF FF FF FF FF FF | .........i......
+[=] -----+-----+-------------------------------------------------+-----------------
+
+[=] Called with no save option

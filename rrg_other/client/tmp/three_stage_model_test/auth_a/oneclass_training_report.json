@@ -1,0 +1,45 @@
+{
+  "mode": "oneclass",
+  "important_note": "Magic samples were used only for evaluation, never for fitting or threshold calibration.",
+  "all_available_data_evaluation": {
+    "sample_count": 2,
+    "threshold": 0.4238104625147832,
+    "accuracy": 1.0,
+    "formal_accept_rate": 1.0,
+    "magic_reject_rate": null,
+    "auc": null,
+    "formal_scores": {
+      "minimum": 0.4238104625137811,
+      "median": 0.4238104625137822,
+      "mean": 0.4238104625137822,
+      "maximum": 0.42381046251378324
+    },
+    "magic_scores": null
+  },
+  "leave_one_formal_card_out": {
+    "status": "unavailable",
+    "reason": "need at least two formal physical-card groups"
+  },
+  "leave_one_batch_out": {
+    "status": "unavailable",
+    "reason": "need at least two usable batches"
+  },
+  "mean_family_scores_by_label": {
+    "formal": {
+      "amplitude": 0.36395022769545143,
+      "occupancy": 0.4549377846193142,
+      "transition": 0.38310550283731726,
+      "correlation": 0.4549377846193142,
+      "temporal": 0.4549377846193142,
+      "spectrum": 0.4309936906919819
+    }
+  },
+  "model_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\tmp\\three_stage_model_test\\auth_a\\oneclass_model.json",
+  "feature_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\tmp\\three_stage_model_test\\auth_a\\features.csv",
+  "capture_count": 2,
+  "formal_card_groups": [
+    "integrated_hardware_lyl",
+    "integrated_hardware_lyl_persistent"
+  ],
+  "magic_card_groups": []
+}

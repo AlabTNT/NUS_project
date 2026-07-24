@@ -1,3 +1,11 @@
+采样模式
+py -3 .\lock\fingerprint_door.py sample --config .\lock\config\xxx.json --label formal --output-dir .\fingerprint_data\xxx
+py -3 .\lock\fingerprint_door.py sample --config .\lock\config\xxx.json --label magic --output-dir .\fingerprint_data\xxx
+训练模式
+py -3 .\lock\fingerprint_door.py train --data-root .\fingerprint_data --model-dir .\fingerprint_models\sector0
+
+
+
 加载数据
 hf mf eload -f my_keys.dic.json
 
@@ -5,7 +13,7 @@ hf mf eload -f my_keys.dic.json
 hf mf sim --1k
 
 破解
-hf mf hardnested --blk 24 -a -k [扇区6 KeyA] --tblk 4 --ta -w
+hf mf hardnested --blk 0 -a -k A0A1A2A3A4A5 --tblk 4 --ta -w
 
 检查密码，存入临时文件
 hf mf chk --dump -k FFFFFFFFFFFF -k 000000000000 -k A0A1A2A3A4A5 -k B0B1B2B3B4B5
@@ -14,9 +22,9 @@ hf mf chk --dump -k FFFFFFFFFFFF -k 000000000000 -k A0A1A2A3A4A5 -k B0B1B2B3B4B5
 hf mf dump -f ../keys/ID_xxx -k hf-mf-FA9B36C5-key.bin --1k
 
 写魔术卡（Gen 1a）
-hf mf cload -f ../keys/xxx.bin
+hf mf cload -f ../keys/ID_xxx.bin
 写魔术卡（Gen 2）
-hf mf restore --1k -f ../keys/xxx.bin
+hf mf restore --1k -f ../keys/ID_xxx.bin
 
 尝试用密钥读块
 hf mf rdbl --blk 3 -k A0A1A2A3A4A5
@@ -25,3 +33,12 @@ tag :78 77 88 FF
 
 清空魔术卡
 hf mf wipe
+hf mf wipe --gen2 -f hf-mf-<当前UID>-key.bin
+
+以无特定起始码型、无高级硬件触发、缓存满时丢弃溢出数据的保守模式，设定阈值比率为 4，立即开始对高频（13.56MHz）射频信号进行底层原始波形的抓取。
+hf sniff --sp 0 --st 0 --smode drop --sratio 4
+
+清空缓存
+data clear
+
+

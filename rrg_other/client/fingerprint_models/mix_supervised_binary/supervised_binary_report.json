@@ -1,0 +1,1701 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-07-24T05:15:55.661837+00:00",
+  "strategy": {
+    "outer_validation": "leave one complete group out",
+    "training_classes": "five groups Formal and Magic",
+    "features": "concatenated auth_a, auth_b and read_block0 features",
+    "classifier": "L2 logistic regression",
+    "sample_weighting": "equal total weight for every group/class cell",
+    "threshold": "every training Formal group FRR <= 0.050",
+    "blind_test": "held-out group's Formal and Magic only"
+  },
+  "data_root": "fingerprint_data_mix",
+  "complete_transaction_count": 449,
+  "feature_count": 234,
+  "ridge": 1.0,
+  "folds": [
+    {
+      "formal_count": 43,
+      "magic_count": 28,
+      "formal_accepted": 43,
+      "formal_rejected": 0,
+      "magic_rejected": 28,
+      "magic_accepted": 0,
+      "formal_accept_rate": 1.0,
+      "formal_frr": 0.0,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "threshold": 0.5495776259721933,
+      "calibration": {
+        "formal_count": 251,
+        "magic_count": 127,
+        "formal_accepted": 251,
+        "formal_rejected": 0,
+        "magic_rejected": 127,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lyl": 0.0,
+          "pcfe": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.40417409603173293,
+        "candidate_count": 379
+      },
+      "training_groups": [
+        "lyl",
+        "pcfe",
+        "szc",
+        "ypz",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_lxj/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 1.0143456765763437e-06,
+        "median": 0.000425558837950911,
+        "mean": 0.0014256860469455573,
+        "maximum": 0.011595715048650874
+      },
+      "magic_score_summary": {
+        "minimum": 0.9906201226058827,
+        "median": 0.9999844932893414,
+        "mean": 0.9990514773648099,
+        "maximum": 0.9999998927095215
+      },
+      "auc": 1.0,
+      "held_out_group": "lxj",
+      "held_out_magic_generation": "Gen 1a",
+      "same_generation_training_groups": [
+        "lyl",
+        "szc",
+        "ypz"
+      ]
+    },
+    {
+      "formal_count": 45,
+      "magic_count": 23,
+      "formal_accepted": 45,
+      "formal_rejected": 0,
+      "magic_rejected": 23,
+      "magic_accepted": 0,
+      "formal_accept_rate": 1.0,
+      "formal_frr": 0.0,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "threshold": 0.5527181463685796,
+      "calibration": {
+        "formal_count": 249,
+        "magic_count": 132,
+        "formal_accepted": 249,
+        "formal_rejected": 0,
+        "magic_rejected": 132,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "pcfe": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.3991266232421923,
+        "candidate_count": 382
+      },
+      "training_groups": [
+        "lxj",
+        "pcfe",
+        "szc",
+        "ypz",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_lyl/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 1.626633286512159e-05,
+        "median": 0.00019192916492698865,
+        "mean": 0.0003533949630959115,
+        "maximum": 0.0014811548791656207
+      },
+      "magic_score_summary": {
+        "minimum": 0.9944769043601036,
+        "median": 0.999115400224843,
+        "mean": 0.9987606640373826,
+        "maximum": 0.9999502439868386
+      },
+      "auc": 1.0,
+      "held_out_group": "lyl",
+      "held_out_magic_generation": "Gen 1a",
+      "same_generation_training_groups": [
+        "lxj",
+        "szc",
+        "ypz"
+      ]
+    },
+    {
+      "formal_count": 58,
+      "magic_count": 29,
+      "formal_accepted": 53,
+      "formal_rejected": 5,
+      "magic_rejected": 29,
+      "magic_accepted": 0,
+      "formal_accept_rate": 0.9137931034482759,
+      "formal_frr": 0.08620689655172409,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 0.9425287356321839,
+      "balanced_accuracy": 0.9568965517241379,
+      "threshold": 0.5346083057947916,
+      "calibration": {
+        "formal_count": 236,
+        "magic_count": 126,
+        "formal_accepted": 236,
+        "formal_rejected": 0,
+        "magic_rejected": 126,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.4273677734135811,
+        "candidate_count": 363
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "szc",
+        "ypz",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_pcfe/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 8.378834393417734e-06,
+        "median": 0.047490784795984536,
+        "mean": 0.15821068706214544,
+        "maximum": 0.8836259749097548
+      },
+      "magic_score_summary": {
+        "minimum": 0.7522651739549119,
+        "median": 0.9943670433742234,
+        "mean": 0.9676185360041102,
+        "maximum": 0.9999095532758729
+      },
+      "auc": 0.9970273483947681,
+      "held_out_group": "pcfe",
+      "held_out_magic_generation": "Gen 2/CUID",
+      "same_generation_training_groups": [
+        "zxh"
+      ]
+    },
+    {
+      "formal_count": 47,
+      "magic_count": 25,
+      "formal_accepted": 47,
+      "formal_rejected": 0,
+      "magic_rejected": 25,
+      "magic_accepted": 0,
+      "formal_accept_rate": 1.0,
+      "formal_frr": 0.0,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "threshold": 0.5588437258090744,
+      "calibration": {
+        "formal_count": 247,
+        "magic_count": 130,
+        "formal_accepted": 247,
+        "formal_rejected": 0,
+        "magic_rejected": 130,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "pcfe": 0.0,
+          "ypz": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.3940497503716627,
+        "candidate_count": 378
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "pcfe",
+        "ypz",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_szc/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 3.7424034472325396e-06,
+        "median": 0.00012597333443226843,
+        "mean": 0.0002514745561364272,
+        "maximum": 0.0017259542717914073
+      },
+      "magic_score_summary": {
+        "minimum": 0.992021800961724,
+        "median": 0.9997970900266954,
+        "mean": 0.9990453536235914,
+        "maximum": 0.9999956637020851
+      },
+      "auc": 1.0,
+      "held_out_group": "szc",
+      "held_out_magic_generation": "Gen 1a",
+      "same_generation_training_groups": [
+        "lxj",
+        "lyl",
+        "ypz"
+      ]
+    },
+    {
+      "formal_count": 47,
+      "magic_count": 20,
+      "formal_accepted": 46,
+      "formal_rejected": 1,
+      "magic_rejected": 20,
+      "magic_accepted": 0,
+      "formal_accept_rate": 0.9787234042553191,
+      "formal_frr": 0.021276595744680882,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 0.9850746268656716,
+      "balanced_accuracy": 0.9893617021276595,
+      "threshold": 0.5230662233444218,
+      "calibration": {
+        "formal_count": 247,
+        "magic_count": 135,
+        "formal_accepted": 247,
+        "formal_rejected": 0,
+        "magic_rejected": 135,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "pcfe": 0.0,
+          "szc": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.44458303687436274,
+        "candidate_count": 383
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "pcfe",
+        "szc",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_ypz/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 9.68853218112578e-07,
+        "median": 0.0019229996376583071,
+        "mean": 0.04156053115519675,
+        "maximum": 0.9998420531530965
+      },
+      "magic_score_summary": {
+        "minimum": 0.993346029018419,
+        "median": 0.9999394403768304,
+        "mean": 0.9989896155656132,
+        "maximum": 0.9999967317958016
+      },
+      "auc": 0.9925531914893617,
+      "held_out_group": "ypz",
+      "held_out_magic_generation": "Gen 1a",
+      "same_generation_training_groups": [
+        "lxj",
+        "lyl",
+        "szc"
+      ]
+    },
+    {
+      "formal_count": 54,
+      "magic_count": 30,
+      "formal_accepted": 54,
+      "formal_rejected": 0,
+      "magic_rejected": 30,
+      "magic_accepted": 0,
+      "formal_accept_rate": 1.0,
+      "formal_frr": 0.0,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "threshold": 0.5528895688741835,
+      "calibration": {
+        "formal_count": 240,
+        "magic_count": 125,
+        "formal_accepted": 240,
+        "formal_rejected": 0,
+        "magic_rejected": 125,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "pcfe": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.4001223169749947,
+        "candidate_count": 366
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "pcfe",
+        "szc",
+        "ypz"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/folds/held_out_zxh/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 1.2212489343351079e-05,
+        "median": 0.00027551362129934456,
+        "mean": 0.0005914485519588563,
+        "maximum": 0.003622038574541309
+      },
+      "magic_score_summary": {
+        "minimum": 0.8495443462695937,
+        "median": 0.9925733331187515,
+        "mean": 0.9776000153619087,
+        "maximum": 0.9997470773989211
+      },
+      "auc": 1.0,
+      "held_out_group": "zxh",
+      "held_out_magic_generation": "Gen 2/CUID",
+      "same_generation_training_groups": [
+        "pcfe"
+      ]
+    }
+  ],
+  "blind_aggregate": {
+    "formal_count": 294,
+    "magic_count": 155,
+    "formal_accepted": 288,
+    "formal_rejected": 6,
+    "magic_rejected": 155,
+    "magic_accepted": 0,
+    "formal_accept_rate": 0.9795918367346939,
+    "formal_frr": 0.020408163265306145,
+    "magic_reject_rate": 1.0,
+    "magic_far": 0.0,
+    "accuracy": 0.9866369710467706,
+    "balanced_accuracy": 0.9897959183673469,
+    "macro_formal_accept_rate": 0.9820860846172659,
+    "macro_magic_reject_rate": 1.0,
+    "macro_balanced_accuracy": 0.9910430423086329,
+    "macro_auc": 0.9982634233140217
+  },
+  "magic_generation_breakdown": {
+    "Gen 1a": {
+      "groups": [
+        "lxj",
+        "lyl",
+        "szc",
+        "ypz"
+      ],
+      "magic_count": 96,
+      "magic_rejected": 96,
+      "magic_accepted": 0,
+      "magic_reject_rate": 1.0,
+      "magic_probability_summary": {
+        "minimum": 0.9906201226058827,
+        "median": 0.9998191820153248,
+        "mean": 0.9989673207393389,
+        "maximum": 0.9999998927095215
+      }
+    },
+    "Gen 2/CUID": {
+      "groups": [
+        "pcfe",
+        "zxh"
+      ],
+      "magic_count": 59,
+      "magic_rejected": 59,
+      "magic_accepted": 0,
+      "magic_reject_rate": 1.0,
+      "magic_probability_summary": {
+        "minimum": 0.7522651739549119,
+        "median": 0.9934726286970975,
+        "mean": 0.9726938644911264,
+        "maximum": 0.9999095532758729
+      }
+    }
+  },
+  "leave_one_magic_generation_out": [
+    {
+      "formal_count": 182,
+      "magic_count": 96,
+      "formal_accepted": 179,
+      "formal_rejected": 3,
+      "magic_rejected": 96,
+      "magic_accepted": 0,
+      "formal_accept_rate": 0.9835164835164835,
+      "formal_frr": 0.016483516483516536,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 0.9892086330935251,
+      "balanced_accuracy": 0.9917582417582418,
+      "threshold": 0.5178019499631932,
+      "calibration": {
+        "formal_count": 112,
+        "magic_count": 59,
+        "formal_accepted": 112,
+        "formal_rejected": 0,
+        "magic_rejected": 59,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "pcfe": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.44824741907342436,
+        "candidate_count": 172
+      },
+      "training_groups": [
+        "pcfe",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/generation_holdout/held_out_Gen_1a/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 4.149729580791404e-07,
+        "median": 0.0006431804318194926,
+        "mean": 0.031423471043832425,
+        "maximum": 0.9999870328120681
+      },
+      "magic_score_summary": {
+        "minimum": 0.9493288365666824,
+        "median": 0.9998500931300015,
+        "mean": 0.9978975136085948,
+        "maximum": 0.9999996115423896
+      },
+      "auc": 0.9954212454212454,
+      "held_out_generation": "Gen 1a",
+      "held_out_groups": [
+        "lxj",
+        "lyl",
+        "szc",
+        "ypz"
+      ]
+    },
+    {
+      "formal_count": 112,
+      "magic_count": 59,
+      "formal_accepted": 99,
+      "formal_rejected": 13,
+      "magic_rejected": 49,
+      "magic_accepted": 10,
+      "formal_accept_rate": 0.8839285714285714,
+      "formal_frr": 0.1160714285714286,
+      "magic_reject_rate": 0.8305084745762712,
+      "magic_far": 0.1694915254237288,
+      "accuracy": 0.8654970760233918,
+      "balanced_accuracy": 0.8572185230024213,
+      "threshold": 0.5138819657425998,
+      "calibration": {
+        "formal_count": 182,
+        "magic_count": 96,
+        "formal_accepted": 182,
+        "formal_rejected": 0,
+        "magic_rejected": 96,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.4703307458289865,
+        "candidate_count": 279
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "szc",
+        "ypz"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/generation_holdout/held_out_Gen_2_CUID/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 1.3336149169830494e-05,
+        "median": 0.0017173390262641918,
+        "mean": 0.14703978818432611,
+        "maximum": 0.892366523537235
+      },
+      "magic_score_summary": {
+        "minimum": 0.013666440482191244,
+        "median": 0.8784182522224606,
+        "mean": 0.7521885120683206,
+        "maximum": 0.9977656401750241
+      },
+      "auc": 0.9355326876513317,
+      "held_out_generation": "Gen 2/CUID",
+      "held_out_groups": [
+        "pcfe",
+        "zxh"
+      ]
+    }
+  ],
+  "four_train_two_test": {
+    "fold_count": 15,
+    "folds": [
+      {
+        "formal_count": 88,
+        "magic_count": 51,
+        "formal_accepted": 88,
+        "formal_rejected": 0,
+        "magic_rejected": 51,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.541908046945095,
+        "calibration": {
+          "formal_count": 206,
+          "magic_count": 104,
+          "formal_accepted": 206,
+          "formal_rejected": 0,
+          "magic_rejected": 104,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "pcfe": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.410729233836407,
+          "candidate_count": 311
+        },
+        "training_groups": [
+          "pcfe",
+          "szc",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lxj__lyl/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.0691873293557767e-06,
+          "median": 0.00036949705232809855,
+          "mean": 0.0011137420439581653,
+          "maximum": 0.013875802093656795
+        },
+        "magic_score_summary": {
+          "minimum": 0.9876149554265793,
+          "median": 0.9995631373103379,
+          "mean": 0.9986011847506966,
+          "maximum": 0.9999998539011554
+        },
+        "auc": 1.0,
+        "split_id": "lxj__lyl",
+        "held_out_groups": [
+          "lxj",
+          "lyl"
+        ],
+        "held_out_magic_generations": {
+          "lxj": "Gen 1a",
+          "lyl": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 101,
+        "magic_count": 57,
+        "formal_accepted": 96,
+        "formal_rejected": 5,
+        "magic_rejected": 57,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9504950495049505,
+        "formal_frr": 0.04950495049504955,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9683544303797469,
+        "balanced_accuracy": 0.9752475247524752,
+        "threshold": 0.5305605636182693,
+        "calibration": {
+          "formal_count": 193,
+          "magic_count": 98,
+          "formal_accepted": 193,
+          "formal_rejected": 0,
+          "magic_rejected": 98,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lyl": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4312672326560192,
+          "candidate_count": 292
+        },
+        "training_groups": [
+          "lyl",
+          "szc",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lxj__pcfe/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.5215194289552356e-06,
+          "median": 0.0022692429080108604,
+          "mean": 0.09113024677578588,
+          "maximum": 0.8778339450786525
+        },
+        "magic_score_summary": {
+          "minimum": 0.735121758442076,
+          "median": 0.998895837904459,
+          "mean": 0.982341059603691,
+          "maximum": 0.9999999745920014
+        },
+        "auc": 0.9989577905158937,
+        "split_id": "lxj__pcfe",
+        "held_out_groups": [
+          "lxj",
+          "pcfe"
+        ],
+        "held_out_magic_generations": {
+          "lxj": "Gen 1a",
+          "pcfe": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 90,
+        "magic_count": 53,
+        "formal_accepted": 90,
+        "formal_rejected": 0,
+        "magic_rejected": 53,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.5528521438757449,
+        "calibration": {
+          "formal_count": 204,
+          "magic_count": 102,
+          "formal_accepted": 204,
+          "formal_rejected": 0,
+          "magic_rejected": 102,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.40035543966810516,
+          "candidate_count": 307
+        },
+        "training_groups": [
+          "lyl",
+          "pcfe",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lxj__szc/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.544242601321702e-06,
+          "median": 0.0002310973963576522,
+          "mean": 0.0009656628073844983,
+          "maximum": 0.01393224895083262
+        },
+        "magic_score_summary": {
+          "minimum": 0.9879277076280913,
+          "median": 0.9998558811503856,
+          "mean": 0.998779254281652,
+          "maximum": 0.9999998006186925
+        },
+        "auc": 1.0,
+        "split_id": "lxj__szc",
+        "held_out_groups": [
+          "lxj",
+          "szc"
+        ],
+        "held_out_magic_generations": {
+          "lxj": "Gen 1a",
+          "szc": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 90,
+        "magic_count": 48,
+        "formal_accepted": 87,
+        "formal_rejected": 3,
+        "magic_rejected": 48,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9666666666666667,
+        "formal_frr": 0.033333333333333326,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9782608695652174,
+        "balanced_accuracy": 0.9833333333333334,
+        "threshold": 0.521955045100768,
+        "calibration": {
+          "formal_count": 204,
+          "magic_count": 107,
+          "formal_accepted": 204,
+          "formal_rejected": 0,
+          "magic_rejected": 107,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "szc": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4468254108414278,
+          "candidate_count": 312
+        },
+        "training_groups": [
+          "lyl",
+          "pcfe",
+          "szc",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lxj__ypz/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 2.0821339450479604e-06,
+          "median": 0.0014838888924590976,
+          "mean": 0.04431524517798918,
+          "maximum": 0.9999611326041425
+        },
+        "magic_score_summary": {
+          "minimum": 0.9910475480660992,
+          "median": 0.9999536296765374,
+          "mean": 0.9990220142495071,
+          "maximum": 0.9999998840081367
+        },
+        "auc": 0.99375,
+        "split_id": "lxj__ypz",
+        "held_out_groups": [
+          "lxj",
+          "ypz"
+        ],
+        "held_out_magic_generations": {
+          "lxj": "Gen 1a",
+          "ypz": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 97,
+        "magic_count": 58,
+        "formal_accepted": 97,
+        "formal_rejected": 0,
+        "magic_rejected": 58,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.5457389953219745,
+        "calibration": {
+          "formal_count": 197,
+          "magic_count": 97,
+          "formal_accepted": 197,
+          "formal_rejected": 0,
+          "magic_rejected": 97,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4065986703176333,
+          "candidate_count": 295
+        },
+        "training_groups": [
+          "lyl",
+          "pcfe",
+          "szc",
+          "ypz"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lxj__zxh/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.0837939267865638e-06,
+          "median": 0.00037420871915034594,
+          "mean": 0.0008465485885126004,
+          "maximum": 0.006545310937169386
+        },
+        "magic_score_summary": {
+          "minimum": 0.814723313546082,
+          "median": 0.9975794799351143,
+          "mean": 0.9869383674226313,
+          "maximum": 0.9999998464164268
+        },
+        "auc": 1.0,
+        "split_id": "lxj__zxh",
+        "held_out_groups": [
+          "lxj",
+          "zxh"
+        ],
+        "held_out_magic_generations": {
+          "lxj": "Gen 1a",
+          "zxh": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 103,
+        "magic_count": 52,
+        "formal_accepted": 99,
+        "formal_rejected": 4,
+        "magic_rejected": 52,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9611650485436893,
+        "formal_frr": 0.03883495145631066,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9741935483870968,
+        "balanced_accuracy": 0.9805825242718447,
+        "threshold": 0.5318784615825771,
+        "calibration": {
+          "formal_count": 191,
+          "magic_count": 103,
+          "formal_accepted": 191,
+          "formal_rejected": 0,
+          "magic_rejected": 103,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.427867668275006,
+          "candidate_count": 295
+        },
+        "training_groups": [
+          "lxj",
+          "szc",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lyl__pcfe/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.0868740974437224e-05,
+          "median": 0.0017338427421888876,
+          "mean": 0.08337571448050997,
+          "maximum": 0.869575825529956
+        },
+        "magic_score_summary": {
+          "minimum": 0.7258694447381194,
+          "median": 0.9975142709337567,
+          "mean": 0.9795957060230225,
+          "maximum": 0.9999845489530954
+        },
+        "auc": 0.9990664675130695,
+        "split_id": "lyl__pcfe",
+        "held_out_groups": [
+          "lyl",
+          "pcfe"
+        ],
+        "held_out_magic_generations": {
+          "lyl": "Gen 1a",
+          "pcfe": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 92,
+        "magic_count": 48,
+        "formal_accepted": 92,
+        "formal_rejected": 0,
+        "magic_rejected": 48,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.55523337576502,
+        "calibration": {
+          "formal_count": 202,
+          "magic_count": 107,
+          "formal_accepted": 202,
+          "formal_rejected": 0,
+          "magic_rejected": 107,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "pcfe": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.39590720699491977,
+          "candidate_count": 310
+        },
+        "training_groups": [
+          "lxj",
+          "pcfe",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lyl__szc/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 5.500018041883958e-06,
+          "median": 0.00015501785933588416,
+          "mean": 0.00033768356073970307,
+          "maximum": 0.002311661177967449
+        },
+        "magic_score_summary": {
+          "minimum": 0.9895107233887558,
+          "median": 0.9995892344113841,
+          "mean": 0.998672887555149,
+          "maximum": 0.9999936485802259
+        },
+        "auc": 1.0,
+        "split_id": "lyl__szc",
+        "held_out_groups": [
+          "lyl",
+          "szc"
+        ],
+        "held_out_magic_generations": {
+          "lyl": "Gen 1a",
+          "szc": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 92,
+        "magic_count": 43,
+        "formal_accepted": 91,
+        "formal_rejected": 1,
+        "magic_rejected": 43,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9891304347826086,
+        "formal_frr": 0.010869565217391353,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9925925925925926,
+        "balanced_accuracy": 0.9945652173913043,
+        "threshold": 0.5233368272979406,
+        "calibration": {
+          "formal_count": 202,
+          "magic_count": 112,
+          "formal_accepted": 202,
+          "formal_rejected": 0,
+          "magic_rejected": 112,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "pcfe": 0.0,
+            "szc": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.44620670820514385,
+          "candidate_count": 315
+        },
+        "training_groups": [
+          "lxj",
+          "pcfe",
+          "szc",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lyl__ypz/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.4676046684639703e-06,
+          "median": 0.00045759390126676625,
+          "mean": 0.02349504486420805,
+          "maximum": 0.9998497364942325
+        },
+        "magic_score_summary": {
+          "minimum": 0.9917572327716857,
+          "median": 0.9998742138239173,
+          "mean": 0.9992345439293172,
+          "maximum": 0.9999980257465845
+        },
+        "auc": 0.9951971688574317,
+        "split_id": "lyl__ypz",
+        "held_out_groups": [
+          "lyl",
+          "ypz"
+        ],
+        "held_out_magic_generations": {
+          "lyl": "Gen 1a",
+          "ypz": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 99,
+        "magic_count": 53,
+        "formal_accepted": 99,
+        "formal_rejected": 0,
+        "magic_rejected": 53,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.5478899185332504,
+        "calibration": {
+          "formal_count": 195,
+          "magic_count": 102,
+          "formal_accepted": 195,
+          "formal_rejected": 0,
+          "magic_rejected": 102,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "pcfe": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4032416011999954,
+          "candidate_count": 298
+        },
+        "training_groups": [
+          "lxj",
+          "pcfe",
+          "szc",
+          "ypz"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/lyl__zxh/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.7847565087441375e-05,
+          "median": 0.00023731299244522802,
+          "mean": 0.0005485962814835592,
+          "maximum": 0.003952828327300344
+        },
+        "magic_score_summary": {
+          "minimum": 0.8476136458273604,
+          "median": 0.995972941046694,
+          "mean": 0.985685165508612,
+          "maximum": 0.9999393793181875
+        },
+        "auc": 1.0,
+        "split_id": "lyl__zxh",
+        "held_out_groups": [
+          "lyl",
+          "zxh"
+        ],
+        "held_out_magic_generations": {
+          "lyl": "Gen 1a",
+          "zxh": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 105,
+        "magic_count": 54,
+        "formal_accepted": 96,
+        "formal_rejected": 9,
+        "magic_rejected": 54,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9142857142857143,
+        "formal_frr": 0.08571428571428574,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9433962264150944,
+        "balanced_accuracy": 0.9571428571428571,
+        "threshold": 0.5372078452123685,
+        "calibration": {
+          "formal_count": 189,
+          "magic_count": 101,
+          "formal_accepted": 189,
+          "formal_rejected": 0,
+          "magic_rejected": 101,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "ypz": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4256644389527462,
+          "candidate_count": 291
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "ypz",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/pcfe__szc/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.3238796213638127e-05,
+          "median": 0.0027075392244684795,
+          "mean": 0.10580243507797833,
+          "maximum": 0.9091253633051906
+        },
+        "magic_score_summary": {
+          "minimum": 0.7545631472023469,
+          "median": 0.9987638048430509,
+          "mean": 0.983238179508316,
+          "maximum": 0.9999977929400724
+        },
+        "auc": 0.9987654320987654,
+        "split_id": "pcfe__szc",
+        "held_out_groups": [
+          "pcfe",
+          "szc"
+        ],
+        "held_out_magic_generations": {
+          "pcfe": "Gen 2/CUID",
+          "szc": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 105,
+        "magic_count": 49,
+        "formal_accepted": 101,
+        "formal_rejected": 4,
+        "magic_rejected": 49,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9619047619047619,
+        "formal_frr": 0.03809523809523807,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.974025974025974,
+        "balanced_accuracy": 0.980952380952381,
+        "threshold": 0.49848716493843537,
+        "calibration": {
+          "formal_count": 189,
+          "magic_count": 106,
+          "formal_accepted": 189,
+          "formal_rejected": 0,
+          "magic_rejected": 106,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "szc": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.47517495215325456,
+          "candidate_count": 296
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "szc",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/pcfe__ypz/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 6.7582724288896706e-06,
+          "median": 0.005491864538729143,
+          "mean": 0.08314803840028083,
+          "maximum": 0.9963690170849965
+        },
+        "magic_score_summary": {
+          "minimum": 0.9176048890880141,
+          "median": 0.9992092379037613,
+          "mean": 0.9925962382153557,
+          "maximum": 0.9999987468851628
+        },
+        "auc": 0.9968901846452867,
+        "split_id": "pcfe__ypz",
+        "held_out_groups": [
+          "pcfe",
+          "ypz"
+        ],
+        "held_out_magic_generations": {
+          "pcfe": "Gen 2/CUID",
+          "ypz": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 112,
+        "magic_count": 59,
+        "formal_accepted": 99,
+        "formal_rejected": 13,
+        "magic_rejected": 49,
+        "magic_accepted": 10,
+        "formal_accept_rate": 0.8839285714285714,
+        "formal_frr": 0.1160714285714286,
+        "magic_reject_rate": 0.8305084745762712,
+        "magic_far": 0.1694915254237288,
+        "accuracy": 0.8654970760233918,
+        "balanced_accuracy": 0.8572185230024213,
+        "threshold": 0.5138819657425998,
+        "calibration": {
+          "formal_count": 182,
+          "magic_count": 96,
+          "formal_accepted": 182,
+          "formal_rejected": 0,
+          "magic_rejected": 96,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "szc": 0.0,
+            "ypz": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4703307458289865,
+          "candidate_count": 279
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "szc",
+          "ypz"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/pcfe__zxh/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.3336149169830494e-05,
+          "median": 0.0017173390262641918,
+          "mean": 0.14703978818432611,
+          "maximum": 0.892366523537235
+        },
+        "magic_score_summary": {
+          "minimum": 0.013666440482191244,
+          "median": 0.8784182522224606,
+          "mean": 0.7521885120683206,
+          "maximum": 0.9977656401750241
+        },
+        "auc": 0.9355326876513317,
+        "split_id": "pcfe__zxh",
+        "held_out_groups": [
+          "pcfe",
+          "zxh"
+        ],
+        "held_out_magic_generations": {
+          "pcfe": "Gen 2/CUID",
+          "zxh": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 94,
+        "magic_count": 45,
+        "formal_accepted": 93,
+        "formal_rejected": 1,
+        "magic_rejected": 45,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9893617021276596,
+        "formal_frr": 0.010638297872340385,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9928057553956835,
+        "balanced_accuracy": 0.9946808510638299,
+        "threshold": 0.520980320758074,
+        "calibration": {
+          "formal_count": 200,
+          "magic_count": 110,
+          "formal_accepted": 200,
+          "formal_rejected": 0,
+          "magic_rejected": 110,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "zxh": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4436876230094203,
+          "candidate_count": 311
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "pcfe",
+          "zxh"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/szc__ypz/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 5.128243737880159e-07,
+          "median": 0.00020536745292428936,
+          "mean": 0.019915408051065724,
+          "maximum": 0.9998444527900769
+        },
+        "magic_score_summary": {
+          "minimum": 0.9805796836405483,
+          "median": 0.999865439943978,
+          "mean": 0.998482333521567,
+          "maximum": 0.9999997910588839
+        },
+        "auc": 0.9950354609929078,
+        "split_id": "szc__ypz",
+        "held_out_groups": [
+          "szc",
+          "ypz"
+        ],
+        "held_out_magic_generations": {
+          "szc": "Gen 1a",
+          "ypz": "Gen 1a"
+        }
+      },
+      {
+        "formal_count": 101,
+        "magic_count": 55,
+        "formal_accepted": 101,
+        "formal_rejected": 0,
+        "magic_rejected": 55,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "threshold": 0.5562156713762622,
+        "calibration": {
+          "formal_count": 193,
+          "magic_count": 100,
+          "formal_accepted": 193,
+          "formal_rejected": 0,
+          "magic_rejected": 100,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "ypz": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.39638075925967053,
+          "candidate_count": 294
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "pcfe",
+          "ypz"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/szc__zxh/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 6.737508974491374e-06,
+          "median": 0.0002306724803003241,
+          "mean": 0.0004537977068661807,
+          "maximum": 0.0036165519835859865
+        },
+        "magic_score_summary": {
+          "minimum": 0.8599221629604114,
+          "median": 0.9965668652297126,
+          "mean": 0.9875871697184293,
+          "maximum": 0.9999916252803103
+        },
+        "auc": 1.0,
+        "split_id": "szc__zxh",
+        "held_out_groups": [
+          "szc",
+          "zxh"
+        ],
+        "held_out_magic_generations": {
+          "szc": "Gen 1a",
+          "zxh": "Gen 2/CUID"
+        }
+      },
+      {
+        "formal_count": 101,
+        "magic_count": 50,
+        "formal_accepted": 100,
+        "formal_rejected": 1,
+        "magic_rejected": 50,
+        "magic_accepted": 0,
+        "formal_accept_rate": 0.9900990099009901,
+        "formal_frr": 0.00990099009900991,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 0.9933774834437086,
+        "balanced_accuracy": 0.995049504950495,
+        "threshold": 0.5213796958673307,
+        "calibration": {
+          "formal_count": 193,
+          "magic_count": 105,
+          "formal_accepted": 193,
+          "formal_rejected": 0,
+          "magic_rejected": 105,
+          "magic_accepted": 0,
+          "formal_accept_rate": 1.0,
+          "formal_frr": 0.0,
+          "magic_reject_rate": 1.0,
+          "magic_far": 0.0,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "formal_frr_by_group": {
+            "lxj": 0.0,
+            "lyl": 0.0,
+            "pcfe": 0.0,
+            "szc": 0.0
+          },
+          "worst_group_formal_frr": 0.0,
+          "score_gap_margin": 0.4453360628746626,
+          "candidate_count": 299
+        },
+        "training_groups": [
+          "lxj",
+          "lyl",
+          "pcfe",
+          "szc"
+        ],
+        "model": "fingerprint_models/mix_supervised_binary/four_train_two_test/ypz__zxh/supervised_binary_model.json",
+        "formal_score_summary": {
+          "minimum": 1.9035088308306561e-06,
+          "median": 0.0005400948415882252,
+          "mean": 0.022723052495997636,
+          "maximum": 0.9998528538910394
+        },
+        "magic_score_summary": {
+          "minimum": 0.755321861594185,
+          "median": 0.9987390649540784,
+          "mean": 0.9845049821822195,
+          "maximum": 0.999998080405115
+        },
+        "auc": 0.9928712871287129,
+        "split_id": "ypz__zxh",
+        "held_out_groups": [
+          "ypz",
+          "zxh"
+        ],
+        "held_out_magic_generations": {
+          "ypz": "Gen 1a",
+          "zxh": "Gen 2/CUID"
+        }
+      }
+    ],
+    "aggregate_with_repeated_test_appearances": {
+      "formal_count": 1470,
+      "magic_count": 775,
+      "formal_accepted": 1429,
+      "formal_rejected": 41,
+      "magic_rejected": 765,
+      "magic_accepted": 10,
+      "formal_accept_rate": 0.972108843537415,
+      "formal_frr": 0.027891156462585,
+      "magic_reject_rate": 0.9870967741935484,
+      "magic_far": 0.012903225806451646,
+      "accuracy": 0.97728285077951,
+      "balanced_accuracy": 0.9796028088654817,
+      "prediction_count_note": "Each transaction appears in five different 4|2 test folds.",
+      "macro_formal_accept_rate": 0.9738024639430409,
+      "macro_magic_reject_rate": 0.9887005649717514,
+      "macro_balanced_accuracy": 0.9812515144573961,
+      "macro_auc": 0.99373776529356
+    }
+  },
+  "group_metadata": "fingerprint_data_mix/group_metadata.json",
+  "final_all_groups_model": {
+    "note": "Trained and calibrated on all six groups; metrics are resubstitution/calibration, not blind-test evidence.",
+    "model": "fingerprint_models/mix_supervised_binary/final_all_groups/supervised_binary_model.json",
+    "calibration_metrics": {
+      "formal_count": 294,
+      "magic_count": 155,
+      "formal_accepted": 294,
+      "formal_rejected": 0,
+      "magic_rejected": 155,
+      "magic_accepted": 0,
+      "formal_accept_rate": 1.0,
+      "formal_frr": 0.0,
+      "magic_reject_rate": 1.0,
+      "magic_far": 0.0,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "threshold": 0.5563979393359214,
+      "calibration": {
+        "formal_count": 294,
+        "magic_count": 155,
+        "formal_accepted": 294,
+        "formal_rejected": 0,
+        "magic_rejected": 155,
+        "magic_accepted": 0,
+        "formal_accept_rate": 1.0,
+        "formal_frr": 0.0,
+        "magic_reject_rate": 1.0,
+        "magic_far": 0.0,
+        "accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "formal_frr_by_group": {
+          "lxj": 0.0,
+          "lyl": 0.0,
+          "pcfe": 0.0,
+          "szc": 0.0,
+          "ypz": 0.0,
+          "zxh": 0.0
+        },
+        "worst_group_formal_frr": 0.0,
+        "score_gap_margin": 0.3969862964918586,
+        "candidate_count": 450
+      },
+      "training_groups": [
+        "lxj",
+        "lyl",
+        "pcfe",
+        "szc",
+        "ypz",
+        "zxh"
+      ],
+      "model": "fingerprint_models/mix_supervised_binary/final_all_groups/supervised_binary_model.json",
+      "formal_score_summary": {
+        "minimum": 8.678146745674547e-07,
+        "median": 0.00032772346091218877,
+        "mean": 0.002896754003443194,
+        "maximum": 0.15941164284406278
+      },
+      "magic_score_summary": {
+        "minimum": 0.9533842358277801,
+        "median": 0.9993519434626437,
+        "mean": 0.9970757312936965,
+        "maximum": 0.9999998665621865
+      },
+      "auc": 1.0
+    }
+  },
+  "artifacts": {
+    "fold_results_csv": "fingerprint_models/mix_supervised_binary/fold_results.csv",
+    "blind_predictions_csv": "fingerprint_models/mix_supervised_binary/blind_predictions.csv",
+    "generation_holdout_predictions_csv": "fingerprint_models/mix_supervised_binary/generation_holdout_predictions.csv",
+    "four_train_two_test_results_csv": "fingerprint_models/mix_supervised_binary/four_train_two_test_results.csv",
+    "four_train_two_test_predictions_csv": "fingerprint_models/mix_supervised_binary/four_train_two_test_predictions.csv",
+    "feature_cache": "fingerprint_models/mix_supervised_binary/feature_cache.npz"
+  }
+}

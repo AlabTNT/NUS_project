@@ -1,0 +1,47 @@
+{
+  "reader": {
+    "name_contains": "ACR122",
+    "poll_interval_ms": 300
+  },
+  "sectors": [
+    {
+      "sector": 0,
+      "required": true,
+      "auth": "both",
+      "key_a": "A0A1A2A3A4A5",
+      "key_b": "B0B1B2B3B4B5",
+      "block0": true,
+      "block0_data": "9AAF3EC5CE880400C838002000000022",
+      "block1": false,
+      "block1_data": null,
+      "block2": false,
+      "block2_data": null
+    },
+    {
+      "sector": 1,
+      "required": true,
+      "auth": "both",
+      "key_a": "872CD8406904",
+      "key_b": "CF3A3C1A7789",
+      "block0": true,
+      "block0_data": "56303139363736000000000000000000",
+      "block1": true,
+      "block1_data": "03FDA1A800C90000018C000000000000",
+      "block2": false,
+      "block2_data": null
+    },
+    {
+      "sector": 2,
+      "required": true,
+      "auth": "both",
+      "key_a": "872CD8406904",
+      "key_b": "872CD8406904",
+      "block0": true,
+      "block0_data": "00AD3FD1F37D7F0788FF14AD3FD1F37D",
+      "block1": false,
+      "block1_data": null,
+      "block2": false,
+      "block2_data": null
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-07-24T03:07:23.085+00:00",
+  "decision_rule": "accept only when auth_a, auth_b and read_block0 relative scores are all <= 1",
+  "important_note": "Magic captures are never used for fitting or threshold calibration.",
+  "complete_formal_capture_count": 180,
+  "complete_magic_capture_count": 61,
+  "physical_card_groups": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "ypz",
+    "zxh"
+  ],
+  "final_models_all_data_evaluation": {
+    "note": "formal scores are resubstitution; use grouped result for generalization",
+    "combined": {
+      "sample_count": 241,
+      "threshold": 1.0,
+      "accuracy": 0.8506224066390041,
+      "formal_accept_rate": 0.85,
+      "magic_reject_rate": 0.8524590163934426,
+      "auc": 0.9443533697632058,
+      "formal_scores": {
+        "minimum": 0.08639506686066566,
+        "median": 0.5744789839271811,
+        "mean": 0.6163101318091022,
+        "maximum": 1.700832428973541
+      },
+      "magic_scores": {
+        "minimum": 0.5995828661688032,
+        "median": 1.7362786272408892,
+        "mean": 1.6313637079397711,
+        "maximum": 2.4258026325584194
+      }
+    },
+    "per_stage": {
+      "auth_a": {
+        "sample_count": 241,
+        "threshold": 1.0,
+        "accuracy": 0.8713692946058091,
+        "formal_accept_rate": 0.95,
+        "magic_reject_rate": 0.639344262295082,
+        "auc": 0.9376138433515483,
+        "formal_scores": {
+          "minimum": 0.05419596807273125,
+          "median": 0.35148307695398506,
+          "mean": 0.4419472346035126,
+          "maximum": 1.2257010342961023
+        },
+        "magic_scores": {
+          "minimum": 0.3616476105007413,
+          "median": 1.322984310847604,
+          "mean": 1.3775403669165664,
+          "maximum": 2.4258026325584194
+        }
+      },
+      "auth_b": {
+        "sample_count": 241,
+        "threshold": 1.0,
+        "accuracy": 0.7800829875518672,
+        "formal_accept_rate": 0.95,
+        "magic_reject_rate": 0.2786885245901639,
+        "auc": 0.8754098360655738,
+        "formal_scores": {
+          "minimum": 0.025771971366732316,
+          "median": 0.14900823192006177,
+          "mean": 0.289326260916789,
+          "maximum": 1.190863340639125
+        },
+        "magic_scores": {
+          "minimum": 0.2053456987605247,
+          "median": 0.8514046722460598,
+          "mean": 0.8881337207385885,
+          "maximum": 2.2872244434440945
+        }
+      },
+      "read_block0": {
+        "sample_count": 241,
+        "threshold": 1.0,
+        "accuracy": 0.8215767634854771,
+        "formal_accept_rate": 0.95,
+        "magic_reject_rate": 0.4426229508196721,
+        "auc": 0.8959016393442623,
+        "formal_scores": {
+          "minimum": 0.028368865311409502,
+          "median": 0.09778646213385289,
+          "mean": 0.2740120373954627,
+          "maximum": 1.700832428973541
+        },
+        "magic_scores": {
+          "minimum": 0.24919456676000884,
+          "median": 0.801322513454535,
+          "mean": 1.0651732690095166,
+          "maximum": 2.102667237875154
+        }
+      }
+    }
+  },
+  "leave_one_card_group_out": {
+    "folds": [
+      {
+        "held_out_card": "lxj",
+        "sample_count": 47,
+        "threshold": 1.0,
+        "accuracy": 0.851063829787234,
+        "formal_accept_rate": 0.7878787878787878,
+        "magic_reject_rate": 1.0,
+        "auc": 1.0,
+        "formal_scores": {
+          "minimum": 0.23753683762630934,
+          "median": 0.8121425804793821,
+          "mean": 0.7482396927425249,
+          "maximum": 1.2373711702249077
+        },
+        "magic_scores": {
+          "minimum": 1.4826808266800133,
+          "median": 1.9169022730457408,
+          "mean": 1.9774866570301897,
+          "maximum": 2.4716500650502238
+        }
+      },
+      {
+        "held_out_card": "lyl",
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.8478260869565217,
+        "formal_accept_rate": 0.875,
+        "magic_reject_rate": 0.7857142857142857,
+        "auc": 0.9040178571428571,
+        "formal_scores": {
+          "minimum": 0.12219238235750943,
+          "median": 0.5554286674767517,
+          "mean": 0.6506081072601091,
+          "maximum": 1.4909119643278004
+        },
+        "magic_scores": {
+          "minimum": 0.5637831949935435,
+          "median": 1.4242591851032247,
+          "mean": 1.3840240249071936,
+          "maximum": 2.058047960899806
+        }
+      },
+      {
+        "held_out_card": "pcfe",
+        "sample_count": 39,
+        "threshold": 1.0,
+        "accuracy": 0.8974358974358975,
+        "formal_accept_rate": 0.8666666666666667,
+        "magic_reject_rate": 1.0,
+        "auc": 1.0,
+        "formal_scores": {
+          "minimum": 0.19008087754169042,
+          "median": 0.569676715543876,
+          "mean": 0.6278069236358771,
+          "maximum": 1.2411384576148876
+        },
+        "magic_scores": {
+          "minimum": 1.4846547307920466,
+          "median": 1.7520858339123828,
+          "mean": 1.891052725388299,
+          "maximum": 2.397195872676408
+        }
+      },
+      {
+        "held_out_card": "szc",
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.8478260869565217,
+        "formal_accept_rate": 0.8387096774193549,
+        "magic_reject_rate": 0.8666666666666667,
+        "auc": 0.9526881720430107,
+        "formal_scores": {
+          "minimum": 0.06243380260275097,
+          "median": 0.5167329244568684,
+          "mean": 0.5839653144856801,
+          "maximum": 1.2553877964826476
+        },
+        "magic_scores": {
+          "minimum": 0.7723067638724262,
+          "median": 1.6467811738140046,
+          "mean": 1.5379299944440874,
+          "maximum": 1.941640781974825
+        }
+      },
+      {
+        "held_out_card": "ypz",
+        "sample_count": 30,
+        "threshold": 1.0,
+        "accuracy": 0.9333333333333333,
+        "formal_accept_rate": 0.9333333333333333,
+        "magic_reject_rate": null,
+        "auc": null,
+        "formal_scores": {
+          "minimum": 0.11206330554829269,
+          "median": 0.5407637259183329,
+          "mean": 0.5407308027760122,
+          "maximum": 1.0998601723844088
+        },
+        "magic_scores": null
+      },
+      {
+        "held_out_card": "zxh",
+        "sample_count": 33,
+        "threshold": 1.0,
+        "accuracy": 0.7575757575757576,
+        "formal_accept_rate": 0.7916666666666666,
+        "magic_reject_rate": 0.6666666666666666,
+        "auc": 0.8657407407407407,
+        "formal_scores": {
+          "minimum": 0.11718276482398644,
+          "median": 0.6352090920652764,
+          "mean": 0.6643780376165092,
+          "maximum": 1.7583645717032523
+        },
+        "magic_scores": {
+          "minimum": 0.6063905822936192,
+          "median": 1.610037432204638,
+          "mean": 1.425605311048726,
+          "maximum": 2.057988989543618
+        }
+      }
+    ],
+    "aggregate": {
+      "sample_count": 241,
+      "threshold": 1.0,
+      "accuracy": 0.8547717842323651,
+      "formal_accept_rate": 0.85,
+      "magic_reject_rate": 0.8688524590163934,
+      "auc": 0.9442622950819672,
+      "formal_scores": {
+        "minimum": 0.06243380260275097,
+        "median": 0.6154078648698977,
+        "mean": 0.6367527707613099,
+        "maximum": 1.7583645717032523
+      },
+      "magic_scores": {
+        "minimum": 0.5637831949935435,
+        "median": 1.7081189257272846,
+        "mean": 1.6390167506839,
+        "maximum": 2.4716500650502238
+      }
+    }
+  },
+  "predictions_csv": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\fingerprint_models\\sector0\\three_stage_predictions.csv"
+}

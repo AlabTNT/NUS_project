@@ -1,0 +1,47 @@
+[=] Output will be flushed after every print.
+
+[+] loaded `C:\Users\Àî\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] execute command from commandline: hw version
+
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+[usb|script] pm3 --> hw version
+
+ [ Proxmark3 ]
+
+ [ Client ]
+  Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:14:17 40306ed8c
+  Compiler.................. MinGW-w64 16.1.0
+  Platform.................. Windows (64b) / x86_64
+  Readline support.......... present
+  QT GUI support............ present
+  Native BT support......... absent
+  Python script support..... absent
+  Python SWIG support....... absent
+  Lua script support........ present ( 5.4.7 )
+  Lua SWIG support.......... present
+
+ [ Model ]
+[-] fail reading from flashmemory
+  External flash............ absent
+  Smartcard reader.......... absent
+  FPC USART for BT add-on... absent
+
+ [ ARM ]
+  Bootrom.... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+  OS......... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+  Compiler... GCC 13.3.0
+
+ [ FPGA ] 
+ fpga_pm3_hf.ncd image 2s30vq100 31-05-2026 08:52:16
+ fpga_pm3_lf.ncd image 2s30vq100 31-05-2026 08:52:16
+ fpga_pm3_felica.ncd image 2s30vq100 31-05-2026 08:52:16
+ fpga_pm3_hf_15.ncd image 2s30vq100 31-05-2026 08:52:16
+
+ [ Hardware ]
+  --= uC: AT91SAM7S512 Rev B
+  --= Embedded Processor: ARM7TDMI
+  --= Internal SRAM size: 64K bytes
+  --= Architecture identifier: AT91SAM7Sxx Series
+  --= Embedded flash memory 512K bytes ( 83% used )
+

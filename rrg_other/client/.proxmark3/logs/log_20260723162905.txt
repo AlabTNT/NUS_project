@@ -1,0 +1,7 @@
+[=] Output will be flushed after every print.
+
+[+] loaded `C:/Users/¿Ó/Desktop/WorkDocument/Grade3-b/Singapore/rrg_other/client/.proxmark3/preferences.json`
+[+] execute command from commandline: data clear
+
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC

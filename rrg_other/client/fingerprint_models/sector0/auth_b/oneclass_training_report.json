@@ -1,0 +1,297 @@
+{
+  "mode": "oneclass",
+  "important_note": "Magic samples were used only for evaluation, never for fitting or threshold calibration.",
+  "all_available_data_evaluation": {
+    "sample_count": 241,
+    "threshold": 6.205138333481677,
+    "accuracy": 0.7800829875518672,
+    "formal_accept_rate": 0.95,
+    "magic_reject_rate": 0.2786885245901639,
+    "auc": 0.8754098360655738,
+    "formal_scores": {
+      "minimum": 0.15991864745710285,
+      "median": 0.9246166918915033,
+      "mean": 1.7953094724976886,
+      "maximum": 7.389471764937881
+    },
+    "magic_scores": {
+      "minimum": 1.2741984669945126,
+      "median": 5.283083769059428,
+      "mean": 5.510992595812727,
+      "maximum": 14.192544071291243
+    }
+  },
+  "leave_one_formal_card_out": {
+    "status": "ok",
+    "folds": [
+      {
+        "held_out_card": "lxj",
+        "capture_count": 33,
+        "accept_rate": 0.9393939393939394,
+        "threshold": 6.361530915164375,
+        "scores": {
+          "minimum": 0.3380050833122983,
+          "median": 1.1666611915347886,
+          "mean": 2.1808129739244686,
+          "maximum": 6.93879487224041
+        }
+      },
+      {
+        "held_out_card": "lyl",
+        "capture_count": 32,
+        "accept_rate": 0.9375,
+        "threshold": 7.162429325304583,
+        "scores": {
+          "minimum": 0.4469398370951343,
+          "median": 1.4991805282947577,
+          "mean": 2.4392071545335137,
+          "maximum": 7.287467573908653
+        }
+      },
+      {
+        "held_out_card": "pcfe",
+        "capture_count": 30,
+        "accept_rate": 0.9,
+        "threshold": 6.223364340093459,
+        "scores": {
+          "minimum": 0.5355436700305561,
+          "median": 1.457900945085035,
+          "mean": 2.468040515517481,
+          "maximum": 7.724056818239089
+        }
+      },
+      {
+        "held_out_card": "szc",
+        "capture_count": 31,
+        "accept_rate": 1.0,
+        "threshold": 7.171730070595816,
+        "scores": {
+          "minimum": 0.19443455120367212,
+          "median": 0.8918578819116831,
+          "mean": 1.4769652953786059,
+          "maximum": 6.4563281563519
+        }
+      },
+      {
+        "held_out_card": "ypz",
+        "capture_count": 30,
+        "accept_rate": 0.9666666666666667,
+        "threshold": 5.703605304182855,
+        "scores": {
+          "minimum": 0.17576907551593027,
+          "median": 0.6263400247707616,
+          "mean": 1.138751540928214,
+          "maximum": 6.273168313071184
+        }
+      },
+      {
+        "held_out_card": "zxh",
+        "capture_count": 24,
+        "accept_rate": 0.9166666666666666,
+        "threshold": 5.685128546586637,
+        "scores": {
+          "minimum": 0.21450757989514269,
+          "median": 0.7409635294290128,
+          "mean": 1.4791720806429325,
+          "maximum": 6.08708729196286
+        }
+      }
+    ],
+    "aggregate_unseen_formal_accept_rate": 0.9444444444444444,
+    "unseen_formal_scores": {
+      "minimum": 0.17576907551593027,
+      "median": 1.0141014897917278,
+      "mean": 1.886173738167322,
+      "maximum": 7.724056818239089
+    }
+  },
+  "leave_one_batch_out": {
+    "status": "ok",
+    "score_definition": "fold anomaly score divided by that fold threshold",
+    "folds": [
+      {
+        "held_out_batch": "lxj",
+        "raw_threshold": 6.361530915164375,
+        "sample_count": 47,
+        "threshold": 1.0,
+        "accuracy": 0.8297872340425532,
+        "formal_accept_rate": 0.9393939393939394,
+        "magic_reject_rate": 0.5714285714285714,
+        "auc": 0.9545454545454546,
+        "formal_scores": {
+          "minimum": 0.05313266379112843,
+          "median": 0.18339314971396997,
+          "mean": 0.3428126032879807,
+          "maximum": 1.0907429304006016
+        },
+        "magic_scores": {
+          "minimum": 0.8297969151585697,
+          "median": 1.1680160949131322,
+          "mean": 1.2744074011201452,
+          "maximum": 2.29631077861667
+        }
+      },
+      {
+        "held_out_batch": "lyl",
+        "raw_threshold": 7.162429325304583,
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.717391304347826,
+        "formal_accept_rate": 0.9375,
+        "magic_reject_rate": 0.21428571428571427,
+        "auc": 0.8058035714285714,
+        "formal_scores": {
+          "minimum": 0.062400592982622995,
+          "median": 0.20931173770863074,
+          "mean": 0.34055584268257844,
+          "maximum": 1.0174575193590134
+        },
+        "magic_scores": {
+          "minimum": 0.21330910470949196,
+          "median": 0.5426946068308196,
+          "mean": 0.6789777114935153,
+          "maximum": 1.692778094445054
+        }
+      },
+      {
+        "held_out_batch": "pcfe",
+        "raw_threshold": 6.223364340093459,
+        "sample_count": 39,
+        "threshold": 1.0,
+        "accuracy": 0.7948717948717948,
+        "formal_accept_rate": 0.9,
+        "magic_reject_rate": 0.4444444444444444,
+        "auc": 0.8592592592592593,
+        "formal_scores": {
+          "minimum": 0.08605372283611369,
+          "median": 0.23426250905682008,
+          "mean": 0.39657657508774696,
+          "maximum": 1.2411384576148876
+        },
+        "magic_scores": {
+          "minimum": 0.39949224785593745,
+          "median": 0.9827523464742494,
+          "mean": 0.9359150313111884,
+          "maximum": 1.704176809379697
+        }
+      },
+      {
+        "held_out_batch": "szc",
+        "raw_threshold": 7.171730070595816,
+        "sample_count": 46,
+        "threshold": 1.0,
+        "accuracy": 0.7391304347826086,
+        "formal_accept_rate": 1.0,
+        "magic_reject_rate": 0.2,
+        "auc": 0.9010752688172043,
+        "formal_scores": {
+          "minimum": 0.027111247814646043,
+          "median": 0.12435742465661274,
+          "mean": 0.20594267782528267,
+          "maximum": 0.900246954751257
+        },
+        "magic_scores": {
+          "minimum": 0.16002429104424218,
+          "median": 0.7226634984641521,
+          "mean": 0.7870340605483853,
+          "maximum": 1.7870095546853026
+        }
+      },
+      {
+        "held_out_batch": "ypz",
+        "raw_threshold": 5.703605304182855,
+        "sample_count": 30,
+        "threshold": 1.0,
+        "accuracy": 0.9666666666666667,
+        "formal_accept_rate": 0.9666666666666667,
+        "magic_reject_rate": null,
+        "auc": null,
+        "formal_scores": {
+          "minimum": 0.030817187750882137,
+          "median": 0.10981475599502341,
+          "mean": 0.1996546886042565,
+          "maximum": 1.0998601723844088
+        },
+        "magic_scores": null
+      },
+      {
+        "held_out_batch": "zxh",
+        "raw_threshold": 5.685128546586637,
+        "sample_count": 33,
+        "threshold": 1.0,
+        "accuracy": 0.696969696969697,
+        "formal_accept_rate": 0.9166666666666666,
+        "magic_reject_rate": 0.1111111111111111,
+        "auc": 0.8240740740740741,
+        "formal_scores": {
+          "minimum": 0.037731350863461736,
+          "median": 0.13033364564357808,
+          "mean": 0.26018269745739175,
+          "maximum": 1.0707035455895821
+        },
+        "magic_scores": {
+          "minimum": 0.38392516592453974,
+          "median": 0.4998496604016605,
+          "mean": 0.5747861067322317,
+          "maximum": 1.0138218131344972
+        }
+      }
+    ],
+    "aggregate": {
+      "sample_count": 241,
+      "threshold": 1.0,
+      "accuracy": 0.7842323651452282,
+      "formal_accept_rate": 0.9444444444444444,
+      "magic_reject_rate": 0.3114754098360656,
+      "auc": 0.8749544626593807,
+      "formal_scores": {
+        "minimum": 0.027111247814646043,
+        "median": 0.15768364976517885,
+        "mean": 0.29292304742592856,
+        "maximum": 1.2411384576148876
+      },
+      "magic_scores": {
+        "minimum": 0.16002429104424218,
+        "median": 0.7474611953505007,
+        "mean": 0.8647411922493083,
+        "maximum": 2.29631077861667
+      }
+    }
+  },
+  "mean_family_scores_by_label": {
+    "formal": {
+      "amplitude": 1.181366583188771,
+      "occupancy": 1.0937401500053556,
+      "transition": 2.831860978914895,
+      "correlation": 1.4706463365302211,
+      "temporal": 1.9452948813043247,
+      "spectrum": 2.2489479050425656
+    },
+    "magic": {
+      "amplitude": 15.879110850259044,
+      "occupancy": 5.97772344786614,
+      "transition": 3.0450392170215124,
+      "correlation": 1.5830220456007515,
+      "temporal": 4.120746456147899,
+      "spectrum": 2.4603135579810136
+    }
+  },
+  "model_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\fingerprint_models\\sector0\\auth_b\\oneclass_model.json",
+  "feature_file": "C:\\Users\\李\\Desktop\\WorkDocument\\Grade3-b\\Singapore\\rrg_other\\client\\fingerprint_models\\sector0\\auth_b\\features.csv",
+  "capture_count": 241,
+  "formal_card_groups": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "ypz",
+    "zxh"
+  ],
+  "magic_card_groups": [
+    "lxj",
+    "lyl",
+    "pcfe",
+    "szc",
+    "zxh"
+  ]
+}

@@ -1,0 +1,189 @@
+[+] loaded `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/.proxmark3/preferences.json`
+[+] Using UART port COM5
+[+] Communicating with PM3 over USB-CDC
+  [ Proxmark3 ]
+
+    MCU....... AT91SAM7S512 Rev B
+    Memory.... 512 KB ( 83% used )
+[-] fail reading from flashmemory
+
+    Client.... Iceman/master/v4.21611-568-g2c6e60711 2026-07-16 01:14:17
+    Bootrom... Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:16 40306ed8c
+    OS........ Iceman/master/v4.21611-568-g2c6e60711-suspect 2026-07-16 01:01:39 40306ed8c
+
+
+[usb|script] pm3 --> hf mf info
+
+[=] --- ISO14443-a Information -----------------------------
+[+]  UID: 6A 53 4D C5 
+[+] ATQA: 00 04
+[+]  SAK: 88 [1]
+
+[=] --- Keys Information
+[+] loaded 2 user keys
+[+] loaded 63 hardcoded keys
+[+] Sector 0 key A... FFFFFFFFFFFF
+[+] Sector 0 key B... FFFFFFFFFFFF
+[+] Sector 1 key A... FFFFFFFFFFFF
+[+] Sector 1 key B... FFFFFFFFFFFF
+[+] Block 0.......... 6A534DC5B1880400C838002000000022 | .8. ..."
+
+[=] --- Fingerprint
+[+] n/a
+
+[=] --- Magic Tag Information
+
+[+] Magic capabilities... Gen 2 / CUID
+
+[=] --- PRNG Information
+
+[usb|script] pm3 --> hf mf autopwn
+
+[+] loaded 8 user keys
+[+] loaded 63 hardcoded keys
+[=] Running strategy 1
+
+[+] -----+-----+--------------+---+--------------+----
+[+]  Sec | Blk | key A        |res| key B        |res
+[+] -----+-----+--------------+---+--------------+----
+[+]  000 | 003 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  001 | 007 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  002 | 011 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  003 | 015 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  004 | 019 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  005 | 023 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  006 | 027 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  007 | 031 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  008 | 035 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  009 | 039 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  010 | 043 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  011 | 047 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  012 | 051 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  013 | 055 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  014 | 059 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+]  015 | 063 | FFFFFFFFFFFF | D | FFFFFFFFFFFF | D 
+[+] -----+-----+--------------+---+--------------+----
+[=] ( D:Dictionary / S:darkSide / U:User / R:Reused / N:Nested / H:Hardnested / C:statiCnested / A:keyA  )
+
+
+[+] Generating binary key file
+[+] Found keys have been dumped to `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-key-009.bin`
+[=] --[ FFFFFFFFFFFF ]-- has been inserted for unknown keys where res is 0
+[=] Transferring keys to simulator memory ( ok )
+[=] Dumping card content to emulator memory (Cmd Error: 04 can occur)
+[=] downloading card content from emulator memory
+[+] Saved 1024 bytes to binary file `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-dump-004.bin`
+[+] Saved to json file C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-dump-004.json
+[=] Autopwn execution time: 2 seconds
+[usb|script] pm3 --> hf mf restore --1k -f ../keys/ID_zxh.bin -k hf-mf-6A534DC5-key-008.bin
+[+] Loaded binary key file `hf-mf-6A534DC5-key-008.bin`
+[+] Loaded 1024 bytes from binary file `../keys/ID_zxh.bin`
+
+[=]  blk | data                                            | status
+[=] -----+-------------------------------------------------+----------------
+[=]    0 | 6A 53 4D C5 B1 88 04 00 C8 38 00 20 00 00 00 22 | ( ok )
+[=]    1 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    3 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]    4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[!] Invalid Access Conditions on sector 1, replacing with default values
+[=]    7 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | ( ok )
+[=]    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   10 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[!] Invalid Access Conditions on sector 2, replacing with default values
+[=]   11 | FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF | ( ok )
+[=]   12 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   13 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   14 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   15 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   16 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   17 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   18 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   19 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   20 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   21 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   22 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   23 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   24 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   25 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   26 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   27 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   28 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   29 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   30 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   31 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   32 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   33 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   34 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   35 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   36 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   37 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   38 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   39 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   40 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   41 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   42 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   43 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   44 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   45 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   46 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   47 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   48 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   49 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   50 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   51 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   52 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   53 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   54 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   55 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   56 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   57 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   58 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   59 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=]   60 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   61 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   62 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 | ( ok )
+[=]   63 | A0 A1 A2 A3 A4 A5 7F 07 88 69 B0 B1 B2 B3 B4 B5 | ( ok )
+[=] -----+-------------------------------------------------+----------------
+
+[?] Hint: Try `hf mf dump --ns` to verify
+[=] Done!
+[usb|script] pm3 --> hf mf chk --dump -k FFFFFFFFFFFF -k A0A1A2A3A4A5 -k B0B1B2B3B4B5
+[+] loaded 3 user keys
+[+] loaded 63 hardcoded keys
+[=] Start check for keys...
+[=] .................................
+[=] Time in checkkeys 2 seconds
+
+[=] Testing to read key B...
+
+[+] -----+-----+--------------+---+--------------+----
+[+]  Sec | Blk | key A        |res| key B        |res
+[+] -----+-----+--------------+---+--------------+----
+[+]  000 | 003 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  001 | 007 | FFFFFFFFFFFF | 1 | FFFFFFFFFFFF | 1 
+[+]  002 | 011 | FFFFFFFFFFFF | 1 | FFFFFFFFFFFF | 1 
+[+]  003 | 015 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  004 | 019 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  005 | 023 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  006 | 027 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  007 | 031 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  008 | 035 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  009 | 039 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  010 | 043 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  011 | 047 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  012 | 051 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  013 | 055 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  014 | 059 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+]  015 | 063 | A0A1A2A3A4A5 | 1 | B0B1B2B3B4B5 | 1 
+[+] -----+-----+--------------+---+--------------+----
+[+] ( 0:Failed / 1:Success )
+[?] Hint: MAD key detected. Try `hf mf mad` for more details
+
+[+] Generating binary key file
+[+] Found keys have been dumped to `C:\Users\李\Desktop\WorkDocument\Grade3-b\Singapore\rrg_other\client\/hf-mf-6A534DC5-key-010.bin`
+[=] --[ FFFFFFFFFFFF ]-- has been inserted for unknown keys where res is 0
+
